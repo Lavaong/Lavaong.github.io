@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>l-tlon</title>
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://lavaong.github.io/"/>
+  <updated>2017-08-16T10:11:35.000Z</updated>
+  <id>https://lavaong.github.io/</id>
+  
+  <author>
+    <name>Lavaong</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>工作点滴0001</title>
+    <link href="https://lavaong.github.io/2017/08/16/%E5%B7%A5%E4%BD%9C%E7%82%B9%E6%BB%B40001/"/>
+    <id>https://lavaong.github.io/2017/08/16/工作点滴0001/</id>
+    <published>2017-08-16T09:05:38.000Z</published>
+    <updated>2017-08-16T10:11:35.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="项目构建"><a href="#项目构建" class="headerlink" title="项目构建"></a>项目构建</h1><h3 id="公司还在用svn-项目从里面checkout出来，然后ide导入本来是一件简单不过的事情，但是，但是，最后还是搞了一天。"><a href="#公司还在用svn-项目从里面checkout出来，然后ide导入本来是一件简单不过的事情，但是，但是，最后还是搞了一天。" class="headerlink" title="公司还在用svn,项目从里面checkout出来，然后ide导入本来是一件简单不过的事情，但是，但是，最后还是搞了一天。"></a>公司还在用svn,项目从里面checkout出来，然后ide导入本来是一件简单不过的事情，但是，但是，最后还是搞了一天。</h3><p>项目采用在IDE（eclipse）maven 导入的方式构建，经过漫长的jar包下载和配置文件Validation（后来才想起来该关掉这个……~.~），项目出现了3万+个errors,项目工程模块分的巨多，这也导致了问题排查的困难，一开始我也怀疑是maven配置文件的原因，最后真是，拿到了正确的配置文件，开心去替换了下，错误减少了点，而且剩下的大部分xxx cannot be resolved to a type这种错误，百度和google都试了一下，不得而解，最后试了某一个博客的方法，具体做法是：</p>
+<ol>
+<li>project-automatically 对勾给取消掉了，应该是防止自动构建用的选项，</li>
+<li>project-clean</li>
+<li>项目clean 完毕,在progress视图里又看到了项目在自动构建（不解），可能会导致eclipse报错，栈溢出了（惊吓）。</li>
+<li>项目右键，maven-update project,项目更新完毕，错误消失。</li>
+</ol>
+<p>###原因思考：<br>网上的解释是eclipse和maven的clean并不同步（存疑解释）,另一种是因为某些特殊原因，eclipse没能自动编译(应该是maven生成的)源代码到build/classes（或其他classes目录），导致类型查找不到,(什么原因呢？)</p>
+<p>###tips(项目执行这个命令会生成 mvn eclipse:eclipse 会自动生成相关的类文件，不需要在用maven 方式导入项目,以普通方式导入即可)。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;项目构建&quot;&gt;&lt;a href=&quot;#项目构建&quot; class=&quot;headerlink&quot; title=&quot;项目构建&quot;&gt;&lt;/a&gt;项目构建&lt;/h1&gt;&lt;h3 id=&quot;公司还在用svn-项目从里面checkout出来，然后ide导入本来是一件简单不过的事情，但是，但是，最后还是搞了
+    
+    </summary>
+    
+    
+      <category term="学习" scheme="https://lavaong.github.io/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>DNS[域名系统]基本解析</title>
+    <link href="https://lavaong.github.io/2017/06/27/DNS-%E5%9F%9F%E5%90%8D%E7%B3%BB%E7%BB%9F-%E5%9F%BA%E6%9C%AC%E8%A7%A3%E6%9E%90/"/>
+    <id>https://lavaong.github.io/2017/06/27/DNS-域名系统-基本解析/</id>
+    <published>2017-06-27T02:47:03.000Z</published>
+    <updated>2017-08-16T10:11:35.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="DNS-Domain-Name-System"><a href="#DNS-Domain-Name-System" class="headerlink" title="DNS(Domain Name System)"></a>DNS(Domain Name System)</h1><p>此协议根据域名解析到此域名对应的相应的ip地址，然后再来访问此IP地址对应得网站或者主机。首先，本机一定要知道DNS服务器的IP地址，否则上不了网，通过DNS服务器，才能知道某个域名的IP地址到底是什么,DNS服务器的IP地址，有可能是动态的，每次上网是由网关分配，这叫做DHCP机制，也有可能是事先固定的地址，一些公网的DNS服务器，也可以使用，其中最有名的就是Google的8.8.8.8和Level3 的4.2.2.2。</p>
+<h3 id="过程采用了分级查询–域名的层级结构如下："><a href="#过程采用了分级查询–域名的层级结构如下：" class="headerlink" title="过程采用了分级查询–域名的层级结构如下："></a>过程采用了分级查询–域名的层级结构如下：</h3><p>主机名（这是用户在自己的域里面为服务器分配的名称，用户可以任意分配）.次级域名.顶级域名.root(根域名，默认是省略的)。每一级都有自己的NS记录（NameServer）此记录指向该级域名的域名服务器，此服务器知道下一级域名的各种记录。</p>
+<ol>
+<li>DNS服务器内置了根域名服务器的NS记录和IP地址（这些记录一般是不会变化的，）根域名服务器全世界只有13台，分别是从A.root-ser<br>vers.net到M.root-servers.net。</li>
+<li>然后DNS服务器向所有这些根域名服务器的IP地址发出”0查询0“请求，询问索要查询的域名（如：www.douyu.com）的顶级域名服务器<br>com.的NS记录，最先回复的根域名服务器将被缓存，以后只向这台服务器发送请求.     </li>
+<li>接下来，DNS服务器向这些顶级域名服务器发出请求，询问次级域名douyu.com的NS记录，返回了此次级域名的四条NS记录和其对应的服务<br>器名称和IP。</li>
+<li>最后，DNS服务器向这些次级域名发送查询请求查询。主机层www对应的NS记录，返回相应的主机服务器和其对应的IP.此IP即是我们要的结<br>果IP。</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;DNS-Domain-Name-System&quot;&gt;&lt;a href=&quot;#DNS-Domain-Name-System&quot; class=&quot;headerlink&quot; title=&quot;DNS(Domain Name System)&quot;&gt;&lt;/a&gt;DNS(Domain Name Sys
+    
+    </summary>
+    
+    
+      <category term="学习" scheme="https://lavaong.github.io/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>杭州初行</title>
+    <link href="https://lavaong.github.io/2017/05/08/%E6%9D%AD%E5%B7%9E%E5%88%9D%E8%A1%8C/"/>
+    <id>https://lavaong.github.io/2017/05/08/杭州初行/</id>
+    <published>2017-05-08T14:24:47.000Z</published>
+    <updated>2017-08-16T10:11:35.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="下过雨后的杭州"><a href="#下过雨后的杭州" class="headerlink" title="下过雨后的杭州"></a>下过雨后的杭州</h3><p>北方城市待久了，第一次见到原来生活可以这样安逸，岩石小道，幽香林木，人们脸上洋溢着幸福的笑容，节奏渐渐的开始舒缓。滴滴答答，淅淅沥沥的小雨，总是那么的让人产生抑郁的心情，可是你还是会感觉到安静，不知为何，感觉得到世界是你自己的了，笑容，可以更开心了。</p>
+<hr>
+<h3 id="大公司里的”生活”"><a href="#大公司里的”生活”" class="headerlink" title="大公司里的”生活”"></a>大公司里的”生活”</h3><p>也许这是很多像我这样刚刚出头的毛头小子向往的，向往的却不是最终的，最终还是暂时离开了，个中缘由难以诉说，也许真的是<em>年轻</em>，什么时候才能适应适应一下你一直厌恶的这些东西。也许也许会是永远，也许一直在身边，最终还不是找不到自己了。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><pre><code>* 林木多可栖，
+* 山雨少侬墨，
+* 夜色寄人情，
+* 莫然难回首。
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;下过雨后的杭州&quot;&gt;&lt;a href=&quot;#下过雨后的杭州&quot; class=&quot;headerlink&quot; title=&quot;下过雨后的杭州&quot;&gt;&lt;/a&gt;下过雨后的杭州&lt;/h3&gt;&lt;p&gt;北方城市待久了，第一次见到原来生活可以这样安逸，岩石小道，幽香林木，人们脸上洋溢着幸福的笑容，节奏渐
+    
+    </summary>
+    
+    
+      <category term="日记" scheme="https://lavaong.github.io/tags/%E6%97%A5%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>练车</title>
+    <link href="https://lavaong.github.io/2017/02/04/%E7%BB%83%E8%BD%A6/"/>
+    <id>https://lavaong.github.io/2017/02/04/练车/</id>
+    <published>2017-02-04T14:01:10.000Z</published>
+    <updated>2017-08-16T10:11:35.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="day01–起步停车转弯"><a href="#day01–起步停车转弯" class="headerlink" title="day01–起步停车转弯"></a>day01–起步停车转弯</h1><h2 id="汽车起步"><a href="#汽车起步" class="headerlink" title="汽车起步"></a>汽车起步</h2><ul>
+<li>1 踩离合</li>
+<li>2 拨动钥匙</li>
+<li>3 手刹按住按钮，先往上提,再往下压。</li>
+<li>4 挂挡 左上为档位1，以此类推。</li>
+<li>5 缓慢松离合。</li>
+</ul>
+<h2 id="汽车停车"><a href="#汽车停车" class="headerlink" title="汽车停车"></a>汽车停车</h2><ul>
+<li>1 踩离合</li>
+<li>2 轻刹</li>
+</ul>
+<h2 id="汽车待机"><a href="#汽车待机" class="headerlink" title="汽车待机"></a>汽车待机</h2><ul>
+<li>1 踩离合</li>
+<li>2 可以刹车，也可以挂到空挡(下拉)</li>
+<li>3 手刹往上提</li>
+<li>4 松离合</li>
+</ul>
+<h2 id="汽车转弯"><a href="#汽车转弯" class="headerlink" title="汽车转弯"></a>汽车转弯</h2><ul>
+<li>车头在马路外沿，转完后需要一直保持外沿，距离转弯向的路边际越近，需要方向盘的转幅越大,需要多加练习方可掌握完美转弯的时机。</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;day01–起步停车转弯&quot;&gt;&lt;a href=&quot;#day01–起步停车转弯&quot; class=&quot;headerlink&quot; title=&quot;day01–起步停车转弯&quot;&gt;&lt;/a&gt;day01–起步停车转弯&lt;/h1&gt;&lt;h2 id=&quot;汽车起步&quot;&gt;&lt;a href=&quot;#汽车起步&quot; cla
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>
