@@ -322,7 +322,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lavaong.github.io/2018/02/21/JavaSE中的默认VM-Hotspot-1/">
+    <link itemprop="mainEntityOfPage" href="https://lavaong.github.io/2018/02/03/JavaSE中的默认VM-Hotspot/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Lavaong">
@@ -341,7 +341,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/21/JavaSE中的默认VM-Hotspot-1/" itemprop="url">JavaSE中的默认VM-Hotspot</a></h1>
+                <a class="post-title-link" href="/2018/02/03/JavaSE中的默认VM-Hotspot/" itemprop="url">JavaSE中的默认VM-HotSpot</a></h1>
         
 
         <div class="post-meta">
@@ -353,8 +353,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-21T17:37:41+08:00">
-                2018-02-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-03T18:51:22+08:00">
+                2018-02-03
               </time>
             
 
@@ -364,6 +364,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -372,9 +394,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/02/21/JavaSE中的默认VM-Hotspot-1/#comments" itemprop="discussionUrl">
+                <a href="/2018/02/03/JavaSE中的默认VM-Hotspot/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/02/21/JavaSE中的默认VM-Hotspot-1/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/02/03/JavaSE中的默认VM-Hotspot/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -404,7 +426,10 @@
       
         
           
-            
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;”hot spot”故名思意,就是热点的意思，在JVM的执行引擎中，热点又通常指执行频率高的代码，而执行频率高的<br>评判标准则是有很多种表现，如<em>方法</em>的执行次数，或者<em>某条执行路径</em>的次数。HotSpot内部的执行引擎采用混合执<br>行模式，即包括解释器和自适应编译器（Adaptive-compile）.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;虚拟机的默认配置下，初始化时所有的Java方法都由解释器执行，解释器记录着每个方法的执行次数和循环次数，<br>并以这两个指标去判断一个方法的”热度”。等到一个方法足够”热”的时候，JVM就会启动该方法的编译，这种在所有执行过的代码里只寻找一部分编译的做法，叫自适应编译，为了实现动态编译，执行引擎需要多层，且一定有一层是进程初始阶段的编译，<br>然后再让自适应编译处理其中的部分代码。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JIT编译（Just-in-time）即每当一部分代码要第一次准备执行时，将这部分代码编译。同时JIT编译和自适应编译都<br>属于动态编译的范畴，其特点是在程序运行的时候进行编译，而不是在程序开始之前就进行编译，和静态编译相互区分。<br>而在HotSpot中的VM是使用”JIT编译的（<em>动态编译</em>）”。其中的Client Compile(C1)和Sever Compile(C2)通常被称为”<br>JIT编译器”。</p>
+
           
         
       
@@ -443,7 +468,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -493,7 +518,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
