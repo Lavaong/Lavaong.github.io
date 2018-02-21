@@ -73,7 +73,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="虚拟机," />
 
 
 
@@ -86,15 +86,22 @@
 
 
 
-<meta name="description" content="read read coding">
-<meta property="og:type" content="website">
-<meta property="og:title" content="l-tlon">
-<meta property="og:url" content="https://lavaong.github.io/page/4/index.html">
+<meta name="description" content="&amp;quot;hot spot&amp;quot;故名思意,就是热点的意思，在JVM的执行引擎中，热点又通常指执行频率高的代码，而执行频率高的
+评判标准则是有很多种表现，如方法的执行次数，或者某条执行路径的次数。HotSpot内部的执行引擎采用混合执行模式，即包括解释器和自适应编译器（Adaptive-compile）.
+虚拟机的默认配置下，初始化时所有的Java方法都由解释器执行，解释器记录着每个方法的执">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaSE中的默认VM-HotSpot">
+<meta property="og:url" content="https://lavaong.github.io/2018/02/03/JavaSE中的默认VM-Hotspot/index.html">
 <meta property="og:site_name" content="l-tlon">
-<meta property="og:description" content="read read coding">
+<meta property="og:description" content="&amp;quot;hot spot&amp;quot;故名思意,就是热点的意思，在JVM的执行引擎中，热点又通常指执行频率高的代码，而执行频率高的
+评判标准则是有很多种表现，如方法的执行次数，或者某条执行路径的次数。HotSpot内部的执行引擎采用混合执行模式，即包括解释器和自适应编译器（Adaptive-compile）.
+虚拟机的默认配置下，初始化时所有的Java方法都由解释器执行，解释器记录着每个方法的执">
+<meta property="og:updated_time" content="2018-02-21T10:21:57.788Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="l-tlon">
-<meta name="twitter:description" content="read read coding">
+<meta name="twitter:title" content="JavaSE中的默认VM-HotSpot">
+<meta name="twitter:description" content="&amp;quot;hot spot&amp;quot;故名思意,就是热点的意思，在JVM的执行引擎中，热点又通常指执行频率高的代码，而执行频率高的
+评判标准则是有很多种表现，如方法的执行次数，或者某条执行路径的次数。HotSpot内部的执行引擎采用混合执行模式，即包括解释器和自适应编译器（Adaptive-compile）.
+虚拟机的默认配置下，初始化时所有的Java方法都由解释器执行，解释器记录着每个方法的执">
 
 
 
@@ -124,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="https://lavaong.github.io/page/4/"/>
+  <link rel="canonical" href="https://lavaong.github.io/2018/02/03/JavaSE中的默认VM-Hotspot/"/>
 
 
 
 
 
-  <title>l-tlon</title>
+  <title>JavaSE中的默认VM-HotSpot | l-tlon</title>
   
 
 
@@ -159,8 +166,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -307,9 +313,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -322,7 +328,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lavaong.github.io/2017/06/27/DNS-域名系统-基本解析/">
+    <link itemprop="mainEntityOfPage" href="https://lavaong.github.io/2018/02/03/JavaSE中的默认VM-Hotspot/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Lavaong">
@@ -339,9 +345,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/06/27/DNS-域名系统-基本解析/" itemprop="url">DNS[域名系统]基本解析</a></h1>
+          <h1 class="post-title" itemprop="name headline">JavaSE中的默认VM-HotSpot</h1>
         
 
         <div class="post-meta">
@@ -353,8 +357,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-27T10:47:03+08:00">
-                2017-06-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-03T18:51:22+08:00">
+                2018-02-03
               </time>
             
 
@@ -364,6 +368,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -372,9 +398,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/06/27/DNS-域名系统-基本解析/#comments" itemprop="discussionUrl">
+                <a href="/2018/02/03/JavaSE中的默认VM-Hotspot/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/06/27/DNS-域名系统-基本解析/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/02/03/JavaSE中的默认VM-Hotspot/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -402,19 +428,11 @@
       
 
       
-        
-          
-            <h1 id="DNS-Domain-Name-System"><a href="#DNS-Domain-Name-System" class="headerlink" title="DNS(Domain Name System)"></a>DNS(Domain Name System)</h1><p>此协议根据域名解析到此域名对应的相应的ip地址，然后再来访问此IP地址对应得网站或者主机。首先，本机一定要知道DNS服务器的IP地址，否则上不了网，通过DNS服务器，才能知道某个域名的IP地址到底是什么,DNS服务器的IP地址，有可能是动态的，每次上网是由网关分配，这叫做DHCP机制，也有可能是事先固定的地址，一些公网的DNS服务器，也可以使用，其中最有名的就是Google的8.8.8.8和Level3 的4.2.2.2。</p>
-<h3 id="过程采用了分级查询–域名的层级结构如下："><a href="#过程采用了分级查询–域名的层级结构如下：" class="headerlink" title="过程采用了分级查询–域名的层级结构如下："></a>过程采用了分级查询–域名的层级结构如下：</h3><p>主机名（这是用户在自己的域里面为服务器分配的名称，用户可以任意分配）.次级域名.顶级域名.root(根域名，默认是省略的)。每一级都有自己的NS记录（NameServer）此记录指向该级域名的域名服务器，此服务器知道下一级域名的各种记录。</p>
-<ol>
-<li>DNS服务器内置了根域名服务器的NS记录和IP地址（这些记录一般是不会变化的，）根域名服务器全世界只有13台，分别是从A.root-ser<br>vers.net到M.root-servers.net。</li>
-<li>然后DNS服务器向所有这些根域名服务器的IP地址发出”0查询0“请求，询问索要查询的域名（如：www.douyu.com）的顶级域名服务器<br>com.的NS记录，最先回复的根域名服务器将被缓存，以后只向这台服务器发送请求.     </li>
-<li>接下来，DNS服务器向这些顶级域名服务器发出请求，询问次级域名douyu.com的NS记录，返回了此次级域名的四条NS记录和其对应的服务<br>器名称和IP。</li>
-<li>最后，DNS服务器向这些次级域名发送查询请求查询。主机层www对应的NS记录，返回相应的主机服务器和其对应的IP.此IP即是我们要的结<br>果IP。</li>
-</ol>
+        <pre><code>&quot;hot spot&quot;故名思意,就是热点的意思，在JVM的执行引擎中，热点又通常指执行频率高的代码，而执行频率高的
+</code></pre><p>评判标准则是有很多种表现，如<em>方法</em>的执行次数，或者<em>某条执行路径</em>的次数。HotSpot内部的执行引擎采用混合执<br>行模式，即包括解释器和自适应编译器（Adaptive-compile）.</p>
+<pre><code>虚拟机的默认配置下，初始化时所有的Java方法都由解释器执行，解释器记录着每个方法的执行次数和循环次数，
+</code></pre><p>并以这两个指标去判断一个方法的”热度”。等到一个方法足够”热”的时候，JVM就会启动该方法的编译，这种在所有执行过的代码里<br>只寻找一部分编译的做法，叫自适应编译，为了实现动态编译，执行引擎需要多层，且一定有一层是进程初始阶段的编译，<br>然后再让自适应编译处理其中的部分代码。<br>    JIT编译（Just-in-time）即每当一部分代码要第一次准备执行时，将这部分代码编译。同时JIT编译和自适应编译都<br>属于动态编译的范畴，其特点是在程序运行的时候进行编译，而不是在程序开始之前就进行编译，和静态编译相互区分。<br>而在HotSpot中的VM是使用”JIT编译的（<em>动态编译</em>）”。其中的Client Compile(C1)和Sever Compile(C2)通常被称为”<br>JIT编译器”。</p>
 
-          
-        
       
     </div>
     
@@ -429,14 +447,40 @@
 
     <footer class="post-footer">
       
-
+        <div class="post-tags">
+          
+            <a href="/tags/虚拟机/" rel="tag"># 虚拟机</a>
+          
+        </div>
       
 
       
+      
+      
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/16/工作点滴0001/" rel="next" title="工作点滴0001">
+                <i class="fa fa-chevron-left"></i> 工作点滴0001
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/21/JavaSE中的默认VM-Hotspot-1/" rel="prev" title="JavaSE中的默认VM-Hotspot">
+                JavaSE中的默认VM-Hotspot <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
       
-        <div class="post-eof"></div>
+
+      
       
     </footer>
   </div>
@@ -446,14 +490,11 @@
   </article>
 
 
-    
-  </section>
 
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
-  </nav>
-
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -461,6 +502,20 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -716,6 +771,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -733,6 +792,18 @@
       <script id="dsq-count-scr" src="https://lavaong.disqus.com/count.js" async></script>
     
 
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://lavaong.github.io/2018/02/03/JavaSE中的默认VM-Hotspot/';
+          this.page.identifier = '2018/02/03/JavaSE中的默认VM-Hotspot/';
+          this.page.title = 'JavaSE中的默认VM-HotSpot';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://lavaong.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
     
 
   
