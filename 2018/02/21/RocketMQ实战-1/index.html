@@ -100,8 +100,9 @@ RocketMQ保证了消息的严格顺序，">
 
 RocketMQ原生支持分布式，不用像ActiveMQ一样做额外的配置，单点式消息中间件
 RocketMQ保证了消息的严格顺序，">
-<meta property="og:image" content="https://lavaong.github.io/C:/Users/Administrator/Desktop/blog-master/source/uploads">
-<meta property="og:updated_time" content="2018-02-21T13:59:59.754Z">
+<meta property="og:image" content="https://lavaong.github.io/C:/Users/Administrator/Desktop/blog-master/source/uploads/TB1lEPePXXXXXX8XXXXXXXXXXXX.png">
+<meta property="og:image" content="https://lavaong.github.io/C:\Users\Administrator\Desktop\blog-master\source\uploads\TB1lEPePXXXXXX8XXXXXXXXXXXX.png">
+<meta property="og:updated_time" content="2018-02-21T14:07:11.548Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RocketMQ实战(1)">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;RocketMQ是一款阿里自主开源的分布式消息中间件，其没有完全遵循JMS(JAVA Message Services)规范，并且和常用的ActiveMQ相比，具有很多优良的特性，并且在如今高负载，大流量的业务场景下完全可以胜任。
@@ -109,7 +110,7 @@ RocketMQ保证了消息的严格顺序，">
 
 RocketMQ原生支持分布式，不用像ActiveMQ一样做额外的配置，单点式消息中间件
 RocketMQ保证了消息的严格顺序，">
-<meta name="twitter:image" content="https://lavaong.github.io/C:/Users/Administrator/Desktop/blog-master/source/uploads">
+<meta name="twitter:image" content="https://lavaong.github.io/C:/Users/Administrator/Desktop/blog-master/source/uploads/TB1lEPePXXXXXX8XXXXXXXXXXXX.png">
 
 
 
@@ -446,7 +447,7 @@ RocketMQ保证了消息的严格顺序，">
 </ol>
 </blockquote>
 <p>&nbsp;&nbsp;&nbsp;RocketMQ的发布订阅模式规定了其采用了Group机制实现消息的负载均衡。即根据Topic的消息数，均衡分布到每个Group相应的数据量，其中Group可以是一台机器或者一个进程。</p>
-<h3 id="RocketMQ的集群部署"><a href="#RocketMQ的集群部署" class="headerlink" title="RocketMQ的集群部署"></a>RocketMQ的集群部署</h3><p><img src="C:/Users/Administrator/Desktop/blog-master/source/uploads" alt="avatar"></p>
+<h3 id="RocketMQ的集群部署"><a href="#RocketMQ的集群部署" class="headerlink" title="RocketMQ的集群部署"></a>RocketMQ的集群部署</h3><p><img src="C:/Users/Administrator/Desktop/blog-master/source/uploads/TB1lEPePXXXXXX8XXXXXXXXXXXX.png" alt="alt text"><br><img src="C:\Users\Administrator\Desktop\blog-master\source\uploads\TB1lEPePXXXXXX8XXXXXXXXXXXX.png" alt="alt text"></p>
 <h4 id="多Master模式"><a href="#多Master模式" class="headerlink" title="多Master模式"></a>多Master模式</h4><p>多个Master存在的模式，当一个Master宕机的时候，会由于其他的代替，缺点是宕机的Master上的消息无法再被订阅，除非复活。</p>
 <h4 id="多Master多Slave模式（同步双写）"><a href="#多Master多Slave模式（同步双写）" class="headerlink" title="多Master多Slave模式（同步双写）"></a>多Master多Slave模式（同步双写）</h4><p>适用于并发量比较大的情况下，只有Master/Slave都成功才能成功，相比于异步辅助，提高了强一致性，但是减缓了读写速度</p>
 <h4 id="多Master单Slave模式（异步复制）"><a href="#多Master单Slave模式（异步复制）" class="headerlink" title="多Master单Slave模式（异步复制）"></a>多Master单Slave模式（异步复制）</h4><p>Master/Slave有短暂的延迟，高可用模式，Master宕机的时候，Slavek可以读到消息，但是可能会有少量的信息丢失。</p>
