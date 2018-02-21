@@ -322,7 +322,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lavaong.github.io/2018/02/03/JavaSE中的默认VM-Hotspot/">
+    <link itemprop="mainEntityOfPage" href="https://lavaong.github.io/2018/02/21/RocketMQ实战-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Lavaong">
@@ -341,7 +341,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/03/JavaSE中的默认VM-Hotspot/" itemprop="url">JavaSE中的默认VM-HotSpot</a></h1>
+                <a class="post-title-link" href="/2018/02/21/RocketMQ实战-1/" itemprop="url">RocketMQ实战(1)</a></h1>
         
 
         <div class="post-meta">
@@ -353,8 +353,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-03T18:51:22+08:00">
-                2018-02-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-21T21:04:34+08:00">
+                2018-02-21
               </time>
             
 
@@ -394,9 +394,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/02/03/JavaSE中的默认VM-Hotspot/#comments" itemprop="discussionUrl">
+                <a href="/2018/02/21/RocketMQ实战-1/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/02/03/JavaSE中的默认VM-Hotspot/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/02/21/RocketMQ实战-1/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -426,9 +426,20 @@
       
         
           
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;”hot spot”故名思意,就是热点的意思，在JVM的执行引擎中，热点又通常指执行频率高的代码，而执行频率高的评判标准则是有很多种表现，如<em>方法</em>的执行次数，或者<em>某条执行路径</em>的次数。HotSpot内部的执行引擎采用混合执行模式，即包括解释器和自适应编译器（Adaptive-compile）.</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;虚拟机的默认配置下，初始化时所有的Java方法都由解释器执行，解释器记录着每个方法的执行次数和循环次数，并以这两个指标去判断一个方法的”热度”。等到一个方法足够”热”的时候，JVM就会启动该方法的编译，这种在所有执行过的代码里只寻找一部分编译的做法，叫自适应编译，为了实现动态编译，执行引擎需要多层，且一定有一层是进程初始阶段的编译，然后再让自适应编译处理其中的部分代码。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JIT编译（Just-in-time）即每当一部分代码要第一次准备执行时，将这部分代码编译。同时JIT编译和自适应编译都属于动态编译的范畴，其特点是在程序运行的时候进行编译，而不是在程序开始之前就进行编译，和静态编译相互区分。而在HotSpot中的VM是使用”JIT编译的（<em>动态编译</em>）”。其中的Client Compile(C1)和Sever Compile(C2)通常被称为”JIT编译器”。</p>
+            <p>&nbsp;&nbsp;&nbsp;RocketMQ是一款阿里自主开源的分布式消息中间件，其没有完全遵循JMS(JAVA Message Services)规范，并且和常用的ActiveMQ相比，具有很多优良的特性，并且在如今高负载，大流量的业务场景下完全可以胜任。</p>
+<blockquote>
+<ol>
+<li>RocketMQ原生支持分布式，不用像ActiveMQ一样做额外的配置，<strong>单点式消息中间件</strong></li>
+<li>RocketMQ保证了消息的严格顺序，ActiveMQ可能会有消息错乱。</li>
+<li>丰富的消息拉取模式。</li>
+<li>亿级消息堆积能力</li>
+</ol>
+</blockquote>
+<p>&nbsp;&nbsp;&nbsp;RocketMQ的发布订阅模式规定了其采用了Group机制实现消息的负载均衡。即根据Topic的消息数，均衡分布到每个Group相应的数据量，其中Group可以是一台机器或者一个进程。</p>
+<h3 id="RocketMQ的集群部署"><a href="#RocketMQ的集群部署" class="headerlink" title="RocketMQ的集群部署"></a>RocketMQ的集群部署</h3><p><img src="C:/Users/Administrator/Desktop/blog-master/source/uploads" alt="avatar"></p>
+<h4 id="多Master模式"><a href="#多Master模式" class="headerlink" title="多Master模式"></a>多Master模式</h4><p>多个Master存在的模式，当一个Master宕机的时候，会由于其他的代替，缺点是宕机的Master上的消息无法再被订阅，除非复活。</p>
+<h4 id="多Master多Slave模式（同步双写）"><a href="#多Master多Slave模式（同步双写）" class="headerlink" title="多Master多Slave模式（同步双写）"></a>多Master多Slave模式（同步双写）</h4><p>适用于并发量比较大的情况下，只有Master/Slave都成功才能成功，相比于异步辅助，提高了强一致性，但是减缓了读写速度</p>
+<h4 id="多Master单Slave模式（异步复制）"><a href="#多Master单Slave模式（异步复制）" class="headerlink" title="多Master单Slave模式（异步复制）"></a>多Master单Slave模式（异步复制）</h4><p>Master/Slave有短暂的延迟，高可用模式，Master宕机的时候，Slavek可以读到消息，但是可能会有少量的信息丢失。</p>
 
           
         
@@ -468,7 +479,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -518,7 +529,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -529,7 +540,7 @@
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -540,7 +551,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>

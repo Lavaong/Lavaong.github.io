@@ -73,7 +73,7 @@
 
 
 
-  <meta name="keywords" content="学习," />
+  <meta name="keywords" content="中间件," />
 
 
 
@@ -86,16 +86,30 @@
 
 
 
-<meta name="description" content="DNS(Domain Name System)此协议根据域名解析到此域名对应的相应的ip地址，然后再来访问此IP地址对应得网站或者主机。首先，本机一定要知道DNS服务器的IP地址，否则上不了网，通过DNS服务器，才能知道某个域名的IP地址到底是什么,DNS服务器的IP地址，有可能是动态的，每次上网是由网关分配，这叫做DHCP机制，也有可能是事先固定的地址，一些公网的DNS服务器，也可以使用，其中最">
+<meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;RocketMQ是一款阿里自主开源的分布式消息中间件，其没有完全遵循JMS(JAVA Message Services)规范，并且和常用的ActiveMQ相比，具有很多优良的特性，并且在如今高负载，大流量的业务场景下完全可以胜任。
+
+
+RocketMQ原生支持分布式，不用像ActiveMQ一样做额外的配置，单点式消息中间件
+RocketMQ保证了消息的严格顺序，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DNS[域名系统]基本解析">
-<meta property="og:url" content="https://lavaong.github.io/2017/06/27/DNS-域名系统-基本解析/index.html">
+<meta property="og:title" content="RocketMQ实战(1)">
+<meta property="og:url" content="https://lavaong.github.io/2018/02/21/RocketMQ实战-1/index.html">
 <meta property="og:site_name" content="l-tlon">
-<meta property="og:description" content="DNS(Domain Name System)此协议根据域名解析到此域名对应的相应的ip地址，然后再来访问此IP地址对应得网站或者主机。首先，本机一定要知道DNS服务器的IP地址，否则上不了网，通过DNS服务器，才能知道某个域名的IP地址到底是什么,DNS服务器的IP地址，有可能是动态的，每次上网是由网关分配，这叫做DHCP机制，也有可能是事先固定的地址，一些公网的DNS服务器，也可以使用，其中最">
-<meta property="og:updated_time" content="2018-02-21T13:20:20.141Z">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;RocketMQ是一款阿里自主开源的分布式消息中间件，其没有完全遵循JMS(JAVA Message Services)规范，并且和常用的ActiveMQ相比，具有很多优良的特性，并且在如今高负载，大流量的业务场景下完全可以胜任。
+
+
+RocketMQ原生支持分布式，不用像ActiveMQ一样做额外的配置，单点式消息中间件
+RocketMQ保证了消息的严格顺序，">
+<meta property="og:image" content="https://lavaong.github.io/C:/Users/Administrator/Desktop/blog-master/source/uploads">
+<meta property="og:updated_time" content="2018-02-21T13:59:59.754Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="DNS[域名系统]基本解析">
-<meta name="twitter:description" content="DNS(Domain Name System)此协议根据域名解析到此域名对应的相应的ip地址，然后再来访问此IP地址对应得网站或者主机。首先，本机一定要知道DNS服务器的IP地址，否则上不了网，通过DNS服务器，才能知道某个域名的IP地址到底是什么,DNS服务器的IP地址，有可能是动态的，每次上网是由网关分配，这叫做DHCP机制，也有可能是事先固定的地址，一些公网的DNS服务器，也可以使用，其中最">
+<meta name="twitter:title" content="RocketMQ实战(1)">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;RocketMQ是一款阿里自主开源的分布式消息中间件，其没有完全遵循JMS(JAVA Message Services)规范，并且和常用的ActiveMQ相比，具有很多优良的特性，并且在如今高负载，大流量的业务场景下完全可以胜任。
+
+
+RocketMQ原生支持分布式，不用像ActiveMQ一样做额外的配置，单点式消息中间件
+RocketMQ保证了消息的严格顺序，">
+<meta name="twitter:image" content="https://lavaong.github.io/C:/Users/Administrator/Desktop/blog-master/source/uploads">
 
 
 
@@ -125,13 +139,13 @@
 
 
 
-  <link rel="canonical" href="https://lavaong.github.io/2017/06/27/DNS-域名系统-基本解析/"/>
+  <link rel="canonical" href="https://lavaong.github.io/2018/02/21/RocketMQ实战-1/"/>
 
 
 
 
 
-  <title>DNS[域名系统]基本解析 | l-tlon</title>
+  <title>RocketMQ实战(1) | l-tlon</title>
   
 
 
@@ -322,7 +336,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lavaong.github.io/2017/06/27/DNS-域名系统-基本解析/">
+    <link itemprop="mainEntityOfPage" href="https://lavaong.github.io/2018/02/21/RocketMQ实战-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Lavaong">
@@ -339,7 +353,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">DNS[域名系统]基本解析</h1>
+          <h1 class="post-title" itemprop="name headline">RocketMQ实战(1)</h1>
         
 
         <div class="post-meta">
@@ -351,8 +365,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-27T10:47:03+08:00">
-                2017-06-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-21T21:04:34+08:00">
+                2018-02-21
               </time>
             
 
@@ -374,8 +388,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Other/" itemprop="url" rel="index">
-                    <span itemprop="name">Other</span>
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
                   </a>
                 </span>
 
@@ -392,9 +406,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/06/27/DNS-域名系统-基本解析/#comments" itemprop="discussionUrl">
+                <a href="/2018/02/21/RocketMQ实战-1/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/06/27/DNS-域名系统-基本解析/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/02/21/RocketMQ实战-1/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -422,14 +436,20 @@
       
 
       
-        <h1 id="DNS-Domain-Name-System"><a href="#DNS-Domain-Name-System" class="headerlink" title="DNS(Domain Name System)"></a>DNS(Domain Name System)</h1><p>此协议根据域名解析到此域名对应的相应的ip地址，然后再来访问此IP地址对应得网站或者主机。首先，本机一定要知道DNS服务器的IP地址，否则上不了网，通过DNS服务器，才能知道某个域名的IP地址到底是什么,DNS服务器的IP地址，有可能是动态的，每次上网是由网关分配，这叫做DHCP机制，也有可能是事先固定的地址，一些公网的DNS服务器，也可以使用，其中最有名的就是Google的8.8.8.8和Level3 的4.2.2.2。</p>
-<h3 id="过程采用了分级查询–域名的层级结构如下："><a href="#过程采用了分级查询–域名的层级结构如下：" class="headerlink" title="过程采用了分级查询–域名的层级结构如下："></a>过程采用了分级查询–域名的层级结构如下：</h3><p>主机名（这是用户在自己的域里面为服务器分配的名称，用户可以任意分配）.次级域名.顶级域名.root(根域名，默认是省略的)。每一级都有自己的NS记录（NameServer）此记录指向该级域名的域名服务器，此服务器知道下一级域名的各种记录。</p>
+        <p>&nbsp;&nbsp;&nbsp;RocketMQ是一款阿里自主开源的分布式消息中间件，其没有完全遵循JMS(JAVA Message Services)规范，并且和常用的ActiveMQ相比，具有很多优良的特性，并且在如今高负载，大流量的业务场景下完全可以胜任。</p>
+<blockquote>
 <ol>
-<li>DNS服务器内置了根域名服务器的NS记录和IP地址（这些记录一般是不会变化的，）根域名服务器全世界只有13台，分别是从A.root-ser<br>vers.net到M.root-servers.net。</li>
-<li>然后DNS服务器向所有这些根域名服务器的IP地址发出”0查询0“请求，询问索要查询的域名（如：www.douyu.com）的顶级域名服务器<br>com.的NS记录，最先回复的根域名服务器将被缓存，以后只向这台服务器发送请求.     </li>
-<li>接下来，DNS服务器向这些顶级域名服务器发出请求，询问次级域名douyu.com的NS记录，返回了此次级域名的四条NS记录和其对应的服务<br>器名称和IP。</li>
-<li>最后，DNS服务器向这些次级域名发送查询请求查询。主机层www对应的NS记录，返回相应的主机服务器和其对应的IP.此IP即是我们要的结<br>果IP。</li>
+<li>RocketMQ原生支持分布式，不用像ActiveMQ一样做额外的配置，<strong>单点式消息中间件</strong></li>
+<li>RocketMQ保证了消息的严格顺序，ActiveMQ可能会有消息错乱。</li>
+<li>丰富的消息拉取模式。</li>
+<li>亿级消息堆积能力</li>
 </ol>
+</blockquote>
+<p>&nbsp;&nbsp;&nbsp;RocketMQ的发布订阅模式规定了其采用了Group机制实现消息的负载均衡。即根据Topic的消息数，均衡分布到每个Group相应的数据量，其中Group可以是一台机器或者一个进程。</p>
+<h3 id="RocketMQ的集群部署"><a href="#RocketMQ的集群部署" class="headerlink" title="RocketMQ的集群部署"></a>RocketMQ的集群部署</h3><p><img src="C:/Users/Administrator/Desktop/blog-master/source/uploads" alt="avatar"></p>
+<h4 id="多Master模式"><a href="#多Master模式" class="headerlink" title="多Master模式"></a>多Master模式</h4><p>多个Master存在的模式，当一个Master宕机的时候，会由于其他的代替，缺点是宕机的Master上的消息无法再被订阅，除非复活。</p>
+<h4 id="多Master多Slave模式（同步双写）"><a href="#多Master多Slave模式（同步双写）" class="headerlink" title="多Master多Slave模式（同步双写）"></a>多Master多Slave模式（同步双写）</h4><p>适用于并发量比较大的情况下，只有Master/Slave都成功才能成功，相比于异步辅助，提高了强一致性，但是减缓了读写速度</p>
+<h4 id="多Master单Slave模式（异步复制）"><a href="#多Master单Slave模式（异步复制）" class="headerlink" title="多Master单Slave模式（异步复制）"></a>多Master单Slave模式（异步复制）</h4><p>Master/Slave有短暂的延迟，高可用模式，Master宕机的时候，Slavek可以读到消息，但是可能会有少量的信息丢失。</p>
 
       
     </div>
@@ -447,7 +467,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/学习/" rel="tag"># 学习</a>
+            <a href="/tags/中间件/" rel="tag"># 中间件</a>
           
         </div>
       
@@ -460,15 +480,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/02/03/JavaSE中的默认VM-Hotspot/" rel="next" title="JavaSE中的默认VM-HotSpot">
+                <i class="fa fa-chevron-left"></i> JavaSE中的默认VM-HotSpot
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/08/16/工作点滴0001/" rel="prev" title="工作点滴0001">
-                工作点滴0001 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -637,7 +657,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DNS-Domain-Name-System"><span class="nav-number">1.</span> <span class="nav-text">DNS(Domain Name System)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#过程采用了分级查询–域名的层级结构如下："><span class="nav-number">1.0.1.</span> <span class="nav-text">过程采用了分级查询–域名的层级结构如下：</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ的集群部署"><span class="nav-number">1.</span> <span class="nav-text">RocketMQ的集群部署</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#多Master模式"><span class="nav-number">1.1.</span> <span class="nav-text">多Master模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多Master多Slave模式（同步双写）"><span class="nav-number">1.2.</span> <span class="nav-text">多Master多Slave模式（同步双写）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多Master单Slave模式（异步复制）"><span class="nav-number">1.3.</span> <span class="nav-text">多Master单Slave模式（异步复制）</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -814,9 +834,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'https://lavaong.github.io/2017/06/27/DNS-域名系统-基本解析/';
-          this.page.identifier = '2017/06/27/DNS-域名系统-基本解析/';
-          this.page.title = 'DNS[域名系统]基本解析';
+          this.page.url = 'https://lavaong.github.io/2018/02/21/RocketMQ实战-1/';
+          this.page.identifier = '2018/02/21/RocketMQ实战-1/';
+          this.page.title = 'RocketMQ实战(1)';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://lavaong.disqus.com/embed.js';
