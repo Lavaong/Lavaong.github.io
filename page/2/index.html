@@ -431,7 +431,7 @@
 <li>finally一般用在try catch 后，无论程序是否抛出异常，必定会执行finally中的语句块，一般用于IO资源的释放，或者连接资源的释放。</li>
 <li>finalize是Object中的一个方法，用于资源回收。<h3 id="Exception-Error："><a href="#Exception-Error：" class="headerlink" title="Exception,Error："></a>Exception,Error：</h3></li>
 <li>都继承自Throwable，error属于非受检类型，一般是底层资源错误或者系统错误 Ex:栈溢出,或者OOM(堆内存溢出)，不能在应用代码级别被处理.</li>
-<li>Exception分为 RuntimeException(运行时)和其他Exception（编译时）,RuntimeException也属于非受检类型，通常指应用程序运行中出现的bug导致的，Ex:NullPointerException,ArrayIndexOutOfBoundException,ClassCastException,IllegalStatementException其他Exception属于受检类型，编译时异常如 IO Exception。异常的处理方式：提倡提早捕获，延迟抛出。出现异常时，若可以解决则捕捉，不能解决则抛出。<h3 id="Integer和int（包装类和拆箱，装箱）"><a href="#Integer和int（包装类和拆箱，装箱）" class="headerlink" title="Integer和int（包装类和拆箱，装箱）:"></a>Integer和int（包装类和拆箱，装箱）:</h3></li>
+<li>Exception分为 RuntimeException(运行时)和其他Exception（编译时）,RuntimeException也属于非受检类型，通常指应用程序运行中出现的bug导致的，Ex:NullPointerException,ArrayIndexOutOfBoundException,ClassCastException,Illegal<br>StatementException其他Exception属于受检类型，编译时异常如 IO Exception。异常的处理方式：提倡提早捕获，延迟抛出。出现异常时，若可以解决则捕捉，不能解决则抛出。<h3 id="Integer和int（包装类和拆箱，装箱）"><a href="#Integer和int（包装类和拆箱，装箱）" class="headerlink" title="Integer和int（包装类和拆箱，装箱）:"></a>Integer和int（包装类和拆箱，装箱）:</h3></li>
 <li>Integer是int的包装类，基本类型都有包装类，包装类能自动转化成相应的基本数据类型，称为拆箱，如包装类做算数运算时，反之（new Integer(1)），称为装箱。装箱和拆箱的设计是一种享元设计模式（它使用共享物件，用来尽可能减少内存使用量以及分享资讯给尽可能多的相似物件）,在装箱的时候，对于在-128到127的int值，Integer会从IntegerCache中拿到相应的复用对象。当大于127时，会重新new一个Integer对象。<h3 id="StringBuffer-StringBuilder-String"><a href="#StringBuffer-StringBuilder-String" class="headerlink" title="StringBuffer,StringBuilder,String:"></a>StringBuffer,StringBuilder,String:</h3></li>
 <li>String的具体实现为 final char value[],他是immutable的（不可变对象），不会存在多线程访问的安全问题，但是性能会有所降低，所以提供了一个可变对象StringBuffer,由于考虑到多线程并发访问的问题，StringBuffer被设计成了Synchronized修饰的，1.5以后，为了提升StringBuffer在单线程下的性能，引入了StringBuilder，StringBuilder和StringBuffer的方法相同，当做字符串连接 ‘+’的使用被编译器所优化，直接在编译期生成一个String对象，如果该对象对象的字符串变量在常量池中已经存在，那么用+ 比用StringBuffer或者StringBuilder都要快，;</li>
 <li>重载：在同一个类中，有多个方法名相同，形式参数列表不同的方法，与修饰符无关，与方法的返回值无关。</li>
@@ -466,14 +466,16 @@
 <li>分布式事务：分布式事务指的多个微服务之间的事务不一致导致的数据一致性问题。解决的办法最常用的是oracle 的xa二阶段提交协议，第一阶段，有一个协调中心节点向所有参与事务<br>节点进行询问请求，所有参与节点进行各自事务相关的数据更新，并将更新日志写入undo log或者redo log中，用于提交或者回滚。当所有的参与节点返回成功给中心调节节点的时候，开始<br>执行第二阶段，第二阶段，协调中心向所有参与者发送让他们commit的请求，所有参与者进行本地事务的提交，提交成功后，返回完成消息给中中心节点，，分布式事务完成。</li>
 <li>并行是指两个或者多个事件在同一刻发生；并发是指两个或者多个事件在同一时间间隔发生；</li>
 <li>进程是资源调度（指内存资源或者IO设备这种资源）的基本单位，线程是cpu调度的基本单位。</li>
-<li>11.volatile是轻量级的synchronized,他在并发环境中保证了共享变量的可见性，并禁止重排序，原子性保证：但对long类型或者double类型的不行，因为那是两步操作</li>
-<li>12.内存可见性：Java线程之间的通信由Java内存模型控制。JMM决定了一个线程对共享变量的操作结果何时对另一个线程可见，每个线程独有的本地内存，本地内存中存储了共享变量的副本，本地内存是JMM抽象出来的一个概念，实际并不存在。JMM通过插入特定的内存屏障指令来禁止cpu级别的指令重排序。JSP-133规范采用happens-before的概念来阐述操作可见性，在JMM中，如果一个操作的执行结果对另一个操作可见，那么这两个操作必定要存在happens-before关系，这样的操作可以不同的线程之间或者同一个线程之内。</li>
-<li>13.CAS(compare and swap)Atomicxxx类型的变量和Lock操作类的底层都是实现了此机制，对变量的操作涉及到3个操作数，内存中的值，变量旧的预期值，要修改的值。当要修改时会检查内存中的值和变量旧的预期值是否相同，如果不同，则认为提交更新失败，线程会自旋等待一段时间后重新计算当前内存值，和要修改的新值。CAS对cpu的要求比较高，且只能保证一个变量的原子性，且存在ABA问题。ABA问题：A线程修改了变量的值为另一个，B线程比较当前旧预期值和内存中的值是相同的，然后阻塞，线程C将变量的值从另一个变更为原来的值，然后B拿到锁，开始执行CAS步骤，又将变量的值重新更新为另一个。解决方法，对变量添加版本号的标识，每一次的更新都会对版本号做变化，更新前会对版本号做对比，不同则不能更新。</li>
-<li>14.线程安全的定义（周志明）：当多个线程访问某个类时，不管运行时环境采用何种调度方式或者这些线程将如何交替进行，并且在主调代码中不需要任何额外的同步或协同，这个类都能表现出正确的行为，那么称这个类是线程安全的<h2 id="框架部分："><a href="#框架部分：" class="headerlink" title="框架部分："></a>框架部分：</h2></li>
-<li>RPC:调用本地函数一样调用远程其他虚拟机内的函数，屏蔽了底层的传输方式和序列化方式，降低了服务之间沟通的成本，<br>gRPC：google开源的一款语言中立的RPC框架，基于Http2协议（双向流，消息头压缩,单TCP的多路复用，服务端推送）,基于IDL文件定义服务。通过proto3工具生成指定语言的数据结构、<br>服务端接口和指定语言的客户端Stub,序列化支持PB(protocal Buffer)和json,PB是一种语言无关的高性能序列化框架。</li>
-<li>tomcat:tomcat作为一个jsp/servlet容器，有三种工作模式：独立的servlet容器，进程内的servlet容器，进程外的servlet容器。tomcat在不同工作模式下的请求分为两类。tomcat作为应用程序服务器，请求来自于前端的Web服务器.tomcat作为独立服务器，请求来自于web浏览器。<h2 id="No-Sql相关："><a href="#No-Sql相关：" class="headerlink" title="No Sql相关："></a>No Sql相关：</h2></li>
+<li>volatile是轻量级的synchronized,他在并发环境中保证了共享变量的可见性，并禁止重排序，原子性保证：但对long类型或者double类型的不行，因为那是两步操作</li>
+<li>内存可见性：Java线程之间的通信由Java内存模型控制。JMM决定了一个线程对共享变量的操作结果何时对另一个线程可见，每个线程独有的本地内存，本地内存中存储了共享变量的副本，本地内存是JMM抽象出来的一个概念，实际并不存在。JMM通过插入特定的内存屏障指令来禁止cpu级别的指令重排序。JSP-133规范采用happens-before的概念来阐述操作可见性，在JMM中，如果一个操作的执行结果对另一个操作可见，那么这两个操作必定要存在happens-before关系，这样的操作可以不同的线程之间或者同一个线程之内。</li>
+<li>CAS(compare and swap)Atomicxxx类型的变量和Lock操作类的底层都是实现了此机制，对变量的操作涉及到3个操作数，内存中的值，变量旧的预期值，要修改的值。当要修改时会检查内存中的值和变量旧的预期值是否相同，如果不同，则认为提交更新失败，线程会自旋等待一段时间后重新计算当前内存值，和要修改的新值。CAS对cpu的要求比较高，且只能保证一个变量的原子性，且存在ABA问题。ABA问题：A线程修改了变量的值为另一个，B线程比较当前旧预期值和内存中的值是相同的，然后阻塞，线程C将变量的值从另一个变更为原来的值，然后B拿到锁，开始执行CAS步骤，又将变量的值重新更新为另一个。解决方法，对变量添加版本号的标识，每一次的更新都会对版本号做变化，更新前会对版本号做对比，不同则不能更新。</li>
+<li>线程安全的定义（周志明）：当多个线程访问某个类时，不管运行时环境采用何种调度方式或者这些线程将如何交替进行，并且在主调代码中不需要任何额外的同步或协同，这个类都能表现出正确的行为，那么称这个类是线程安全的  </li>
 </ol>
-<ul>
+<h2 id="框架部分："><a href="#框架部分：" class="headerlink" title="框架部分："></a>框架部分：</h2><ol>
+<li>RPC:调用本地函数一样调用远程其他虚拟机内的函数，屏蔽了底层的传输方式和序列化方式，降低了服务之间沟通的成本，<br>gRPC：google开源的一款语言中立的RPC框架，基于Http2协议（双向流，消息头压缩,单TCP的多路复用，服务端推送）,基于IDL文件定义服务。通过proto3工具生成指定语言的数据结构、<br>服务端接口和指定语言的客户端Stub,序列化支持PB(protocal Buffer)和json,PB是一种语言无关的高性能序列化框架。</li>
+<li>tomcat:tomcat作为一个jsp/servlet容器，有三种工作模式：独立的servlet容器，进程内的servlet容器，进程外的servlet容器。tomcat在不同工作模式下的请求分为两类。tomcat作为应用程序服务器，请求来自于前端的Web服务器.tomcat作为独立服务器，请求来自于web浏览器。  </li>
+</ol>
+<h2 id="No-Sql相关："><a href="#No-Sql相关：" class="headerlink" title="No Sql相关："></a>No Sql相关：</h2><ul>
 <li>Redis的5中常用数据类型string（最大大小为512M）,list（双向链表），set(value永远为null的HashMap)，zset,hash(value是一个HashMap,适合存储对象).  支持pop/push,add/remove 操作，取交集和并集等原子性操作。支持序列化到磁盘或者文件。默认端口为6379.</li>
 <li>Redis的持久化策略：RDB:在指定的时间内将snapshot快照写入磁盘，恢复时将文件直接读入内存，场景分析：大规模数据的恢复，且对数据恢复的完整性不敏感。最后一次持久化后的数据可能丢失。</li>
 <li>AOF:以日志的形式来记录每个写操作.使用场景：备份机制更稳健，丢失数据概率更低，日志文本可读。</li>
@@ -489,9 +491,11 @@
 <li>缓存问题：<ol>
 <li>缓存并发:缓存过期或者在更新，且同时存在大量并发请求该key，导致的缓存失效，请求直接到达数据库层会导致数据一致性问题，或者服务“雪崩”。解决方法是对查询缓存操作加锁，阻塞直至重建缓存。</li>
 <li>缓存雪崩：当缓存失效时间相同时，可能导致同时大量缓存同时失效，导致数据库查询压力骤增，引发雪崩，可将缓存失效时间均匀平摊在时间轴上。</li>
-<li>缓存击穿：某个key对应的数据为空，缓存没有命中，导致不必要的数据库查询操作，通过设置布隆过滤器，将有可能存在的数据hash到一个足够大的bitmap中。一个一定不存在的数据一定会被过滤掉，从而避免了请求直达数据库。<h2 id="RDBMS数据库相关（mysql）："><a href="#RDBMS数据库相关（mysql）：" class="headerlink" title="RDBMS数据库相关（mysql）："></a>RDBMS数据库相关（mysql）：</h2></li>
+<li>缓存击穿：某个key对应的数据为空，缓存没有命中，导致不必要的数据库查询操作，通过设置布隆过滤器，将有可能存在的数据hash到一个足够大的bitmap中。一个一定不存在的数据一定会被过滤掉，从而避免了请求直达数据库。  </li>
 </ol>
 </li>
+</ul>
+<h2 id="RDBMS数据库相关-mtsql-："><a href="#RDBMS数据库相关-mtsql-：" class="headerlink" title="RDBMS数据库相关(mtsql)："></a>RDBMS数据库相关(mtsql)：</h2><ul>
 <li>普通索引</li>
 <li>唯一性索引,必须指定为primary key</li>
 <li>全文索引单列索引，多列索引</li>
@@ -505,12 +509,14 @@
 <li>类的加载机制：类的加载值得时将类的.class文件中的二进制数据读入到内存中，将其放在运行时的数据区的方法内，然后再堆区创建一个java.lang.class对象，用来封装类在方法区内的数据结构，并提供了访问方法区内的这些数据结构的方法。</li>
 <li>类的生命周期：加载（加载二进制数据到内存中），连接，初始化（静态变量赋初值，常量赋值），使用（new()） 和卸载 (垃圾回收)。</li>
 <li>jvm初始化步骤：（1）假如这个类没有没加载和连接，则程序先加载并连接。(2)假如该类的直接父类没有被初始化，则先初始化其直接父类，假如类中有初始化语句，则系统依此执行这些初始化语句。</li>
-<li>类初始化时机：只有当类的主动使用时才会导致类的初始化，主动使用的方式有：<h2 id="Sun-JDK关于JVM监控和处理故障的命令"><a href="#Sun-JDK关于JVM监控和处理故障的命令" class="headerlink" title="Sun JDK关于JVM监控和处理故障的命令:"></a>Sun JDK关于JVM监控和处理故障的命令:</h2><blockquote>
-<p>jps:JVM Process Status Tool:显示指定系统内所有的HotSpot进程(jps -l -m)<br>jstat：JVM static Monitoring是用于监视虚拟机运行时状态信息的命令<br>jmap:JVM Memory Map 用于生成heap dump文件，堆快照文件，一般用MAT工具进行分析，大对象无法被回收或者过多应该被回收的对象一直被引用。<br>jstack:用于生成jvm当前时刻的线程快照，线程快照是当前JVM中每条线程的方法的执行堆栈集合，可以查询线程死锁或者循环等待等问题。<br>jinfo:JVM Configure Info 用于查看和调整虚拟机的运行时参数，能看到更详细的，未被指定的参数。</p>
-<h2 id="linux-相关："><a href="#linux-相关：" class="headerlink" title="linux 相关："></a>linux 相关：</h2><p>cat[选项][文件]：查看文件内容，但是对于较大的文件不适合，会过多占用系统资源，无法进行交互和控制<br>more[选项][文件]：分页查看文件、<br>less[选项][文件]：更高级的查看和搜索文件内容的方式<br>tail[-f（必要参数）][可选参数][文件]：查看文件的最后几行，一般用于日志文件的实时查看。head:查看文件的头几行。<br>wc [选项参数][文件]：统计文件中字符的个数   </p>
-</blockquote>
-</li>
+<li>类初始化时机：只有当类的主动使用时才会导致类的初始化，主动使用的方式有：  </li>
 </ul>
+<h2 id="Sun-JDK关于JVM监控和处理故障的命令"><a href="#Sun-JDK关于JVM监控和处理故障的命令" class="headerlink" title="Sun JDK关于JVM监控和处理故障的命令:"></a>Sun JDK关于JVM监控和处理故障的命令:</h2><blockquote>
+<p>jps:JVM Process Status Tool:显示指定系统内所有的HotSpot进程(jps -l -m)<br>jstat：JVM static Monitoring是用于监视虚拟机运行时状态信息的命令<br>jmap:JVM Memory Map 用于生成heap dump文件，堆快照文件，一般用MAT工具进行分析，大对象无法被回收或者过多应该被回收的对象一直被引用。<br>jstack:用于生成jvm当前时刻的线程快照，线程快照是当前JVM中每条线程的方法的执行堆栈集合，可以查询线程死锁或者循环等待等问题。<br>jinfo:JVM Configure Info 用于查看和调整虚拟机的运行时参数，能看到更详细的，未被指定的参数。  </p>
+</blockquote>
+<h2 id="linux-相关："><a href="#linux-相关：" class="headerlink" title="linux 相关："></a>linux 相关：</h2><blockquote>
+<p>cat[选项][文件]：查看文件内容，但是对于较大的文件不适合，会过多占用系统资源，无法进行交互和控制<br>more[选项][文件]：分页查看文件、<br>less[选项][文件]：更高级的查看和搜索文件内容的方式<br>tail[-f（必要参数）][可选参数][文件]：查看文件的最后几行，一般用于日志文件的实时查看。head:查看文件的头几行。<br>wc [选项参数][文件]：统计文件中字符的个数   </p>
+</blockquote>
 <h2 id="数据结构和算法部分："><a href="#数据结构和算法部分：" class="headerlink" title="数据结构和算法部分："></a>数据结构和算法部分：</h2>
           
         
