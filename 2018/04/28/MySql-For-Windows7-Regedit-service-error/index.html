@@ -86,28 +86,27 @@
 
 
 
-<meta name="description" content="##记一次Mysql注册服务相关问题
-###mysql解压版本的正确启动：###
-
+<meta name="description" content="记一次Mysql注册服务相关问题mysql解压版本的正确启动：
 需要配置环境变量，环境变量的配置建议在系统Path中配置，配置完bin目录后.
-需要配置默认的my-default.ini配置文件，主要就是设置字符编码和basedir和datadir两个配置选项，分别为mysql的解压目录和mysql的数据存储目录，数据存储目录需要我们手动在mysql的根目录下建立data文件夹">
+需要配置默认的my-default.ini配置文件，主要就是设置字符编码和basedir和datadir两个配置选项，分别为mysql的解压目录和mysql的数据存储目录，数据存储目录需要我们手动在mysql的根目录下建立data文件夹
+初始化mysql命">
 <meta property="og:type" content="article">
-<meta property="og:title" content="面试知识点整理">
+<meta property="og:title" content="MySql安装问题">
 <meta property="og:url" content="https://lavaong.github.io/2018/04/28/MySql-For-Windows7-Regedit-service-error/index.html">
 <meta property="og:site_name" content="l-tlon">
-<meta property="og:description" content="##记一次Mysql注册服务相关问题
-###mysql解压版本的正确启动：###
-
+<meta property="og:description" content="记一次Mysql注册服务相关问题mysql解压版本的正确启动：
 需要配置环境变量，环境变量的配置建议在系统Path中配置，配置完bin目录后.
-需要配置默认的my-default.ini配置文件，主要就是设置字符编码和basedir和datadir两个配置选项，分别为mysql的解压目录和mysql的数据存储目录，数据存储目录需要我们手动在mysql的根目录下建立data文件夹">
-<meta property="og:updated_time" content="2018-04-28T10:39:53.671Z">
+需要配置默认的my-default.ini配置文件，主要就是设置字符编码和basedir和datadir两个配置选项，分别为mysql的解压目录和mysql的数据存储目录，数据存储目录需要我们手动在mysql的根目录下建立data文件夹
+初始化mysql命">
+<meta property="og:image" content="https://lavaong.github.io/..\uploads\mysql service error.png">
+<meta property="og:updated_time" content="2018-04-28T10:49:19.175Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="面试知识点整理">
-<meta name="twitter:description" content="##记一次Mysql注册服务相关问题
-###mysql解压版本的正确启动：###
-
+<meta name="twitter:title" content="MySql安装问题">
+<meta name="twitter:description" content="记一次Mysql注册服务相关问题mysql解压版本的正确启动：
 需要配置环境变量，环境变量的配置建议在系统Path中配置，配置完bin目录后.
-需要配置默认的my-default.ini配置文件，主要就是设置字符编码和basedir和datadir两个配置选项，分别为mysql的解压目录和mysql的数据存储目录，数据存储目录需要我们手动在mysql的根目录下建立data文件夹">
+需要配置默认的my-default.ini配置文件，主要就是设置字符编码和basedir和datadir两个配置选项，分别为mysql的解压目录和mysql的数据存储目录，数据存储目录需要我们手动在mysql的根目录下建立data文件夹
+初始化mysql命">
+<meta name="twitter:image" content="https://lavaong.github.io/..\uploads\mysql service error.png">
 
 
 
@@ -143,7 +142,7 @@
 
 
 
-  <title>面试知识点整理 | l-tlon</title>
+  <title>MySql安装问题 | l-tlon</title>
   
 
 
@@ -351,7 +350,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">面试知识点整理</h1>
+          <h1 class="post-title" itemprop="name headline">MySql安装问题</h1>
         
 
         <div class="post-meta">
@@ -434,15 +433,13 @@
       
 
       
-        <p>##记一次Mysql注册服务相关问题</p>
-<p>###mysql解压版本的正确启动：###</p>
-<ol>
+        <h2 id="记一次Mysql注册服务相关问题"><a href="#记一次Mysql注册服务相关问题" class="headerlink" title="记一次Mysql注册服务相关问题"></a>记一次Mysql注册服务相关问题</h2><h3 id="mysql解压版本的正确启动："><a href="#mysql解压版本的正确启动：" class="headerlink" title="mysql解压版本的正确启动："></a>mysql解压版本的正确启动：</h3><ol>
 <li>需要配置环境变量，环境变量的配置建议在系统Path中配置，配置完bin目录后.</li>
 <li>需要配置默认的my-default.ini配置文件，主要就是设置字符编码和basedir和datadir两个配置选项，分别为mysql的解压目录和mysql的数据存储目录，数据存储目录需要我们手动在mysql的根目录下建立data文件夹</li>
 <li>初始化mysql命令:mysqld –initialize-insecure –user=mysql</li>
 <li>注册mysql服务：mysqld –install mysql服务名（可自定义）–defaults-file=”mysql配置文件的路径”，<strong>注意</strong>，此处注册的mysql的配置文件不可以用其默认的my-default.ini，必须另外建立一个该文件的副本如my.ini,否则会导致服务启动失败，如下图所示。</li>
 </ol>
-<p>![error])(..\uploads\mysql service error.png)</p>
+<p><img src="..\uploads\mysql service error.png" alt="error"></p>
 
       
     </div>
@@ -543,8 +540,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -631,6 +637,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#记一次Mysql注册服务相关问题"><span class="nav-number">1.</span> <span class="nav-text">记一次Mysql注册服务相关问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql解压版本的正确启动："><span class="nav-number">1.1.</span> <span class="nav-text">mysql解压版本的正确启动：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -804,7 +826,7 @@
         var disqus_config = function () {
           this.page.url = 'https://lavaong.github.io/2018/04/28/MySql-For-Windows7-Regedit-service-error/';
           this.page.identifier = '2018/04/28/MySql-For-Windows7-Regedit-service-error/';
-          this.page.title = '面试知识点整理';
+          this.page.title = 'MySql安装问题';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://lavaong.disqus.com/embed.js';
