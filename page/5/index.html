@@ -86,16 +86,15 @@
 
 
 
-<meta name="description" content="This is about mysite infoHappy every day,thank yourself!">
+<meta name="description" content="read read coding">
 <meta property="og:type" content="website">
-<meta property="og:title" content="about">
-<meta property="og:url" content="https://lavaong.github.io/about/index.html">
+<meta property="og:title" content="l-tlon">
+<meta property="og:url" content="https://lavaong.github.io/page/5/index.html">
 <meta property="og:site_name" content="l-tlon">
-<meta property="og:description" content="This is about mysite infoHappy every day,thank yourself!">
-<meta property="og:updated_time" content="2017-08-16T10:11:35.000Z">
+<meta property="og:description" content="read read coding">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="about">
-<meta name="twitter:description" content="This is about mysite infoHappy every day,thank yourself!">
+<meta name="twitter:title" content="l-tlon">
+<meta name="twitter:description" content="read read coding">
 
 
 
@@ -125,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="https://lavaong.github.io/about/"/>
+  <link rel="canonical" href="https://lavaong.github.io/page/5/"/>
 
 
 
 
 
-  <title>about | l-tlon</title>
+  <title>l-tlon</title>
   
 
 
@@ -160,7 +159,8 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left 
+  page-home">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -307,38 +307,154 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
+  <section id="posts" class="posts-expand">
+    
+      
 
-  <div id="posts" class="posts-expand">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://lavaong.github.io/2017/08/16/工作点滴0001/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Lavaong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="l-tlon">
+    </span>
+
     
-    
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">about</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <h3 id="This-is-about-mysite-info"><a href="#This-is-about-mysite-info" class="headerlink" title="This is about mysite info"></a>This is about mysite info</h3><pre><code>Happy every day,thank yourself!
-</code></pre>
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/16/工作点滴0001/" itemprop="url">工作点滴0001</a></h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-16T17:05:38+08:00">
+                2017-08-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/08/16/工作点滴0001/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/08/16/工作点滴0001/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        
+          
+            <h1 id="项目构建"><a href="#项目构建" class="headerlink" title="项目构建"></a>项目构建</h1><h3 id="公司还在用svn-项目从里面checkout出来，然后ide导入本来是一件简单不过的事情，但是，但是，最后还是搞了一天。"><a href="#公司还在用svn-项目从里面checkout出来，然后ide导入本来是一件简单不过的事情，但是，但是，最后还是搞了一天。" class="headerlink" title="公司还在用svn,项目从里面checkout出来，然后ide导入本来是一件简单不过的事情，但是，但是，最后还是搞了一天。"></a>公司还在用svn,项目从里面checkout出来，然后ide导入本来是一件简单不过的事情，但是，但是，最后还是搞了一天。</h3><p>项目采用在IDE（eclipse）maven 导入的方式构建，经过漫长的jar包下载和配置文件Validation（后来才想起来该关掉这个……~.~），项目出现了3万+个errors,项目工程模块分的巨多，这也导致了问题排查的困难，一开始我也怀疑是maven配置文件的原因，最后真是，拿到了正确的配置文件，开心去替换了下，错误减少了点，而且剩下的大部分xxx cannot be resolved to a type这种错误，百度和google都试了一下，不得而解，最后试了某一个博客的方法，具体做法是：</p>
+<ol>
+<li>project-automatically 对勾给取消掉了，应该是防止自动构建用的选项，</li>
+<li>project-clean</li>
+<li>项目clean 完毕,在progress视图里又看到了项目在自动构建（不解），可能会导致eclipse报错，栈溢出了（惊吓）。</li>
+<li>项目右键，maven-update project,项目更新完毕，错误消失。</li>
+</ol>
+<p>###原因思考：<br>网上的解释是eclipse和maven的clean并不同步（存疑解释）,另一种是因为某些特殊原因，eclipse没能自动编译(应该是maven生成的)源代码到build/classes（或其他classes目录），导致类型查找不到,(什么原因呢？)</p>
+<p>###tips(项目执行这个命令会生成 mvn eclipse:eclipse 会自动生成相关的类文件，不需要在用maven 方式导入项目,以普通方式导入即可)。</p>
+
+          
+        
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
   </div>
+  
+  
+  
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -346,20 +462,6 @@
 
 
           
-
-  
-    <div class="comments" id="comments">
-      <div id="disqus_thread">
-        <noscript>
-          Please enable JavaScript to view the
-          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-        </noscript>
-      </div>
-    </div>
-
-  
-
-
 
         </div>
         
@@ -380,17 +482,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -477,22 +570,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#This-is-about-mysite-info"><span class="nav-number">1.</span> <span class="nav-text">This is about mysite info</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -640,10 +717,6 @@
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
 
   
 
@@ -661,18 +734,6 @@
       <script id="dsq-count-scr" src="https://lavaong.disqus.com/count.js" async></script>
     
 
-    
-      <script type="text/javascript">
-        var disqus_config = function () {
-          this.page.url = 'https://lavaong.github.io/about/index.html';
-          this.page.identifier = 'about/index.html';
-          this.page.title = 'about';
-        };
-        var d = document, s = d.createElement('script');
-        s.src = 'https://lavaong.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', '' + +new Date());
-        (d.head || d.body).appendChild(s);
-      </script>
     
 
   
