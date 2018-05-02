@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://lavaong.github.io/"/>
-  <updated>2018-04-28T10:49:19.175Z</updated>
+  <updated>2018-05-02T16:33:02.445Z</updated>
   <id>https://lavaong.github.io/</id>
   
   <author>
@@ -14,6 +14,74 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SpringCloud微服务实战（1）</title>
+    <link href="https://lavaong.github.io/2018/05/02/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%EF%BC%881%EF%BC%89/"/>
+    <id>https://lavaong.github.io/2018/05/02/SpringCloud微服务实战（1）/</id>
+    <published>2018-05-02T15:25:38.000Z</published>
+    <updated>2018-05-02T16:33:02.445Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="记录学习Spring-Cloud的中Eureka集群的问题"><a href="#记录学习Spring-Cloud的中Eureka集群的问题" class="headerlink" title="记录学习Spring-Cloud的中Eureka集群的问题"></a>记录学习Spring-Cloud的中Eureka集群的问题</h2><p>在Eureka单节点的配置文件: <strong>application.properties</strong>:  </p>
+<pre><code>server.port=8081
+eureka.instance.hostname=localhost
+eureka.client.register-with-eureka=false
+eureka.client.fetch-registry=false
+eureka.client.service-url.defaultZone=http://${eureka.instance.hostname}:${server.port}/eureka/
+</code></pre><p>另外，在pom文件中需要加入Eureka相关的starter POMs,需要指定Spring-Cloud的版本号，此处使用Edgware.SR3（埃奇韦尔-伦敦一地铁站名字）版本号，  </p>
+<pre><code>&lt;properties&gt;
+    &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+    &lt;project.reporting.outputEncoding&gt;UTF-8&lt;/project.reporting.outputEncoding&gt;
+    &lt;java.version&gt;1.8&lt;/java.version&gt;
+    &lt;spring-cloud.version&gt;Edgware.SR3&lt;/spring-cloud.version&gt;
+&lt;/properties&gt;
+.....
+&lt;dependencies&gt;    
+&lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-cloud-starter-eureka-server&lt;/artifactId&gt;
+&lt;/dependency&gt;
+....
+&lt;/dependencies&gt;
+&lt;dependencyManagement&gt;
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-cloud-dependencies&lt;/artifactId&gt;
+            &lt;version&gt;${spring-cloud.version}&lt;/version&gt;
+            &lt;type&gt;pom&lt;/type&gt;
+            &lt;scope&gt;import&lt;/scope&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+&lt;/dependencyManagement&gt;  
+</code></pre><p>之后在Spring-boot的主启动文件Application.java类的定义头上加入@EnableEurekaServer注解即可，启动应用程序，单机Eureka注册中心即建立完成，访问localhost:8081可查看Eureka注册中心的Web详情页。<br>(2)  Eureka server集群的建立原理是将自己作为服务向其他服务注册中心注册自己，这样就可以形成一组互相注册的服务注册中心集群，<strong>但是服务注册信息不会进行二次链式循环传播，即1注册到2,2注册到3,3注册到1，这种，服务在1注册的不会同步到3上，这在PeerAwareInstanceImpl类中体现</strong> ，同步服务列表信息。<br>Server 集群可在原有的单机项目基础上进行改建，只需增加application-peer1.properties,application-peer2.properties,application-peer3.properties,三个相关的配置文件，并将原application.properties中的  </p>
+<pre><code>eureka.client.register-with-eureka=false
+eureka.client.fetch-registry=false  
+</code></pre><p>两项false改成true,或者注解掉.因为默认是true,这两项配置的意思是是否允许Erueka server注册自己,是否检索服务。<br>application-peer1.properties文件如下：  </p>
+<pre><code>spring.application.name=eureka-server
+server.port=8081
+eureka.instance.hostname=peer1
+eureka.client.serviceUrl.defaultZone=http://peer2:80822/eureka/，http://peer3:8083/eureka/  
+</code></pre><p>其他两个文件与此文件类似，改写即可，然后在通过java -jar <em>*</em>.jar –spring.profiles.active=peer1，….. 命令分别启动三个服务注册中心应用，另:–需要提前在hosts文件中为每个分片配置地址解析  ：</p>
+<blockquote>
+<p>127.0.0.1 peer1<br>127.0.0.1 peer2<br>127.0.0.1 peer3  </p>
+</blockquote>
+<p>在命令行中执行上述启动命令后，可能会报如下异常：<br><img src="..\uploads\eureka 集群error.png" alt="error">  </p>
+<p>即连接超时Exception,这种状况是正常的，因为在你启动一个注册中心后，另外两个注册中心还没启动，此时尝试连接这两个，当然会连接超时。在所有注册中心都启动后，日志信息会正常输出。至此，Eureka Server高可用集群搭建完毕。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;记录学习Spring-Cloud的中Eureka集群的问题&quot;&gt;&lt;a href=&quot;#记录学习Spring-Cloud的中Eureka集群的问题&quot; class=&quot;headerlink&quot; title=&quot;记录学习Spring-Cloud的中Eureka集群的问题&quot;&gt;&lt;/a
+    
+    </summary>
+    
+      <category term="Java SpringCloud Spring-boot" scheme="https://lavaong.github.io/categories/Java-SpringCloud-Spring-boot/"/>
+    
+    
+      <category term="学习" scheme="https://lavaong.github.io/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
   
   <entry>
     <title>MySql安装问题</title>
