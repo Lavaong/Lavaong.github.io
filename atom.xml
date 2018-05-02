@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://lavaong.github.io/"/>
-  <updated>2018-05-02T16:33:02.445Z</updated>
+  <updated>2018-05-02T16:40:50.428Z</updated>
   <id>https://lavaong.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://lavaong.github.io/2018/05/02/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%EF%BC%881%EF%BC%89/"/>
     <id>https://lavaong.github.io/2018/05/02/SpringCloud微服务实战（1）/</id>
     <published>2018-05-02T15:25:38.000Z</published>
-    <updated>2018-05-02T16:33:02.445Z</updated>
+    <updated>2018-05-02T16:40:50.428Z</updated>
     
     <content type="html"><![CDATA[<h2 id="记录学习Spring-Cloud的中Eureka集群的问题"><a href="#记录学习Spring-Cloud的中Eureka集群的问题" class="headerlink" title="记录学习Spring-Cloud的中Eureka集群的问题"></a>记录学习Spring-Cloud的中Eureka集群的问题</h2><p>在Eureka单节点的配置文件: <strong>application.properties</strong>:  </p>
 <pre><code>server.port=8081
@@ -54,7 +54,7 @@ eureka.client.service-url.defaultZone=http://${eureka.instance.hostname}:${serve
         &lt;/dependency&gt;
     &lt;/dependencies&gt;
 &lt;/dependencyManagement&gt;  
-</code></pre><p>之后在Spring-boot的主启动文件Application.java类的定义头上加入@EnableEurekaServer注解即可，启动应用程序，单机Eureka注册中心即建立完成，访问localhost:8081可查看Eureka注册中心的Web详情页。<br>(2)  Eureka server集群的建立原理是将自己作为服务向其他服务注册中心注册自己，这样就可以形成一组互相注册的服务注册中心集群，<strong>但是服务注册信息不会进行二次链式循环传播，即1注册到2,2注册到3,3注册到1，这种，服务在1注册的不会同步到3上，这在PeerAwareInstanceImpl类中体现</strong> ，同步服务列表信息。<br>Server 集群可在原有的单机项目基础上进行改建，只需增加application-peer1.properties,application-peer2.properties,application-peer3.properties,三个相关的配置文件，并将原application.properties中的  </p>
+</code></pre><p>之后在Spring-boot的主启动文件Application.java类的定义头上加入@EnableEurekaServer注解即可，启动应用程序，单机Eureka注册中心即建立完成，访问localhost:8081可查看Eureka注册中心的Web详情页。<br>(2)  Eureka server集群的建立原理是将自己作为服务向其他服务注册中心注册自己，这样就可以形成一组互相注册的服务注册中心集群，<strong>但是服务注册信息不会进行二次链式循环传播，即1注册到2,2注册到3,3注册到1，这种，服务在1注册的不会同步到3上，这在PeerAwareInstanceImpl类中体现</strong>。<br>Server集群可在原有的单机项目基础上进行改建，只需增application-peer1.properties,application-peer2.properties,application-peer3.properties,三个相关的配置文件，并将原application.properties中的两个选项：  </p>
 <pre><code>eureka.client.register-with-eureka=false
 eureka.client.fetch-registry=false  
 </code></pre><p>两项false改成true,或者注解掉.因为默认是true,这两项配置的意思是是否允许Erueka server注册自己,是否检索服务。<br>application-peer1.properties文件如下：  </p>
@@ -77,35 +77,6 @@ eureka.client.serviceUrl.defaultZone=http://peer2:80822/eureka/，http://peer3:8
     </summary>
     
       <category term="Java SpringCloud Spring-boot" scheme="https://lavaong.github.io/categories/Java-SpringCloud-Spring-boot/"/>
-    
-    
-      <category term="学习" scheme="https://lavaong.github.io/tags/%E5%AD%A6%E4%B9%A0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MySql安装问题</title>
-    <link href="https://lavaong.github.io/2018/04/28/MySql-For-Windows7-Regedit-service-error/"/>
-    <id>https://lavaong.github.io/2018/04/28/MySql-For-Windows7-Regedit-service-error/</id>
-    <published>2018-04-28T09:42:57.000Z</published>
-    <updated>2018-04-28T10:49:19.175Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="记一次Mysql注册服务相关问题"><a href="#记一次Mysql注册服务相关问题" class="headerlink" title="记一次Mysql注册服务相关问题"></a>记一次Mysql注册服务相关问题</h2><h3 id="mysql解压版本的正确启动："><a href="#mysql解压版本的正确启动：" class="headerlink" title="mysql解压版本的正确启动："></a>mysql解压版本的正确启动：</h3><ol>
-<li>需要配置环境变量，环境变量的配置建议在系统Path中配置，配置完bin目录后.</li>
-<li>需要配置默认的my-default.ini配置文件，主要就是设置字符编码和basedir和datadir两个配置选项，分别为mysql的解压目录和mysql的数据存储目录，数据存储目录需要我们手动在mysql的根目录下建立data文件夹</li>
-<li>初始化mysql命令:mysqld –initialize-insecure –user=mysql</li>
-<li>注册mysql服务：mysqld –install mysql服务名（可自定义）–defaults-file=”mysql配置文件的路径”，<strong>注意</strong>，此处注册的mysql的配置文件不可以用其默认的my-default.ini，必须另外建立一个该文件的副本如my.ini,否则会导致服务启动失败，如下图所示。</li>
-</ol>
-<p><img src="..\uploads\mysql service error.png" alt="error"></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;记一次Mysql注册服务相关问题&quot;&gt;&lt;a href=&quot;#记一次Mysql注册服务相关问题&quot; class=&quot;headerlink&quot; title=&quot;记一次Mysql注册服务相关问题&quot;&gt;&lt;/a&gt;记一次Mysql注册服务相关问题&lt;/h2&gt;&lt;h3 id=&quot;mysql解压版本
-    
-    </summary>
-    
-      <category term="Java" scheme="https://lavaong.github.io/categories/Java/"/>
     
     
       <category term="学习" scheme="https://lavaong.github.io/tags/%E5%AD%A6%E4%B9%A0/"/>
@@ -215,6 +186,35 @@ eureka.client.serviceUrl.defaultZone=http://peer2:80822/eureka/，http://peer3:8
     <summary type="html">
     
       &lt;h2 id=&quot;JAVA基础部分：&quot;&gt;&lt;a href=&quot;#JAVA基础部分：&quot; class=&quot;headerlink&quot; title=&quot;JAVA基础部分：&quot;&gt;&lt;/a&gt;JAVA基础部分：&lt;/h2&gt;&lt;h3 id=&quot;final-finally-finalize区别：&quot;&gt;&lt;a href=&quot;#
+    
+    </summary>
+    
+      <category term="Java" scheme="https://lavaong.github.io/categories/Java/"/>
+    
+    
+      <category term="学习" scheme="https://lavaong.github.io/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MySql安装问题</title>
+    <link href="https://lavaong.github.io/2018/04/28/MySql-For-Windows7-Regedit-service-error/"/>
+    <id>https://lavaong.github.io/2018/04/28/MySql-For-Windows7-Regedit-service-error/</id>
+    <published>2018-04-28T09:42:57.000Z</published>
+    <updated>2018-04-28T10:49:19.175Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="记一次Mysql注册服务相关问题"><a href="#记一次Mysql注册服务相关问题" class="headerlink" title="记一次Mysql注册服务相关问题"></a>记一次Mysql注册服务相关问题</h2><h3 id="mysql解压版本的正确启动："><a href="#mysql解压版本的正确启动：" class="headerlink" title="mysql解压版本的正确启动："></a>mysql解压版本的正确启动：</h3><ol>
+<li>需要配置环境变量，环境变量的配置建议在系统Path中配置，配置完bin目录后.</li>
+<li>需要配置默认的my-default.ini配置文件，主要就是设置字符编码和basedir和datadir两个配置选项，分别为mysql的解压目录和mysql的数据存储目录，数据存储目录需要我们手动在mysql的根目录下建立data文件夹</li>
+<li>初始化mysql命令:mysqld –initialize-insecure –user=mysql</li>
+<li>注册mysql服务：mysqld –install mysql服务名（可自定义）–defaults-file=”mysql配置文件的路径”，<strong>注意</strong>，此处注册的mysql的配置文件不可以用其默认的my-default.ini，必须另外建立一个该文件的副本如my.ini,否则会导致服务启动失败，如下图所示。</li>
+</ol>
+<p><img src="..\uploads\mysql service error.png" alt="error"></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;记一次Mysql注册服务相关问题&quot;&gt;&lt;a href=&quot;#记一次Mysql注册服务相关问题&quot; class=&quot;headerlink&quot; title=&quot;记一次Mysql注册服务相关问题&quot;&gt;&lt;/a&gt;记一次Mysql注册服务相关问题&lt;/h2&gt;&lt;h3 id=&quot;mysql解压版本
     
     </summary>
     

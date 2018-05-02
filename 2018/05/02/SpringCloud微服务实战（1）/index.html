@@ -101,7 +101,7 @@ eureka.instance.hostname=localhost
 eureka.client.register-with-eureka=false
 eureka.client.fetch-registry=false">
 <meta property="og:image" content="https://lavaong.github.io/..\uploads\eureka 集群error.png">
-<meta property="og:updated_time" content="2018-05-02T16:33:02.445Z">
+<meta property="og:updated_time" content="2018-05-02T16:40:50.428Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringCloud微服务实战（1）">
 <meta name="twitter:description" content="记录学习Spring-Cloud的中Eureka集群的问题在Eureka单节点的配置文件: application.properties:  
@@ -468,7 +468,7 @@ eureka.client.service-url.defaultZone=http://${eureka.instance.hostname}:${serve
         &lt;/dependency&gt;
     &lt;/dependencies&gt;
 &lt;/dependencyManagement&gt;  
-</code></pre><p>之后在Spring-boot的主启动文件Application.java类的定义头上加入@EnableEurekaServer注解即可，启动应用程序，单机Eureka注册中心即建立完成，访问localhost:8081可查看Eureka注册中心的Web详情页。<br>(2)  Eureka server集群的建立原理是将自己作为服务向其他服务注册中心注册自己，这样就可以形成一组互相注册的服务注册中心集群，<strong>但是服务注册信息不会进行二次链式循环传播，即1注册到2,2注册到3,3注册到1，这种，服务在1注册的不会同步到3上，这在PeerAwareInstanceImpl类中体现</strong> ，同步服务列表信息。<br>Server 集群可在原有的单机项目基础上进行改建，只需增加application-peer1.properties,application-peer2.properties,application-peer3.properties,三个相关的配置文件，并将原application.properties中的  </p>
+</code></pre><p>之后在Spring-boot的主启动文件Application.java类的定义头上加入@EnableEurekaServer注解即可，启动应用程序，单机Eureka注册中心即建立完成，访问localhost:8081可查看Eureka注册中心的Web详情页。<br>(2)  Eureka server集群的建立原理是将自己作为服务向其他服务注册中心注册自己，这样就可以形成一组互相注册的服务注册中心集群，<strong>但是服务注册信息不会进行二次链式循环传播，即1注册到2,2注册到3,3注册到1，这种，服务在1注册的不会同步到3上，这在PeerAwareInstanceImpl类中体现</strong>。<br>Server集群可在原有的单机项目基础上进行改建，只需增application-peer1.properties,application-peer2.properties,application-peer3.properties,三个相关的配置文件，并将原application.properties中的两个选项：  </p>
 <pre><code>eureka.client.register-with-eureka=false
 eureka.client.fetch-registry=false  
 </code></pre><p>两项false改成true,或者注解掉.因为默认是true,这两项配置的意思是是否允许Erueka server注册自己,是否检索服务。<br>application-peer1.properties文件如下：  </p>
@@ -512,8 +512,8 @@ eureka.client.serviceUrl.defaultZone=http://peer2:80822/eureka/，http://peer3:8
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/28/MySql-For-Windows7-Regedit-service-error/" rel="next" title="MySql安装问题">
-                <i class="fa fa-chevron-left"></i> MySql安装问题
+              <a href="/2018/04/28/面试知识点整理/" rel="next" title="面试知识点整理">
+                <i class="fa fa-chevron-left"></i> 面试知识点整理
               </a>
             
           </div>
