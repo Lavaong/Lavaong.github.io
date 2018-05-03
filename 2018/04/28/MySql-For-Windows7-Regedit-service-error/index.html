@@ -99,7 +99,7 @@
 需要配置默认的my-default.ini配置文件，主要就是设置字符编码和basedir和datadir两个配置选项，分别为mysql的解压目录和mysql的数据存储目录，数据存储目录需要我们手动在mysql的根目录下建立data文件夹
 初始化mysql命">
 <meta property="og:image" content="https://lavaong.github.io/..\uploads\mysql service error.png">
-<meta property="og:updated_time" content="2018-04-28T10:49:19.175Z">
+<meta property="og:updated_time" content="2018-05-03T01:46:17.850Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySql安装问题">
 <meta name="twitter:description" content="记一次Mysql注册服务相关问题mysql解压版本的正确启动：
@@ -437,9 +437,8 @@
 <li>需要配置环境变量，环境变量的配置建议在系统Path中配置，配置完bin目录后.</li>
 <li>需要配置默认的my-default.ini配置文件，主要就是设置字符编码和basedir和datadir两个配置选项，分别为mysql的解压目录和mysql的数据存储目录，数据存储目录需要我们手动在mysql的根目录下建立data文件夹</li>
 <li>初始化mysql命令:mysqld –initialize-insecure –user=mysql</li>
-<li>注册mysql服务：mysqld –install mysql服务名（可自定义）–defaults-file=”mysql配置文件的路径”，<strong>注意</strong>，此处注册的mysql的配置文件不可以用其默认的my-default.ini，必须另外建立一个该文件的副本如my.ini,否则会导致服务启动失败，如下图所示。</li>
+<li>注册mysql服务：mysqld –install mysql服务名（可自定义）–defaults-file=”mysql配置文件的路径”，<strong>注意</strong>，此处注册的mysql的配置文件不可以用其默认的my-default.ini，必须另外建立一个该文件的副本如my.ini,否则会导致服务启动失败，如下图所示：<br><img src="..\uploads\mysql service error.png" alt="error"></li>
 </ol>
-<p><img src="..\uploads\mysql service error.png" alt="error"></p>
 
       
     </div>
@@ -470,8 +469,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/02/21/RocketMQ实战-1/" rel="next" title="RocketMQ实战(1)">
-                <i class="fa fa-chevron-left"></i> RocketMQ实战(1)
+              <a href="/2018/04/28/面试知识点整理/" rel="next" title="面试知识点整理">
+                <i class="fa fa-chevron-left"></i> 面试知识点整理
               </a>
             
           </div>
@@ -480,8 +479,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/04/28/面试知识点整理/" rel="prev" title="面试知识点整理">
-                面试知识点整理 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/05/02/SpringCloud微服务实战（1）/" rel="prev" title="SpringCloud微服务实战（1）">
+                SpringCloud微服务实战（1） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

@@ -84,6 +84,34 @@ eureka.client.serviceUrl.defaultZone=http://peer2:80822/eureka/，http://peer3:8
   </entry>
   
   <entry>
+    <title>MySql安装问题</title>
+    <link href="https://lavaong.github.io/2018/04/28/MySql-For-Windows7-Regedit-service-error/"/>
+    <id>https://lavaong.github.io/2018/04/28/MySql-For-Windows7-Regedit-service-error/</id>
+    <published>2018-04-28T09:42:57.000Z</published>
+    <updated>2018-05-03T01:46:17.850Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="记一次Mysql注册服务相关问题"><a href="#记一次Mysql注册服务相关问题" class="headerlink" title="记一次Mysql注册服务相关问题"></a>记一次Mysql注册服务相关问题</h2><h3 id="mysql解压版本的正确启动："><a href="#mysql解压版本的正确启动：" class="headerlink" title="mysql解压版本的正确启动："></a>mysql解压版本的正确启动：</h3><ol>
+<li>需要配置环境变量，环境变量的配置建议在系统Path中配置，配置完bin目录后.</li>
+<li>需要配置默认的my-default.ini配置文件，主要就是设置字符编码和basedir和datadir两个配置选项，分别为mysql的解压目录和mysql的数据存储目录，数据存储目录需要我们手动在mysql的根目录下建立data文件夹</li>
+<li>初始化mysql命令:mysqld –initialize-insecure –user=mysql</li>
+<li>注册mysql服务：mysqld –install mysql服务名（可自定义）–defaults-file=”mysql配置文件的路径”，<strong>注意</strong>，此处注册的mysql的配置文件不可以用其默认的my-default.ini，必须另外建立一个该文件的副本如my.ini,否则会导致服务启动失败，如下图所示：<br><img src="..\uploads\mysql service error.png" alt="error"></li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;记一次Mysql注册服务相关问题&quot;&gt;&lt;a href=&quot;#记一次Mysql注册服务相关问题&quot; class=&quot;headerlink&quot; title=&quot;记一次Mysql注册服务相关问题&quot;&gt;&lt;/a&gt;记一次Mysql注册服务相关问题&lt;/h2&gt;&lt;h3 id=&quot;mysql解压版本
+    
+    </summary>
+    
+      <category term="Java" scheme="https://lavaong.github.io/categories/Java/"/>
+    
+    
+      <category term="学习" scheme="https://lavaong.github.io/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
     <title>面试知识点整理</title>
     <link href="https://lavaong.github.io/2018/04/28/%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/"/>
     <id>https://lavaong.github.io/2018/04/28/面试知识点整理/</id>
@@ -186,35 +214,6 @@ eureka.client.serviceUrl.defaultZone=http://peer2:80822/eureka/，http://peer3:8
     <summary type="html">
     
       &lt;h2 id=&quot;JAVA基础部分：&quot;&gt;&lt;a href=&quot;#JAVA基础部分：&quot; class=&quot;headerlink&quot; title=&quot;JAVA基础部分：&quot;&gt;&lt;/a&gt;JAVA基础部分：&lt;/h2&gt;&lt;h3 id=&quot;final-finally-finalize区别：&quot;&gt;&lt;a href=&quot;#
-    
-    </summary>
-    
-      <category term="Java" scheme="https://lavaong.github.io/categories/Java/"/>
-    
-    
-      <category term="学习" scheme="https://lavaong.github.io/tags/%E5%AD%A6%E4%B9%A0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MySql安装问题</title>
-    <link href="https://lavaong.github.io/2018/04/28/MySql-For-Windows7-Regedit-service-error/"/>
-    <id>https://lavaong.github.io/2018/04/28/MySql-For-Windows7-Regedit-service-error/</id>
-    <published>2018-04-28T09:42:57.000Z</published>
-    <updated>2018-04-28T10:49:19.175Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="记一次Mysql注册服务相关问题"><a href="#记一次Mysql注册服务相关问题" class="headerlink" title="记一次Mysql注册服务相关问题"></a>记一次Mysql注册服务相关问题</h2><h3 id="mysql解压版本的正确启动："><a href="#mysql解压版本的正确启动：" class="headerlink" title="mysql解压版本的正确启动："></a>mysql解压版本的正确启动：</h3><ol>
-<li>需要配置环境变量，环境变量的配置建议在系统Path中配置，配置完bin目录后.</li>
-<li>需要配置默认的my-default.ini配置文件，主要就是设置字符编码和basedir和datadir两个配置选项，分别为mysql的解压目录和mysql的数据存储目录，数据存储目录需要我们手动在mysql的根目录下建立data文件夹</li>
-<li>初始化mysql命令:mysqld –initialize-insecure –user=mysql</li>
-<li>注册mysql服务：mysqld –install mysql服务名（可自定义）–defaults-file=”mysql配置文件的路径”，<strong>注意</strong>，此处注册的mysql的配置文件不可以用其默认的my-default.ini，必须另外建立一个该文件的副本如my.ini,否则会导致服务启动失败，如下图所示。</li>
-</ol>
-<p><img src="..\uploads\mysql service error.png" alt="error"></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;记一次Mysql注册服务相关问题&quot;&gt;&lt;a href=&quot;#记一次Mysql注册服务相关问题&quot; class=&quot;headerlink&quot; title=&quot;记一次Mysql注册服务相关问题&quot;&gt;&lt;/a&gt;记一次Mysql注册服务相关问题&lt;/h2&gt;&lt;h3 id=&quot;mysql解压版本
     
     </summary>
     
