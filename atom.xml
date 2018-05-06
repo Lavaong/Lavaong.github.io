@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://lavaong.github.io/"/>
-  <updated>2018-05-06T03:34:42.889Z</updated>
+  <updated>2018-05-06T03:58:01.974Z</updated>
   <id>https://lavaong.github.io/</id>
   
   <author>
@@ -20,15 +20,9 @@
     <link href="https://lavaong.github.io/2018/05/06/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%EF%BC%882%EF%BC%89/"/>
     <id>https://lavaong.github.io/2018/05/06/SpringCloud微服务实战（2）/</id>
     <published>2018-05-06T03:33:23.000Z</published>
-    <updated>2018-05-06T03:34:42.889Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="..\uploads\eureka 集群error.png" alt="error"></p>
-]]></content>
+    <updated>2018-05-06T03:58:01.974Z</updated>
     
     <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;..\uploads\eureka 集群error.png&quot; alt=&quot;error&quot;&gt;&lt;/p&gt;
-
     
     </summary>
     
@@ -108,15 +102,14 @@ eureka.client.serviceUrl.defaultZone=http://peer2:80822/eureka/，http://peer3:8
     <link href="https://lavaong.github.io/2018/04/28/MySql-For-Windows7-Regedit-service-error/"/>
     <id>https://lavaong.github.io/2018/04/28/MySql-For-Windows7-Regedit-service-error/</id>
     <published>2018-04-28T09:42:57.000Z</published>
-    <updated>2018-05-06T03:34:34.917Z</updated>
+    <updated>2018-05-06T03:57:37.733Z</updated>
     
     <content type="html"><![CDATA[<h2 id="记一次Mysql注册服务相关问题"><a href="#记一次Mysql注册服务相关问题" class="headerlink" title="记一次Mysql注册服务相关问题"></a>记一次Mysql注册服务相关问题</h2><h3 id="mysql解压版本的正确启动："><a href="#mysql解压版本的正确启动：" class="headerlink" title="mysql解压版本的正确启动："></a>mysql解压版本的正确启动：</h3><ol>
 <li>需要配置环境变量，环境变量的配置建议在系统Path中配置，配置完bin目录后.</li>
 <li>需要配置默认的my-default.ini配置文件，主要就是设置字符编码和basedir和datadir两个配置选项，分别为mysql的解压目录和mysql的数据存储目录，数据存储目录需要我们手动在mysql的根目录下建立data文件夹</li>
 <li>初始化mysql命令:mysqld –initialize-insecure –user=mysql</li>
-<li>注册mysql服务：mysqld –install mysql服务名（可自定义）–defaults-file=”mysql配置文件的路径”，<strong>注意</strong>，此处注册的mysql的配置文件不可以用其默认的my-default.ini，必须另外建立一个该文件的副本如my.ini,否则会导致服务启动失败，如下图所示：<br><img src="..\uploads\mysql service error.png" alt="error">  </li>
+<li>注册mysql服务：mysqld –install mysql服务名（可自定义）–defaults-file=”mysql配置文件的路径”，<strong>注意</strong>，此处注册的mysql的配置文件不可以用其默认的my-default.ini，必须另外建立一个该文件的副本如my.ini,否则会导致服务启动失败，如下图所示：<br><img src="/uploads\mysql service error.png" alt="error">  </li>
 </ol>
-<h3 id="啦啦啦啦"><a href="#啦啦啦啦" class="headerlink" title="啦啦啦啦"></a>啦啦啦啦</h3><p><img src="..\uploads\eureka 集群error.png" alt="error"></p>
 ]]></content>
     
     <summary type="html">

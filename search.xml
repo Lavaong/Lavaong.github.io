@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[SpringCloud微服务实战（2）]]></title>
     <url>%2F2018%2F05%2F06%2FSpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%EF%BC%882%EF%BC%89%2F</url>
-    <content type="text"><![CDATA[]]></content>
+    <content type="text"></content>
   </entry>
   <entry>
     <title><![CDATA[SpringCloud微服务实战（1）]]></title>
@@ -19,7 +19,7 @@
   <entry>
     <title><![CDATA[MySql安装问题]]></title>
     <url>%2F2018%2F04%2F28%2FMySql-For-Windows7-Regedit-service-error%2F</url>
-    <content type="text"><![CDATA[记一次Mysql注册服务相关问题mysql解压版本的正确启动： 需要配置环境变量，环境变量的配置建议在系统Path中配置，配置完bin目录后. 需要配置默认的my-default.ini配置文件，主要就是设置字符编码和basedir和datadir两个配置选项，分别为mysql的解压目录和mysql的数据存储目录，数据存储目录需要我们手动在mysql的根目录下建立data文件夹 初始化mysql命令:mysqld –initialize-insecure –user=mysql 注册mysql服务：mysqld –install mysql服务名（可自定义）–defaults-file=”mysql配置文件的路径”，注意，此处注册的mysql的配置文件不可以用其默认的my-default.ini，必须另外建立一个该文件的副本如my.ini,否则会导致服务启动失败，如下图所示： 啦啦啦啦]]></content>
+    <content type="text"><![CDATA[记一次Mysql注册服务相关问题mysql解压版本的正确启动： 需要配置环境变量，环境变量的配置建议在系统Path中配置，配置完bin目录后. 需要配置默认的my-default.ini配置文件，主要就是设置字符编码和basedir和datadir两个配置选项，分别为mysql的解压目录和mysql的数据存储目录，数据存储目录需要我们手动在mysql的根目录下建立data文件夹 初始化mysql命令:mysqld –initialize-insecure –user=mysql 注册mysql服务：mysqld –install mysql服务名（可自定义）–defaults-file=”mysql配置文件的路径”，注意，此处注册的mysql的配置文件不可以用其默认的my-default.ini，必须另外建立一个该文件的副本如my.ini,否则会导致服务启动失败，如下图所示：]]></content>
       <categories>
         <category>Java</category>
       </categories>
