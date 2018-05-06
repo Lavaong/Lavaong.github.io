@@ -470,7 +470,7 @@ eureka.client.serviceUrl.defaultZone=http://peer2:80822/eureka/，http://peer3:8
 <blockquote>
 <p>127.0.0.1 peer1<br>127.0.0.1 peer2<br>127.0.0.1 peer3  </p>
 </blockquote>
-<p>在命令行中执行上述启动命令后，可能会报如下异常：<br><img src="..\uploads\eureka 集群error.png" alt="error">  </p>
+<p>在命令行中执行上述启动命令后，可能会报如下异常：<br><img src="/uploads/eureka 集群error.png" alt="error">  </p>
 <p>即连接超时Exception,这种状况是正常的，因为在你启动一个注册中心后，另外两个注册中心还没启动，此时尝试连接这两个，当然会连接超时。在所有注册中心都启动后，日志信息会正常输出。至此，Eureka Server高可用集群搭建完毕。</p>
 
           

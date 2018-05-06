@@ -40,7 +40,7 @@
     <link href="https://lavaong.github.io/2018/05/02/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%EF%BC%881%EF%BC%89/"/>
     <id>https://lavaong.github.io/2018/05/02/SpringCloud微服务实战（1）/</id>
     <published>2018-05-02T15:25:38.000Z</published>
-    <updated>2018-05-02T16:40:50.428Z</updated>
+    <updated>2018-05-06T03:55:07.342Z</updated>
     
     <content type="html"><![CDATA[<h2 id="记录学习Spring-Cloud的中Eureka集群的问题"><a href="#记录学习Spring-Cloud的中Eureka集群的问题" class="headerlink" title="记录学习Spring-Cloud的中Eureka集群的问题"></a>记录学习Spring-Cloud的中Eureka集群的问题</h2><p>在Eureka单节点的配置文件: <strong>application.properties</strong>:  </p>
 <pre><code>server.port=8081
@@ -86,7 +86,7 @@ eureka.client.serviceUrl.defaultZone=http://peer2:80822/eureka/，http://peer3:8
 <blockquote>
 <p>127.0.0.1 peer1<br>127.0.0.1 peer2<br>127.0.0.1 peer3  </p>
 </blockquote>
-<p>在命令行中执行上述启动命令后，可能会报如下异常：<br><img src="..\uploads\eureka 集群error.png" alt="error">  </p>
+<p>在命令行中执行上述启动命令后，可能会报如下异常：<br><img src="/uploads/eureka 集群error.png" alt="error">  </p>
 <p>即连接超时Exception,这种状况是正常的，因为在你启动一个注册中心后，另外两个注册中心还没启动，此时尝试连接这两个，当然会连接超时。在所有注册中心都启动后，日志信息会正常输出。至此，Eureka Server高可用集群搭建完毕。</p>
 ]]></content>
     
