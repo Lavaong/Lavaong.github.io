@@ -92,12 +92,12 @@
 <meta property="og:url" content="https://lavaong.github.io/2018/02/21/RocketMQ实战-1/index.html">
 <meta property="og:site_name" content="l-tlon">
 <meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;RocketMQ是一款阿里自主开源的分布式消息中间件，其没有完全遵循JMS(JAVA Message Services)规范，并且和常用的ActiveMQ相比，具有很多优良的特性，并且在如今高负载，大流量的业务场景下完全可以胜任。">
-<meta property="og:image" content="https://lavaong.github.io/..\uploads\TB1lEPePXXXXXX8XXXXXXXXXXXX.png">
-<meta property="og:updated_time" content="2018-06-14T09:00:20.529Z">
+<meta property="og:image" content="https://lavaong.github.io/uploads/TB1lEPePXXXXXX8XXXXXXXXXXXX.png">
+<meta property="og:updated_time" content="2018-06-14T09:53:29.698Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RocketMQ实战(1)">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;RocketMQ是一款阿里自主开源的分布式消息中间件，其没有完全遵循JMS(JAVA Message Services)规范，并且和常用的ActiveMQ相比，具有很多优良的特性，并且在如今高负载，大流量的业务场景下完全可以胜任。">
-<meta name="twitter:image" content="https://lavaong.github.io/..\uploads\TB1lEPePXXXXXX8XXXXXXXXXXXX.png">
+<meta name="twitter:image" content="https://lavaong.github.io/uploads/TB1lEPePXXXXXX8XXXXXXXXXXXX.png">
 
 
 
@@ -404,6 +404,17 @@
 
           
           
+             <span id="/2018/02/21/RocketMQ实战-1/" class="leancloud_visitors" data-flag-title="RocketMQ实战(1)">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
           
 
@@ -434,7 +445,7 @@
 </ol>
 </blockquote>
 <p>&nbsp;&nbsp;&nbsp;RocketMQ的发布订阅模式规定了其采用了Group机制实现消息的负载均衡。即根据Topic的消息数，均衡分布到每个Group相应的数据量，其中Group可以是一台机器或者一个进程。</p>
-<h3 id="RocketMQ的集群部署"><a href="#RocketMQ的集群部署" class="headerlink" title="RocketMQ的集群部署"></a>RocketMQ的集群部署</h3><p><img src="..\uploads\TB1lEPePXXXXXX8XXXXXXXXXXXX.png" alt="alt text"></p>
+<h3 id="RocketMQ的集群部署"><a href="#RocketMQ的集群部署" class="headerlink" title="RocketMQ的集群部署"></a>RocketMQ的集群部署</h3><p><img src="/uploads/TB1lEPePXXXXXX8XXXXXXXXXXXX.png" alt="alt text"></p>
 <h4 id="多Master模式"><a href="#多Master模式" class="headerlink" title="多Master模式"></a>多Master模式</h4><p>多个Master存在的模式，当一个Master宕机的时候，会由于其他的代替，缺点是宕机的Master上的消息无法再被订阅，除非复活。</p>
 <h4 id="多Master多Slave模式（同步双写）"><a href="#多Master多Slave模式（同步双写）" class="headerlink" title="多Master多Slave模式（同步双写）"></a>多Master多Slave模式（同步双写）</h4><p>适用于并发量比较大的情况下，只有Master/Slave都成功才能成功，相比于异步辅助，提高了强一致性，但是减缓了读写速度</p>
 <h4 id="多Master单Slave模式（异步复制）"><a href="#多Master单Slave模式（异步复制）" class="headerlink" title="多Master单Slave模式（异步复制）"></a>多Master单Slave模式（异步复制）</h4><p>Master/Slave有短暂的延迟，高可用模式，Master宕机的时候，Slavek可以读到消息，但是可能会有少量的信息丢失。</p>
@@ -1203,6 +1214,113 @@
   
 
   
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("Psidx2aBInOaQFbUdWL6EWYX-gzGzoHsz", "ctJDnnbs3u17j5iJPICPpgty");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
 
   
 
@@ -1218,6 +1336,89 @@
   
 <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
 
+  
+  	 <!-- custom analytics part create by xiamo -->
+<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+<script>AV.initialize("Psidx2aBInOaQFbUdWL6EWYX-gzGzoHsz", "ctJDnnbs3u17j5iJPICPpgty");</script>
+<script>
+function showTime(Counter) {
+	var query = new AV.Query(Counter);
+	$(".leancloud_visitors").each(function() {
+		var url = $(this).attr("id").trim();
+		query.equalTo("url", url);
+		query.find({
+			success: function(results) {
+				if (results.length == 0) {
+					var content = $(document.getElementById(url)).text() + ': 0';
+					$(document.getElementById(url)).text(content);
+					return;
+				}
+				for (var i = 0; i < results.length; i++) {
+					var object = results[i];
+					var content = $(document.getElementById(url)).text() + ': ' + object.get('time');
+					$(document.getElementById(url)).text(content);
+				}
+			},
+			error: function(object, error) {
+				console.log("Error: " + error.code + " " + error.message);
+			}
+		});
+
+	});
+}
+
+function addCount(Counter) {
+	var Counter = AV.Object.extend("Counter");
+	url = $(".leancloud_visitors").attr('id').trim();
+	title = $(".leancloud_visitors").attr('data-flag-title').trim();
+	var query = new AV.Query(Counter);
+	query.equalTo("url", url);
+	query.find({
+		success: function(results) {
+			if (results.length > 0) {
+				var counter = results[0];
+				counter.fetchWhenSave(true);
+				counter.increment("time");
+				counter.save(null, {
+					success: function(counter) {
+						var content = $(document.getElementById(url)).text() + ': ' + counter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(counter, error) {
+						console.log('Failed to save Visitor num, with error message: ' + error.message);
+					}
+				});
+			} else {
+				var newcounter = new Counter();
+				newcounter.set("title", title);
+				newcounter.set("url", url);
+				newcounter.set("time", 1);
+				newcounter.save(null, {
+					success: function(newcounter) {
+					    console.log("newcounter.get('time')="+newcounter.get('time'));
+						var content = $(document.getElementById(url)).text() + ': ' + newcounter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(newcounter, error) {
+						console.log('Failed to create');
+					}
+				});
+			}
+		},
+		error: function(error) {
+			console.log('Error:' + error.code + " " + error.message);
+		}
+	});
+}
+$(function() {
+	var Counter = AV.Object.extend("Counter");
+	if ($('.leancloud_visitors').length == 1) {
+		addCount(Counter);
+	} else if ($('.post-title-link').length > 1) {
+		showTime(Counter);
+	}
+});
+</script>	
   
 </body>
 </html>
