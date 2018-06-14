@@ -102,11 +102,11 @@ eureka.client.serviceUrl.defaultZone=http://peer2:80822/eureka/，http://peer3:8
     <link href="https://lavaong.github.io/2018/04/28/MySql-For-Windows7-Regedit-service-error/"/>
     <id>https://lavaong.github.io/2018/04/28/MySql-For-Windows7-Regedit-service-error/</id>
     <published>2018-04-28T09:42:57.000Z</published>
-    <updated>2018-05-06T03:57:37.733Z</updated>
+    <updated>2018-06-14T08:59:40.727Z</updated>
     
     <content type="html"><![CDATA[<h2 id="记一次Mysql注册服务相关问题"><a href="#记一次Mysql注册服务相关问题" class="headerlink" title="记一次Mysql注册服务相关问题"></a>记一次Mysql注册服务相关问题</h2><h3 id="mysql解压版本的正确启动："><a href="#mysql解压版本的正确启动：" class="headerlink" title="mysql解压版本的正确启动："></a>mysql解压版本的正确启动：</h3><ol>
 <li>需要配置环境变量，环境变量的配置建议在系统Path中配置，配置完bin目录后.</li>
-<li>需要配置默认的my-default.ini配置文件，主要就是设置字符编码和basedir和datadir两个配置选项，分别为mysql的解压目录和mysql的数据存储目录，数据存储目录需要我们手动在mysql的根目录下建立data文件夹</li>
+<li>需要配置默认的my-default.ini配置文件，主要就是设置字符编码和basedir和datadir两个配置选项，分别为mysql的解压目录和mysql的数据存储目录，数据存储目录需要我们手动在mysql的根目录下建立data文件夹<a id="more"></a></li>
 <li>初始化mysql命令:mysqld –initialize-insecure –user=mysql</li>
 <li>注册mysql服务：mysqld –install mysql服务名（可自定义）–defaults-file=”mysql配置文件的路径”，<strong>注意</strong>，此处注册的mysql的配置文件不可以用其默认的my-default.ini，必须另外建立一个该文件的副本如my.ini,否则会导致服务启动失败，如下图所示：<br><img src="/uploads\mysql service error.png" alt="error">  </li>
 </ol>
@@ -114,7 +114,9 @@ eureka.client.serviceUrl.defaultZone=http://peer2:80822/eureka/，http://peer3:8
     
     <summary type="html">
     
-      &lt;h2 id=&quot;记一次Mysql注册服务相关问题&quot;&gt;&lt;a href=&quot;#记一次Mysql注册服务相关问题&quot; class=&quot;headerlink&quot; title=&quot;记一次Mysql注册服务相关问题&quot;&gt;&lt;/a&gt;记一次Mysql注册服务相关问题&lt;/h2&gt;&lt;h3 id=&quot;mysql解压版本
+      &lt;h2 id=&quot;记一次Mysql注册服务相关问题&quot;&gt;&lt;a href=&quot;#记一次Mysql注册服务相关问题&quot; class=&quot;headerlink&quot; title=&quot;记一次Mysql注册服务相关问题&quot;&gt;&lt;/a&gt;记一次Mysql注册服务相关问题&lt;/h2&gt;&lt;h3 id=&quot;mysql解压版本的正确启动：&quot;&gt;&lt;a href=&quot;#mysql解压版本的正确启动：&quot; class=&quot;headerlink&quot; title=&quot;mysql解压版本的正确启动：&quot;&gt;&lt;/a&gt;mysql解压版本的正确启动：&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;需要配置环境变量，环境变量的配置建议在系统Path中配置，配置完bin目录后.&lt;/li&gt;
+&lt;li&gt;需要配置默认的my-default.ini配置文件，主要就是设置字符编码和basedir和datadir两个配置选项，分别为mysql的解压目录和mysql的数据存储目录，数据存储目录需要我们手动在mysql的根目录下建立data文件夹
     
     </summary>
     
@@ -243,9 +245,9 @@ eureka.client.serviceUrl.defaultZone=http://peer2:80822/eureka/，http://peer3:8
     <link href="https://lavaong.github.io/2018/02/21/RocketMQ%E5%AE%9E%E6%88%98-1/"/>
     <id>https://lavaong.github.io/2018/02/21/RocketMQ实战-1/</id>
     <published>2018-02-21T13:04:34.000Z</published>
-    <updated>2018-04-28T10:44:39.910Z</updated>
+    <updated>2018-06-14T09:00:20.529Z</updated>
     
-    <content type="html"><![CDATA[<p>&nbsp;&nbsp;&nbsp;RocketMQ是一款阿里自主开源的分布式消息中间件，其没有完全遵循JMS(JAVA Message Services)规范，并且和常用的ActiveMQ相比，具有很多优良的特性，并且在如今高负载，大流量的业务场景下完全可以胜任。</p>
+    <content type="html"><![CDATA[<p>&nbsp;&nbsp;&nbsp;RocketMQ是一款阿里自主开源的分布式消息中间件，其没有完全遵循JMS(JAVA Message Services)规范，并且和常用的ActiveMQ相比，具有很多优良的特性，并且在如今高负载，大流量的业务场景下完全可以胜任。<br><a id="more"></a></p>
 <blockquote>
 <ol>
 <li>RocketMQ原生支持分布式，不用像ActiveMQ一样做额外的配置，<strong>单点式消息中间件</strong></li>
@@ -263,7 +265,7 @@ eureka.client.serviceUrl.defaultZone=http://peer2:80822/eureka/，http://peer3:8
     
     <summary type="html">
     
-      &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;RocketMQ是一款阿里自主开源的分布式消息中间件，其没有完全遵循JMS(JAVA Message Services)规范，并且和常用的ActiveMQ相比，具有很多优良的特性，并且在如今高负载，大流量的业务场景下完全可以胜任。&lt;/p&gt;
+      &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;RocketMQ是一款阿里自主开源的分布式消息中间件，其没有完全遵循JMS(JAVA Message Services)规范，并且和常用的ActiveMQ相比，具有很多优良的特性，并且在如今高负载，大流量的业务场景下完全可以胜任。&lt;br&gt;
     
     </summary>
     
@@ -279,16 +281,16 @@ eureka.client.serviceUrl.defaultZone=http://peer2:80822/eureka/，http://peer3:8
     <link href="https://lavaong.github.io/2018/02/03/JavaSE%E4%B8%AD%E7%9A%84%E9%BB%98%E8%AE%A4VM-Hotspot/"/>
     <id>https://lavaong.github.io/2018/02/03/JavaSE中的默认VM-Hotspot/</id>
     <published>2018-02-03T10:51:22.616Z</published>
-    <updated>2018-02-21T12:18:21.172Z</updated>
+    <updated>2018-06-14T08:59:13.850Z</updated>
     
-    <content type="html"><![CDATA[<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;”hot spot”故名思意,就是热点的意思，在JVM的执行引擎中，热点又通常指执行频率高的代码，而执行频率高的评判标准则是有很多种表现，如<em>方法</em>的执行次数，或者<em>某条执行路径</em>的次数。HotSpot内部的执行引擎采用混合执行模式，即包括解释器和自适应编译器（Adaptive-compile）.</p>
+    <content type="html"><![CDATA[<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;”hot spot”故名思意,就是热点的意思，在JVM的执行引擎中，热点又通常指执行频率高的代码，而执行频率高的评判标准则是有很多种表现，如<em>方法</em>的执行次数，或者<em>某条执行路径</em>的次数。HotSpot内部的执行引擎采用混合执行模式，即包括解释器和自适应编译器（Adaptive-compile）.<br><a id="more"></a></p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;虚拟机的默认配置下，初始化时所有的Java方法都由解释器执行，解释器记录着每个方法的执行次数和循环次数，并以这两个指标去判断一个方法的”热度”。等到一个方法足够”热”的时候，JVM就会启动该方法的编译，这种在所有执行过的代码里只寻找一部分编译的做法，叫自适应编译，为了实现动态编译，执行引擎需要多层，且一定有一层是进程初始阶段的编译，然后再让自适应编译处理其中的部分代码。</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JIT编译（Just-in-time）即每当一部分代码要第一次准备执行时，将这部分代码编译。同时JIT编译和自适应编译都属于动态编译的范畴，其特点是在程序运行的时候进行编译，而不是在程序开始之前就进行编译，和静态编译相互区分。而在HotSpot中的VM是使用”JIT编译的（<em>动态编译</em>）”。其中的Client Compile(C1)和Sever Compile(C2)通常被称为”JIT编译器”。</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;”hot spot”故名思意,就是热点的意思，在JVM的执行引擎中，热点又通常指执行频率高的代码，而执行频率高的评判标准则是有很多种表现，如&lt;em&gt;方法&lt;/em&gt;的执行次数，或者&lt;em&gt;某条执行路径&lt;/
+      &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;”hot spot”故名思意,就是热点的意思，在JVM的执行引擎中，热点又通常指执行频率高的代码，而执行频率高的评判标准则是有很多种表现，如&lt;em&gt;方法&lt;/em&gt;的执行次数，或者&lt;em&gt;某条执行路径&lt;/em&gt;的次数。HotSpot内部的执行引擎采用混合执行模式，即包括解释器和自适应编译器（Adaptive-compile）.&lt;br&gt;
     
     </summary>
     
@@ -333,10 +335,9 @@ eureka.client.serviceUrl.defaultZone=http://peer2:80822/eureka/，http://peer3:8
     <link href="https://lavaong.github.io/2017/06/27/DNS-%E5%9F%9F%E5%90%8D%E7%B3%BB%E7%BB%9F-%E5%9F%BA%E6%9C%AC%E8%A7%A3%E6%9E%90/"/>
     <id>https://lavaong.github.io/2017/06/27/DNS-域名系统-基本解析/</id>
     <published>2017-06-27T02:47:03.000Z</published>
-    <updated>2018-06-14T08:46:09.267Z</updated>
+    <updated>2018-06-14T08:57:40.399Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="DNS-Domain-Name-System"><a href="#DNS-Domain-Name-System" class="headerlink" title="DNS(Domain Name System)"></a>DNS(Domain Name System)</h3><p>此协议根据域名解析到此域名对应的相应的ip地址，然后再来访问此IP地址对应得网站或者主机。首先，本机一定要知道DNS服务器的IP地址，否则上不了网，通过DNS服务器，才能知道某个域名的IP地址到底是什么,DNS服务器的IP地址，有可能是动态的，每次上网是由网关分配，这叫做DHCP机制，也有可能是事先固定的地址，一些公网的DNS服务器，也可以使用，其中最有名的就是Google的8.8.8.8和Level3 的4.2.2.2 </p>
-<p>&lt; !–more–&gt;。</p>
+    <content type="html"><![CDATA[<h3 id="DNS-Domain-Name-System"><a href="#DNS-Domain-Name-System" class="headerlink" title="DNS(Domain Name System)"></a>DNS(Domain Name System)</h3><p>此协议根据域名解析到此域名对应的相应的ip地址，然后再来访问此IP地址对应得网站或者主机。首先，本机一定要知道DNS服务器的IP地址，否则上不了网，通过DNS服务器，才能知道某个域名的IP地址到底是什么,DNS服务器的IP地址，有可能是动态的，每次上网是由网关分配，这叫做DHCP机制，也有可能是事先固定的地址，一些公网的DNS服务器，也可以使用，其中最有名的就是Google的8.8.8.8和Level3 的4.2.2.2<br><a id="more"></a></p>
 <h3 id="过程采用了分级查询–域名的层级结构如下："><a href="#过程采用了分级查询–域名的层级结构如下：" class="headerlink" title="过程采用了分级查询–域名的层级结构如下："></a>过程采用了分级查询–域名的层级结构如下：</h3><p>主机名（这是用户在自己的域里面为服务器分配的名称，用户可以任意分配）.次级域名.顶级域名.root(根域名，默认是省略的)。每一级都有自己的NS记录（NameServer）此记录指向该级域名的域名服务器，此服务器知道下一级域名的各种记录。</p>
 <ol>
 <li>DNS服务器内置了根域名服务器的NS记录和IP地址（这些记录一般是不会变化的，）根域名服务器全世界只有13台，分别是从A.root-ser<br>vers.net到M.root-servers.net。</li>
@@ -348,7 +349,7 @@ eureka.client.serviceUrl.defaultZone=http://peer2:80822/eureka/，http://peer3:8
     
     <summary type="html">
     
-      &lt;h3 id=&quot;DNS-Domain-Name-System&quot;&gt;&lt;a href=&quot;#DNS-Domain-Name-System&quot; class=&quot;headerlink&quot; title=&quot;DNS(Domain Name System)&quot;&gt;&lt;/a&gt;DNS(Domain Name Sys
+      &lt;h3 id=&quot;DNS-Domain-Name-System&quot;&gt;&lt;a href=&quot;#DNS-Domain-Name-System&quot; class=&quot;headerlink&quot; title=&quot;DNS(Domain Name System)&quot;&gt;&lt;/a&gt;DNS(Domain Name System)&lt;/h3&gt;&lt;p&gt;此协议根据域名解析到此域名对应的相应的ip地址，然后再来访问此IP地址对应得网站或者主机。首先，本机一定要知道DNS服务器的IP地址，否则上不了网，通过DNS服务器，才能知道某个域名的IP地址到底是什么,DNS服务器的IP地址，有可能是动态的，每次上网是由网关分配，这叫做DHCP机制，也有可能是事先固定的地址，一些公网的DNS服务器，也可以使用，其中最有名的就是Google的8.8.8.8和Level3 的4.2.2.2&lt;br&gt;
     
     </summary>
     

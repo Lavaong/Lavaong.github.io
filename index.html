@@ -753,15 +753,16 @@ eureka.client.serviceUrl.defaultZone=http://peer2:80822/eureka/，http://peer3:8
 
       
         
-          
-            <h2 id="记一次Mysql注册服务相关问题"><a href="#记一次Mysql注册服务相关问题" class="headerlink" title="记一次Mysql注册服务相关问题"></a>记一次Mysql注册服务相关问题</h2><h3 id="mysql解压版本的正确启动："><a href="#mysql解压版本的正确启动：" class="headerlink" title="mysql解压版本的正确启动："></a>mysql解压版本的正确启动：</h3><ol>
+          <h2 id="记一次Mysql注册服务相关问题"><a href="#记一次Mysql注册服务相关问题" class="headerlink" title="记一次Mysql注册服务相关问题"></a>记一次Mysql注册服务相关问题</h2><h3 id="mysql解压版本的正确启动："><a href="#mysql解压版本的正确启动：" class="headerlink" title="mysql解压版本的正确启动："></a>mysql解压版本的正确启动：</h3><ol>
 <li>需要配置环境变量，环境变量的配置建议在系统Path中配置，配置完bin目录后.</li>
-<li>需要配置默认的my-default.ini配置文件，主要就是设置字符编码和basedir和datadir两个配置选项，分别为mysql的解压目录和mysql的数据存储目录，数据存储目录需要我们手动在mysql的根目录下建立data文件夹</li>
-<li>初始化mysql命令:mysqld –initialize-insecure –user=mysql</li>
-<li>注册mysql服务：mysqld –install mysql服务名（可自定义）–defaults-file=”mysql配置文件的路径”，<strong>注意</strong>，此处注册的mysql的配置文件不可以用其默认的my-default.ini，必须另外建立一个该文件的副本如my.ini,否则会导致服务启动失败，如下图所示：<br><img src="/uploads\mysql service error.png" alt="error">  </li>
-</ol>
-
-          
+<li>需要配置默认的my-default.ini配置文件，主要就是设置字符编码和basedir和datadir两个配置选项，分别为mysql的解压目录和mysql的数据存储目录，数据存储目录需要我们手动在mysql的根目录下建立data文件夹
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/28/MySql-For-Windows7-Regedit-service-error/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1154,23 +1155,14 @@ eureka.client.serviceUrl.defaultZone=http://peer2:80822/eureka/，http://peer3:8
 
       
         
-          
-            <p>&nbsp;&nbsp;&nbsp;RocketMQ是一款阿里自主开源的分布式消息中间件，其没有完全遵循JMS(JAVA Message Services)规范，并且和常用的ActiveMQ相比，具有很多优良的特性，并且在如今高负载，大流量的业务场景下完全可以胜任。</p>
-<blockquote>
-<ol>
-<li>RocketMQ原生支持分布式，不用像ActiveMQ一样做额外的配置，<strong>单点式消息中间件</strong></li>
-<li>RocketMQ保证了消息的严格顺序，ActiveMQ可能会有消息错乱。</li>
-<li>丰富的消息拉取模式。</li>
-<li>亿级消息堆积能力</li>
-</ol>
-</blockquote>
-<p>&nbsp;&nbsp;&nbsp;RocketMQ的发布订阅模式规定了其采用了Group机制实现消息的负载均衡。即根据Topic的消息数，均衡分布到每个Group相应的数据量，其中Group可以是一台机器或者一个进程。</p>
-<h3 id="RocketMQ的集群部署"><a href="#RocketMQ的集群部署" class="headerlink" title="RocketMQ的集群部署"></a>RocketMQ的集群部署</h3><p><img src="..\uploads\TB1lEPePXXXXXX8XXXXXXXXXXXX.png" alt="alt text"></p>
-<h4 id="多Master模式"><a href="#多Master模式" class="headerlink" title="多Master模式"></a>多Master模式</h4><p>多个Master存在的模式，当一个Master宕机的时候，会由于其他的代替，缺点是宕机的Master上的消息无法再被订阅，除非复活。</p>
-<h4 id="多Master多Slave模式（同步双写）"><a href="#多Master多Slave模式（同步双写）" class="headerlink" title="多Master多Slave模式（同步双写）"></a>多Master多Slave模式（同步双写）</h4><p>适用于并发量比较大的情况下，只有Master/Slave都成功才能成功，相比于异步辅助，提高了强一致性，但是减缓了读写速度</p>
-<h4 id="多Master单Slave模式（异步复制）"><a href="#多Master单Slave模式（异步复制）" class="headerlink" title="多Master单Slave模式（异步复制）"></a>多Master单Slave模式（异步复制）</h4><p>Master/Slave有短暂的延迟，高可用模式，Master宕机的时候，Slavek可以读到消息，但是可能会有少量的信息丢失。</p>
-
-          
+          <p>&nbsp;&nbsp;&nbsp;RocketMQ是一款阿里自主开源的分布式消息中间件，其没有完全遵循JMS(JAVA Message Services)规范，并且和常用的ActiveMQ相比，具有很多优良的特性，并且在如今高负载，大流量的业务场景下完全可以胜任。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/02/21/RocketMQ实战-1/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1320,12 +1312,14 @@ eureka.client.serviceUrl.defaultZone=http://peer2:80822/eureka/，http://peer3:8
 
       
         
-          
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;”hot spot”故名思意,就是热点的意思，在JVM的执行引擎中，热点又通常指执行频率高的代码，而执行频率高的评判标准则是有很多种表现，如<em>方法</em>的执行次数，或者<em>某条执行路径</em>的次数。HotSpot内部的执行引擎采用混合执行模式，即包括解释器和自适应编译器（Adaptive-compile）.</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;虚拟机的默认配置下，初始化时所有的Java方法都由解释器执行，解释器记录着每个方法的执行次数和循环次数，并以这两个指标去判断一个方法的”热度”。等到一个方法足够”热”的时候，JVM就会启动该方法的编译，这种在所有执行过的代码里只寻找一部分编译的做法，叫自适应编译，为了实现动态编译，执行引擎需要多层，且一定有一层是进程初始阶段的编译，然后再让自适应编译处理其中的部分代码。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JIT编译（Just-in-time）即每当一部分代码要第一次准备执行时，将这部分代码编译。同时JIT编译和自适应编译都属于动态编译的范畴，其特点是在程序运行的时候进行编译，而不是在程序开始之前就进行编译，和静态编译相互区分。而在HotSpot中的VM是使用”JIT编译的（<em>动态编译</em>）”。其中的Client Compile(C1)和Sever Compile(C2)通常被称为”JIT编译器”。</p>
-
-          
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;”hot spot”故名思意,就是热点的意思，在JVM的执行引擎中，热点又通常指执行频率高的代码，而执行频率高的评判标准则是有很多种表现，如<em>方法</em>的执行次数，或者<em>某条执行路径</em>的次数。HotSpot内部的执行引擎采用混合执行模式，即包括解释器和自适应编译器（Adaptive-compile）.<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/02/03/JavaSE中的默认VM-Hotspot/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1614,18 +1608,14 @@ eureka.client.serviceUrl.defaultZone=http://peer2:80822/eureka/，http://peer3:8
 
       
         
-          
-            <h3 id="DNS-Domain-Name-System"><a href="#DNS-Domain-Name-System" class="headerlink" title="DNS(Domain Name System)"></a>DNS(Domain Name System)</h3><p>此协议根据域名解析到此域名对应的相应的ip地址，然后再来访问此IP地址对应得网站或者主机。首先，本机一定要知道DNS服务器的IP地址，否则上不了网，通过DNS服务器，才能知道某个域名的IP地址到底是什么,DNS服务器的IP地址，有可能是动态的，每次上网是由网关分配，这叫做DHCP机制，也有可能是事先固定的地址，一些公网的DNS服务器，也可以使用，其中最有名的就是Google的8.8.8.8和Level3 的4.2.2.2 </p>
-<p>&lt; !–more–&gt;。</p>
-<h3 id="过程采用了分级查询–域名的层级结构如下："><a href="#过程采用了分级查询–域名的层级结构如下：" class="headerlink" title="过程采用了分级查询–域名的层级结构如下："></a>过程采用了分级查询–域名的层级结构如下：</h3><p>主机名（这是用户在自己的域里面为服务器分配的名称，用户可以任意分配）.次级域名.顶级域名.root(根域名，默认是省略的)。每一级都有自己的NS记录（NameServer）此记录指向该级域名的域名服务器，此服务器知道下一级域名的各种记录。</p>
-<ol>
-<li>DNS服务器内置了根域名服务器的NS记录和IP地址（这些记录一般是不会变化的，）根域名服务器全世界只有13台，分别是从A.root-ser<br>vers.net到M.root-servers.net。</li>
-<li>然后DNS服务器向所有这些根域名服务器的IP地址发出”0查询0“请求，询问索要查询的域名（如：www.douyu.com）的顶级域名服务器<br>com.的NS记录，最先回复的根域名服务器将被缓存，以后只向这台服务器发送请求.     </li>
-<li>接下来，DNS服务器向这些顶级域名服务器发出请求，询问次级域名douyu.com的NS记录，返回了此次级域名的四条NS记录和其对应的服务<br>器名称和IP。</li>
-<li>最后，DNS服务器向这些次级域名发送查询请求查询。主机层www对应的NS记录，返回相应的主机服务器和其对应的IP.此IP即是我们要的结<br>果IP。</li>
-</ol>
-
-          
+          <h3 id="DNS-Domain-Name-System"><a href="#DNS-Domain-Name-System" class="headerlink" title="DNS(Domain Name System)"></a>DNS(Domain Name System)</h3><p>此协议根据域名解析到此域名对应的相应的ip地址，然后再来访问此IP地址对应得网站或者主机。首先，本机一定要知道DNS服务器的IP地址，否则上不了网，通过DNS服务器，才能知道某个域名的IP地址到底是什么,DNS服务器的IP地址，有可能是动态的，每次上网是由网关分配，这叫做DHCP机制，也有可能是事先固定的地址，一些公网的DNS服务器，也可以使用，其中最有名的就是Google的8.8.8.8和Level3 的4.2.2.2<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/06/27/DNS-域名系统-基本解析/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
