@@ -333,9 +333,9 @@ eureka.client.serviceUrl.defaultZone=http://peer2:80822/eureka/，http://peer3:8
     <link href="https://lavaong.github.io/2017/06/27/DNS-%E5%9F%9F%E5%90%8D%E7%B3%BB%E7%BB%9F-%E5%9F%BA%E6%9C%AC%E8%A7%A3%E6%9E%90/"/>
     <id>https://lavaong.github.io/2017/06/27/DNS-域名系统-基本解析/</id>
     <published>2017-06-27T02:47:03.000Z</published>
-    <updated>2018-02-21T13:20:20.141Z</updated>
+    <updated>2018-06-14T08:32:29.933Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="DNS-Domain-Name-System"><a href="#DNS-Domain-Name-System" class="headerlink" title="DNS(Domain Name System)"></a>DNS(Domain Name System)</h1><p>此协议根据域名解析到此域名对应的相应的ip地址，然后再来访问此IP地址对应得网站或者主机。首先，本机一定要知道DNS服务器的IP地址，否则上不了网，通过DNS服务器，才能知道某个域名的IP地址到底是什么,DNS服务器的IP地址，有可能是动态的，每次上网是由网关分配，这叫做DHCP机制，也有可能是事先固定的地址，一些公网的DNS服务器，也可以使用，其中最有名的就是Google的8.8.8.8和Level3 的4.2.2.2。</p>
+    <content type="html"><![CDATA[<h3 id="DNS-Domain-Name-System"><a href="#DNS-Domain-Name-System" class="headerlink" title="DNS(Domain Name System)"></a>DNS(Domain Name System)</h3><p>此协议根据域名解析到此域名对应的相应的ip地址，然后再来访问此IP地址对应得网站或者主机。首先，本机一定要知道DNS服务器的IP地址，否则上不了网，通过DNS服务器，才能知道某个域名的IP地址到底是什么,DNS服务器的IP地址，有可能是动态的，每次上网是由网关分配，这叫做DHCP机制，也有可能是事先固定的地址，一些公网的DNS服务器，也可以使用，其中最有名的就是Google的8.8.8.8和Level3 的4.2.2.2 &lt; !–more–&gt;。</p>
 <h3 id="过程采用了分级查询–域名的层级结构如下："><a href="#过程采用了分级查询–域名的层级结构如下：" class="headerlink" title="过程采用了分级查询–域名的层级结构如下："></a>过程采用了分级查询–域名的层级结构如下：</h3><p>主机名（这是用户在自己的域里面为服务器分配的名称，用户可以任意分配）.次级域名.顶级域名.root(根域名，默认是省略的)。每一级都有自己的NS记录（NameServer）此记录指向该级域名的域名服务器，此服务器知道下一级域名的各种记录。</p>
 <ol>
 <li>DNS服务器内置了根域名服务器的NS记录和IP地址（这些记录一般是不会变化的，）根域名服务器全世界只有13台，分别是从A.root-ser<br>vers.net到M.root-servers.net。</li>
@@ -347,7 +347,7 @@ eureka.client.serviceUrl.defaultZone=http://peer2:80822/eureka/，http://peer3:8
     
     <summary type="html">
     
-      &lt;h1 id=&quot;DNS-Domain-Name-System&quot;&gt;&lt;a href=&quot;#DNS-Domain-Name-System&quot; class=&quot;headerlink&quot; title=&quot;DNS(Domain Name System)&quot;&gt;&lt;/a&gt;DNS(Domain Name Sys
+      &lt;h3 id=&quot;DNS-Domain-Name-System&quot;&gt;&lt;a href=&quot;#DNS-Domain-Name-System&quot; class=&quot;headerlink&quot; title=&quot;DNS(Domain Name System)&quot;&gt;&lt;/a&gt;DNS(Domain Name Sys
     
     </summary>
     
