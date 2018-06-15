@@ -2,11 +2,11 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>l-tlon</title>
   
-  <link href="/atom.xml" rel="self"/>
+  <link href="/Lavaong/%20%7C%7C%20/atom.xml" rel="self"/>
   
-  <link href="https://lavaong.github.io/"/>
+  <link href="https://l-tlon.coding.me/Lavaong/%20%7C%7C%20https://lavaong.github.io/%20%7C%7C/"/>
   <updated>2018-06-15T01:54:48.948Z</updated>
-  <id>https://lavaong.github.io/</id>
+  <id>https://l-tlon.coding.me/Lavaong/ || https://lavaong.github.io/ ||/</id>
   
   <author>
     <name>Lavaong</name>
@@ -17,8 +17,8 @@
   
   <entry>
     <title>SpringCloud微服务实战（1）</title>
-    <link href="https://lavaong.github.io/2018/05/02/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%EF%BC%881%EF%BC%89/"/>
-    <id>https://lavaong.github.io/2018/05/02/SpringCloud微服务实战（1）/</id>
+    <link href="https://l-tlon.coding.me/Lavaong/%20%7C%7C%20https://lavaong.github.io/%20%7C%7C/2018/05/02/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%EF%BC%881%EF%BC%89/"/>
+    <id>https://l-tlon.coding.me/Lavaong/ || https://lavaong.github.io/ ||/2018/05/02/SpringCloud微服务实战（1）/</id>
     <published>2018-05-02T15:25:38.000Z</published>
     <updated>2018-06-15T01:54:48.948Z</updated>
     
@@ -83,16 +83,16 @@ eureka.client.service-url.defaultZone=http://${eureka.instance.hostname}:${serve
     </summary>
     
     
-      <category term="SpringCloud" scheme="https://lavaong.github.io/tags/SpringCloud/"/>
+      <category term="SpringCloud" scheme="https://l-tlon.coding.me/Lavaong/%20%7C%7C%20https://lavaong.github.io/%20%7C%7C/tags/SpringCloud/"/>
     
-      <category term="SpringBoot" scheme="https://lavaong.github.io/tags/SpringBoot/"/>
+      <category term="SpringBoot" scheme="https://l-tlon.coding.me/Lavaong/%20%7C%7C%20https://lavaong.github.io/%20%7C%7C/tags/SpringBoot/"/>
     
   </entry>
   
   <entry>
     <title>MySql安装问题</title>
-    <link href="https://lavaong.github.io/2018/04/28/MySql-For-Windows7-Regedit-service-error/"/>
-    <id>https://lavaong.github.io/2018/04/28/MySql-For-Windows7-Regedit-service-error/</id>
+    <link href="https://l-tlon.coding.me/Lavaong/%20%7C%7C%20https://lavaong.github.io/%20%7C%7C/2018/04/28/MySql-For-Windows7-Regedit-service-error/"/>
+    <id>https://l-tlon.coding.me/Lavaong/ || https://lavaong.github.io/ ||/2018/04/28/MySql-For-Windows7-Regedit-service-error/</id>
     <published>2018-04-28T09:42:57.000Z</published>
     <updated>2018-06-15T01:57:43.241Z</updated>
     
@@ -113,14 +113,14 @@ eureka.client.service-url.defaultZone=http://${eureka.instance.hostname}:${serve
     </summary>
     
     
-      <category term="work" scheme="https://lavaong.github.io/tags/work/"/>
+      <category term="work" scheme="https://l-tlon.coding.me/Lavaong/%20%7C%7C%20https://lavaong.github.io/%20%7C%7C/tags/work/"/>
     
   </entry>
   
   <entry>
     <title>面试知识点整理</title>
-    <link href="https://lavaong.github.io/2018/04/28/%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/"/>
-    <id>https://lavaong.github.io/2018/04/28/面试知识点整理/</id>
+    <link href="https://l-tlon.coding.me/Lavaong/%20%7C%7C%20https://lavaong.github.io/%20%7C%7C/2018/04/28/%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/"/>
+    <id>https://l-tlon.coding.me/Lavaong/ || https://lavaong.github.io/ ||/2018/04/28/面试知识点整理/</id>
     <published>2018-04-28T09:42:57.000Z</published>
     <updated>2018-06-15T01:57:16.646Z</updated>
     
@@ -226,14 +226,14 @@ eureka.client.service-url.defaultZone=http://${eureka.instance.hostname}:${serve
     </summary>
     
     
-      <category term="Java面试知识" scheme="https://lavaong.github.io/tags/Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86/"/>
+      <category term="Java面试知识" scheme="https://l-tlon.coding.me/Lavaong/%20%7C%7C%20https://lavaong.github.io/%20%7C%7C/tags/Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86/"/>
     
   </entry>
   
   <entry>
     <title>RocketMQ实战(1)</title>
-    <link href="https://lavaong.github.io/2018/02/21/RocketMQ%E5%AE%9E%E6%88%98-1/"/>
-    <id>https://lavaong.github.io/2018/02/21/RocketMQ实战-1/</id>
+    <link href="https://l-tlon.coding.me/Lavaong/%20%7C%7C%20https://lavaong.github.io/%20%7C%7C/2018/02/21/RocketMQ%E5%AE%9E%E6%88%98-1/"/>
+    <id>https://l-tlon.coding.me/Lavaong/ || https://lavaong.github.io/ ||/2018/02/21/RocketMQ实战-1/</id>
     <published>2018-02-21T13:04:34.000Z</published>
     <updated>2018-06-15T01:55:58.933Z</updated>
     
@@ -260,14 +260,14 @@ eureka.client.service-url.defaultZone=http://${eureka.instance.hostname}:${serve
     </summary>
     
     
-      <category term="中间件" scheme="https://lavaong.github.io/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
+      <category term="中间件" scheme="https://l-tlon.coding.me/Lavaong/%20%7C%7C%20https://lavaong.github.io/%20%7C%7C/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
     
   </entry>
   
   <entry>
     <title>JavaSE中的默认VM-HotSpot</title>
-    <link href="https://lavaong.github.io/2018/02/03/JavaSE%E4%B8%AD%E7%9A%84%E9%BB%98%E8%AE%A4VM-Hotspot/"/>
-    <id>https://lavaong.github.io/2018/02/03/JavaSE中的默认VM-Hotspot/</id>
+    <link href="https://l-tlon.coding.me/Lavaong/%20%7C%7C%20https://lavaong.github.io/%20%7C%7C/2018/02/03/JavaSE%E4%B8%AD%E7%9A%84%E9%BB%98%E8%AE%A4VM-Hotspot/"/>
+    <id>https://l-tlon.coding.me/Lavaong/ || https://lavaong.github.io/ ||/2018/02/03/JavaSE中的默认VM-Hotspot/</id>
     <published>2018-02-03T10:51:22.616Z</published>
     <updated>2018-06-15T01:58:45.895Z</updated>
     
@@ -283,16 +283,16 @@ eureka.client.service-url.defaultZone=http://${eureka.instance.hostname}:${serve
     </summary>
     
     
-      <category term="JVM" scheme="https://lavaong.github.io/tags/JVM/"/>
+      <category term="JVM" scheme="https://l-tlon.coding.me/Lavaong/%20%7C%7C%20https://lavaong.github.io/%20%7C%7C/tags/JVM/"/>
     
-      <category term="JIT" scheme="https://lavaong.github.io/tags/JIT/"/>
+      <category term="JIT" scheme="https://l-tlon.coding.me/Lavaong/%20%7C%7C%20https://lavaong.github.io/%20%7C%7C/tags/JIT/"/>
     
   </entry>
   
   <entry>
     <title>工作点滴0001</title>
-    <link href="https://lavaong.github.io/2017/08/16/%E5%B7%A5%E4%BD%9C%E7%82%B9%E6%BB%B40001/"/>
-    <id>https://lavaong.github.io/2017/08/16/工作点滴0001/</id>
+    <link href="https://l-tlon.coding.me/Lavaong/%20%7C%7C%20https://lavaong.github.io/%20%7C%7C/2017/08/16/%E5%B7%A5%E4%BD%9C%E7%82%B9%E6%BB%B40001/"/>
+    <id>https://l-tlon.coding.me/Lavaong/ || https://lavaong.github.io/ ||/2017/08/16/工作点滴0001/</id>
     <published>2017-08-16T09:05:38.000Z</published>
     <updated>2018-06-15T01:57:27.177Z</updated>
     
@@ -314,14 +314,14 @@ eureka.client.service-url.defaultZone=http://${eureka.instance.hostname}:${serve
     </summary>
     
     
-      <category term="work" scheme="https://lavaong.github.io/tags/work/"/>
+      <category term="work" scheme="https://l-tlon.coding.me/Lavaong/%20%7C%7C%20https://lavaong.github.io/%20%7C%7C/tags/work/"/>
     
   </entry>
   
   <entry>
     <title>DNS[域名系统]基本解析</title>
-    <link href="https://lavaong.github.io/2017/06/27/DNS-%E5%9F%9F%E5%90%8D%E7%B3%BB%E7%BB%9F-%E5%9F%BA%E6%9C%AC%E8%A7%A3%E6%9E%90/"/>
-    <id>https://lavaong.github.io/2017/06/27/DNS-域名系统-基本解析/</id>
+    <link href="https://l-tlon.coding.me/Lavaong/%20%7C%7C%20https://lavaong.github.io/%20%7C%7C/2017/06/27/DNS-%E5%9F%9F%E5%90%8D%E7%B3%BB%E7%BB%9F-%E5%9F%BA%E6%9C%AC%E8%A7%A3%E6%9E%90/"/>
+    <id>https://l-tlon.coding.me/Lavaong/ || https://lavaong.github.io/ ||/2017/06/27/DNS-域名系统-基本解析/</id>
     <published>2017-06-27T02:47:03.000Z</published>
     <updated>2018-06-15T01:55:39.288Z</updated>
     
@@ -342,9 +342,9 @@ eureka.client.service-url.defaultZone=http://${eureka.instance.hostname}:${serve
     </summary>
     
     
-      <category term="tcp" scheme="https://lavaong.github.io/tags/tcp/"/>
+      <category term="tcp" scheme="https://l-tlon.coding.me/Lavaong/%20%7C%7C%20https://lavaong.github.io/%20%7C%7C/tags/tcp/"/>
     
-      <category term="ip" scheme="https://lavaong.github.io/tags/ip/"/>
+      <category term="ip" scheme="https://l-tlon.coding.me/Lavaong/%20%7C%7C%20https://lavaong.github.io/%20%7C%7C/tags/ip/"/>
     
   </entry>
   
