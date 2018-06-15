@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://lavaong.github.io/"/>
-  <updated>2018-06-14T09:22:34.789Z</updated>
+  <updated>2018-06-15T01:54:48.948Z</updated>
   <id>https://lavaong.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://lavaong.github.io/2018/05/02/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%EF%BC%881%EF%BC%89/"/>
     <id>https://lavaong.github.io/2018/05/02/SpringCloud微服务实战（1）/</id>
     <published>2018-05-02T15:25:38.000Z</published>
-    <updated>2018-06-14T09:22:34.789Z</updated>
+    <updated>2018-06-15T01:54:48.948Z</updated>
     
     <content type="html"><![CDATA[<h2 id="记录学习Spring-Cloud的中Eureka集群的问题"><a href="#记录学习Spring-Cloud的中Eureka集群的问题" class="headerlink" title="记录学习Spring-Cloud的中Eureka集群的问题"></a>记录学习Spring-Cloud的中Eureka集群的问题</h2><p>在Eureka单节点的配置文件: <strong>application.properties</strong>:  </p>
 <pre><code>server.port=8081
@@ -82,10 +82,10 @@ eureka.client.service-url.defaultZone=http://${eureka.instance.hostname}:${serve
     
     </summary>
     
-      <category term="Java SpringCloud Spring-boot" scheme="https://lavaong.github.io/categories/Java-SpringCloud-Spring-boot/"/>
     
+      <category term="SpringCloud" scheme="https://lavaong.github.io/tags/SpringCloud/"/>
     
-      <category term="学习" scheme="https://lavaong.github.io/tags/%E5%AD%A6%E4%B9%A0/"/>
+      <category term="SpringBoot" scheme="https://lavaong.github.io/tags/SpringBoot/"/>
     
   </entry>
   
@@ -94,7 +94,7 @@ eureka.client.service-url.defaultZone=http://${eureka.instance.hostname}:${serve
     <link href="https://lavaong.github.io/2018/04/28/MySql-For-Windows7-Regedit-service-error/"/>
     <id>https://lavaong.github.io/2018/04/28/MySql-For-Windows7-Regedit-service-error/</id>
     <published>2018-04-28T09:42:57.000Z</published>
-    <updated>2018-06-14T08:59:40.727Z</updated>
+    <updated>2018-06-15T01:57:43.241Z</updated>
     
     <content type="html"><![CDATA[<h2 id="记一次Mysql注册服务相关问题"><a href="#记一次Mysql注册服务相关问题" class="headerlink" title="记一次Mysql注册服务相关问题"></a>记一次Mysql注册服务相关问题</h2><h3 id="mysql解压版本的正确启动："><a href="#mysql解压版本的正确启动：" class="headerlink" title="mysql解压版本的正确启动："></a>mysql解压版本的正确启动：</h3><ol>
 <li>需要配置环境变量，环境变量的配置建议在系统Path中配置，配置完bin目录后.</li>
@@ -112,10 +112,8 @@ eureka.client.service-url.defaultZone=http://${eureka.instance.hostname}:${serve
     
     </summary>
     
-      <category term="Java" scheme="https://lavaong.github.io/categories/Java/"/>
     
-    
-      <category term="学习" scheme="https://lavaong.github.io/tags/%E5%AD%A6%E4%B9%A0/"/>
+      <category term="work" scheme="https://lavaong.github.io/tags/work/"/>
     
   </entry>
   
@@ -124,7 +122,7 @@ eureka.client.service-url.defaultZone=http://${eureka.instance.hostname}:${serve
     <link href="https://lavaong.github.io/2018/04/28/%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/"/>
     <id>https://lavaong.github.io/2018/04/28/面试知识点整理/</id>
     <published>2018-04-28T09:42:57.000Z</published>
-    <updated>2018-06-14T09:20:37.317Z</updated>
+    <updated>2018-06-15T01:57:16.646Z</updated>
     
     <content type="html"><![CDATA[<h2 id="JAVA基础部分："><a href="#JAVA基础部分：" class="headerlink" title="JAVA基础部分："></a>JAVA基础部分：</h2><h3 id="final-finally-finalize区别："><a href="#final-finally-finalize区别：" class="headerlink" title="final,finally,finalize区别："></a>final,finally,finalize区别：</h3><ul>
 <li>final可以修饰方法，类，成员变量，当final修饰基本类型的成员变量时，该成员变量的值不可变，当fina修饰引用变量时，改引用指向的对象实体不可变，但是对象实体中的内容可变。当修饰类时，final和abstract不可同时使用，abstract意指该类是抽象的，用于扩展的。final修饰类时则意味着该类是不可被继承和扩展的。修饰方法时，该方法不可被重写。修饰形参时，该形参不可在方法内被重新赋值。<a id="more"></a>
@@ -227,10 +225,8 @@ eureka.client.service-url.defaultZone=http://${eureka.instance.hostname}:${serve
     
     </summary>
     
-      <category term="Java" scheme="https://lavaong.github.io/categories/Java/"/>
     
-    
-      <category term="学习" scheme="https://lavaong.github.io/tags/%E5%AD%A6%E4%B9%A0/"/>
+      <category term="Java面试知识" scheme="https://lavaong.github.io/tags/Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86/"/>
     
   </entry>
   
@@ -239,7 +235,7 @@ eureka.client.service-url.defaultZone=http://${eureka.instance.hostname}:${serve
     <link href="https://lavaong.github.io/2018/02/21/RocketMQ%E5%AE%9E%E6%88%98-1/"/>
     <id>https://lavaong.github.io/2018/02/21/RocketMQ实战-1/</id>
     <published>2018-02-21T13:04:34.000Z</published>
-    <updated>2018-06-14T09:53:29.698Z</updated>
+    <updated>2018-06-15T01:55:58.933Z</updated>
     
     <content type="html"><![CDATA[<p>&nbsp;&nbsp;&nbsp;RocketMQ是一款阿里自主开源的分布式消息中间件，其没有完全遵循JMS(JAVA Message Services)规范，并且和常用的ActiveMQ相比，具有很多优良的特性，并且在如今高负载，大流量的业务场景下完全可以胜任。<br><a id="more"></a></p>
 <blockquote>
@@ -263,8 +259,6 @@ eureka.client.service-url.defaultZone=http://${eureka.instance.hostname}:${serve
     
     </summary>
     
-      <category term="Java" scheme="https://lavaong.github.io/categories/Java/"/>
-    
     
       <category term="中间件" scheme="https://lavaong.github.io/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
     
@@ -275,7 +269,7 @@ eureka.client.service-url.defaultZone=http://${eureka.instance.hostname}:${serve
     <link href="https://lavaong.github.io/2018/02/03/JavaSE%E4%B8%AD%E7%9A%84%E9%BB%98%E8%AE%A4VM-Hotspot/"/>
     <id>https://lavaong.github.io/2018/02/03/JavaSE中的默认VM-Hotspot/</id>
     <published>2018-02-03T10:51:22.616Z</published>
-    <updated>2018-06-14T08:59:13.850Z</updated>
+    <updated>2018-06-15T01:58:45.895Z</updated>
     
     <content type="html"><![CDATA[<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;”hot spot”故名思意,就是热点的意思，在JVM的执行引擎中，热点又通常指执行频率高的代码，而执行频率高的评判标准则是有很多种表现，如<em>方法</em>的执行次数，或者<em>某条执行路径</em>的次数。HotSpot内部的执行引擎采用混合执行模式，即包括解释器和自适应编译器（Adaptive-compile）.<br><a id="more"></a></p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;虚拟机的默认配置下，初始化时所有的Java方法都由解释器执行，解释器记录着每个方法的执行次数和循环次数，并以这两个指标去判断一个方法的”热度”。等到一个方法足够”热”的时候，JVM就会启动该方法的编译，这种在所有执行过的代码里只寻找一部分编译的做法，叫自适应编译，为了实现动态编译，执行引擎需要多层，且一定有一层是进程初始阶段的编译，然后再让自适应编译处理其中的部分代码。</p>
@@ -288,10 +282,10 @@ eureka.client.service-url.defaultZone=http://${eureka.instance.hostname}:${serve
     
     </summary>
     
-      <category term="Java" scheme="https://lavaong.github.io/categories/Java/"/>
     
+      <category term="JVM" scheme="https://lavaong.github.io/tags/JVM/"/>
     
-      <category term="虚拟机" scheme="https://lavaong.github.io/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/"/>
+      <category term="JIT" scheme="https://lavaong.github.io/tags/JIT/"/>
     
   </entry>
   
@@ -300,7 +294,7 @@ eureka.client.service-url.defaultZone=http://${eureka.instance.hostname}:${serve
     <link href="https://lavaong.github.io/2017/08/16/%E5%B7%A5%E4%BD%9C%E7%82%B9%E6%BB%B40001/"/>
     <id>https://lavaong.github.io/2017/08/16/工作点滴0001/</id>
     <published>2017-08-16T09:05:38.000Z</published>
-    <updated>2018-06-14T09:20:24.112Z</updated>
+    <updated>2018-06-15T01:57:27.177Z</updated>
     
     <content type="html"><![CDATA[<h3 id="项目构建"><a href="#项目构建" class="headerlink" title="项目构建"></a>项目构建</h3><p>公司还在用svn,项目从里面checkout出来，然后ide导入本来是一件简单不过的事情，但是，但是，最后还是搞了一天，从侧面反映了自己这个农民工还是不熟练，详情如下。<br><a id="more"></a><br>项目采用在IDE（eclipse）maven 导入的方式构建，经过漫长的jar包下载和配置文件Validation（后来才想起来该关掉这个……~.~），项目出现了3万+个errors,项目工程模块分的巨多，这也导致了问题排查的困难，一开始我也怀疑是maven配置文件的原因，最后真是，拿到了正确的配置文件，开心去替换了下，错误减少了点，而且剩下的大部分xxx cannot be resolved to a type这种错误，百度和google都试了一下，不得而解，最后试了某一个博客的方法，具体做法是：</p>
 <ol>
@@ -320,7 +314,7 @@ eureka.client.service-url.defaultZone=http://${eureka.instance.hostname}:${serve
     </summary>
     
     
-      <category term="学习" scheme="https://lavaong.github.io/tags/%E5%AD%A6%E4%B9%A0/"/>
+      <category term="work" scheme="https://lavaong.github.io/tags/work/"/>
     
   </entry>
   
@@ -329,7 +323,7 @@ eureka.client.service-url.defaultZone=http://${eureka.instance.hostname}:${serve
     <link href="https://lavaong.github.io/2017/06/27/DNS-%E5%9F%9F%E5%90%8D%E7%B3%BB%E7%BB%9F-%E5%9F%BA%E6%9C%AC%E8%A7%A3%E6%9E%90/"/>
     <id>https://lavaong.github.io/2017/06/27/DNS-域名系统-基本解析/</id>
     <published>2017-06-27T02:47:03.000Z</published>
-    <updated>2018-06-14T08:57:40.399Z</updated>
+    <updated>2018-06-15T01:55:39.288Z</updated>
     
     <content type="html"><![CDATA[<h3 id="DNS-Domain-Name-System"><a href="#DNS-Domain-Name-System" class="headerlink" title="DNS(Domain Name System)"></a>DNS(Domain Name System)</h3><p>此协议根据域名解析到此域名对应的相应的ip地址，然后再来访问此IP地址对应得网站或者主机。首先，本机一定要知道DNS服务器的IP地址，否则上不了网，通过DNS服务器，才能知道某个域名的IP地址到底是什么,DNS服务器的IP地址，有可能是动态的，每次上网是由网关分配，这叫做DHCP机制，也有可能是事先固定的地址，一些公网的DNS服务器，也可以使用，其中最有名的就是Google的8.8.8.8和Level3 的4.2.2.2<br><a id="more"></a></p>
 <h3 id="过程采用了分级查询–域名的层级结构如下："><a href="#过程采用了分级查询–域名的层级结构如下：" class="headerlink" title="过程采用了分级查询–域名的层级结构如下："></a>过程采用了分级查询–域名的层级结构如下：</h3><p>主机名（这是用户在自己的域里面为服务器分配的名称，用户可以任意分配）.次级域名.顶级域名.root(根域名，默认是省略的)。每一级都有自己的NS记录（NameServer）此记录指向该级域名的域名服务器，此服务器知道下一级域名的各种记录。</p>
@@ -347,10 +341,10 @@ eureka.client.service-url.defaultZone=http://${eureka.instance.hostname}:${serve
     
     </summary>
     
-      <category term="Other" scheme="https://lavaong.github.io/categories/Other/"/>
     
+      <category term="tcp" scheme="https://lavaong.github.io/tags/tcp/"/>
     
-      <category term="学习" scheme="https://lavaong.github.io/tags/%E5%AD%A6%E4%B9%A0/"/>
+      <category term="ip" scheme="https://lavaong.github.io/tags/ip/"/>
     
   </entry>
   
