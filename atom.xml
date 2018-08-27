@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://l-tlon.coding.me%20%7C%7C%20https://lavaong.github.io/"/>
-  <updated>2018-08-27T08:26:07.016Z</updated>
+  <updated>2018-08-27T08:47:22.420Z</updated>
   <id>https://l-tlon.coding.me || https://lavaong.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://l-tlon.coding.me%20%7C%7C%20https://lavaong.github.io/2018/08/27/eureka-%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/"/>
     <id>https://l-tlon.coding.me || https://lavaong.github.io/2018/08/27/eureka-源码解析/</id>
     <published>2018-08-27T08:13:08.000Z</published>
-    <updated>2018-08-27T08:26:07.016Z</updated>
+    <updated>2018-08-27T08:47:22.420Z</updated>
     
     <content type="html"><![CDATA[<h3 id="微服务应用使用eureka作为注册中心的核心注解-EnableDiscoveryClient"><a href="#微服务应用使用eureka作为注册中心的核心注解-EnableDiscoveryClient" class="headerlink" title="微服务应用使用eureka作为注册中心的核心注解@EnableDiscoveryClient"></a>微服务应用使用eureka作为注册中心的核心注解@EnableDiscoveryClient</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Target</span>(&#123;ElementType.TYPE&#125;)</div><div class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</div><div class="line"><span class="meta">@Documented</span></div><div class="line"><span class="meta">@Inherited</span></div><div class="line"><span class="meta">@Import</span>(&#123;EnableDiscoveryClientImportSelector.class&#125;)</div><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> EnableDiscoveryClient &#123;</div><div class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">autoRegister</span><span class="params">()</span> <span class="keyword">default</span> <span class="keyword">true</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <a id="more"></a>
@@ -37,7 +37,15 @@
 <p><img src="/uploads/2018-08-27-eurekaserver_core.png" alt="package_view"></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@POST</span></div><div class="line"><span class="meta">@Consumes</span>(&#123;<span class="string">"application/json"</span>, <span class="string">"application/xml"</span>&#125;)</div><div class="line"><span class="function"><span class="keyword">public</span> Response <span class="title">addInstance</span><span class="params">(InstanceInfo info, @HeaderParam(<span class="string">"x-netflix-discovery-replication"</span>)</span> String isReplication) </span>&#123;</div><div class="line">    logger.debug(<span class="string">"Registering instance &#123;&#125; (replication=&#123;&#125;)"</span>, info.getId(), isReplication);</div><div class="line">    <span class="comment">// ....对传来的实例的元数据信息进行校验</span></div><div class="line">    registry.register(info ,<span class="string">"true"</span>.equals(isReplication));</div><div class="line">    <span class="keyword">return</span> Response.status(<span class="number">204</span>).build();<span class="comment">//204 转发</span></div><div class="line">    &#125;</div></pre></td></tr></table></figure>
 <p>register中的注册的具体实现为InstanceRegistry类的register重写方法，如下<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">register</span><span class="params">(InstanceInfo info, <span class="keyword">boolean</span> isReplication)</span> </span>&#123;</div><div class="line">    <span class="keyword">this</span>.handleRegistration(info, <span class="keyword">this</span>.resolveInstanceLeaseDuration(info), isReplication);</div><div class="line">    <span class="keyword">super</span>.register(info, isReplication);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>其中 handleRegistration方位是将新服务注册的事件传播出去，然后调用父类中的register方法，将InstanceInfo中的元数据信息存储在一个两层的ConcurrentMap中，第一层的key是 appName.,第二层的key是 instanceId,也就是说同一个服务名可以对应多个服务Id,id可由端口号指定，或内部自动生成，调用时按照一定的策略去调用。</p>
+<p>其中 handleRegistration方位是将新服务注册的事件传播出去，然后调用父类中的register方法，将InstanceInfo中的元数据信息存储在一个两层的ConcurrentMap中，第一层的key是 appName.,第二层的key是 instanceId,也就是说同一个服务名可以对应多个服务Id,id默认采用主机名实现不同，这使得无法在同一主机上启动多个相同微服务实例，spring cloud 对原生的Eureka InstanceInfo 实例做了优化，默认生成id会采用如下优先级规则：</p>
+<blockquote>
+<p>${spring.cloud.client.hostname}:${spring.application.name}:${spring.application.instance_id:${server.port}}</p>
+</blockquote>
+<p>相关的客户端配置属性为: 下为配置实例id为应用成名+随机整数区分、</p>
+<blockquote>
+<p>eureka.instance.instanceId=${spring.application.name:${randon.int}}</p>
+</blockquote>
+<p>调用时按照一定的策略去调用。</p>
 ]]></content>
     
     <summary type="html">
