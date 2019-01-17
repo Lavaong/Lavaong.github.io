@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://l-tlon.coding.me%20%7C%7C%20https://lavaong.github.io/"/>
-  <updated>2018-08-27T08:47:22.420Z</updated>
+  <updated>2019-01-17T08:26:21.564Z</updated>
   <id>https://l-tlon.coding.me || https://lavaong.github.io/</id>
   
   <author>
@@ -14,6 +14,223 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>面试知识点整理-2</title>
+    <link href="https://l-tlon.coding.me%20%7C%7C%20https://lavaong.github.io/2018/11/02/%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86-2/"/>
+    <id>https://l-tlon.coding.me || https://lavaong.github.io/2018/11/02/面试知识点整理-2/</id>
+    <published>2018-11-02T11:25:38.000Z</published>
+    <updated>2019-01-17T08:26:21.564Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="学习笔记"><a href="#学习笔记" class="headerlink" title="学习笔记"></a>学习笔记</h3><p>工厂方法模式中有一个问题，添加一个新的产品时，可以在客户端代码中直接通过xml+反射机制来生成产品对象，在定义产品对象时使用抽象类型，同样可以确保系统的灵活性和可扩展性，增加新的具体产品类无须修改源代码，只需要将其作为抽象产品类的子类再修改配置文件即可，根本不需要抽象工厂类和具体工厂类，这个答案应该是：创建对象与使用对象-工厂的作用-<a href="https://blog.csdn.net/will130/article/details/50446287" target="_blank" rel="external">https://blog.csdn.net/will130/article/details/50446287</a><br><a id="more"></a></p>
+<h3 id="面试相关"><a href="#面试相关" class="headerlink" title="面试相关"></a>面试相关</h3><ul>
+<li><p>Restful:  Rest是一种设计原则，分为几个方面。(1),网络上的所有事物都被抽象为资源，每个资源都有唯一的一个资源标识符，同一个资源具有多重表现形式，所有的操作都是无状态的，符合Rest原则架构方式即可成称为Restful.  </p>
+</li>
+<li><p>幂等性：对同一Rest接口的多次访问，得到的资源状态是相同的  </p>
+</li>
+<li><p>spring的IOC和DI: <a href="https://blog.csdn.net/luoyepiaoxue2014/article/details/72426666" target="_blank" rel="external">https://blog.csdn.net/luoyepiaoxue2014/article/details/72426666</a>  </p>
+</li>
+<li><p>session共享问题:</p>
+<ul>
+<li>cookie和session都是一种客户端和服务端会话保持技术，</li>
+<li>由于Http是一种无状态的协议，cookie有 version0和version1两个版本，两个版本的差别在于 set-cookie2响应头的属性项多了一些，在JavaWeb的Servlet规范中不支持Set-Cookie2这种响应头，但是在实际应用开发中我们却可以使用Set-Cookie:响应头里设置Set-Cookie2属性项。cookie可以让服务端程序跟踪每个客户端的访问，但是每次客户端的访问都必须回传这些Cookie,如果Cookie很多，会加大服务端和客户端的带宽等消耗，另外，不同的浏览器对cookie的数量和大小都有限制，session可以解决这些问题。</li>
+<li>基本上大多数session都是基于cookie来工作的，第一次客户端访问应用时会生成一个JSESSIONID,此ID对于每个客户端是唯一的，然后通过Cookie回传到客户端，等下次访问服务器时，就携带者这个Cookie,根据这个Cookie的Id会检查服务器中的Sessiond对象是否存在，不存在就创建，存在就设置值，并将这些生成的session对象放置到SessionManager容器中管理，这个容器将管理所有session对象的生命周期，这就是session的会话保持技术。</li>
+<li>分布式环境下Session的共享问题，分布式环境下，因为cookie储存在客户端浏览器中，每次访问不同的服务器都会携带会话状态信息，所以不存在不同服务器会话不一致问题，但是会有其他的问题，比如说，大小和数量限制问题导致的Cookie丢失，安全问题，cookie窃取，虽然可以设置HttpOnly属性防止私密Cookie被访问（加密Cookie,维护问题）。Session的共享需要放置在分布式缓存当中，MemCache集群，Tail等，分布式缓存框架的实现：重新实现HttpSession接口，定义自己的Session操作类，这个操作必须在进入应用之前完成，所以需要一个拦截器Filter拦截进入Mvc框架之前的请求，并封装HttpRequest和HttpResponse,然后根据SESSIONID获取到用户的私密信息（从分布式缓存中获取），然后将我们自己定义的Session对象设置到request和response对象中，最后将最新的会话信息保存到分布式缓存中。</li>
+</ul>
+</li>
+<li><p>BIO和NIO：BIO:同步阻塞I/O模式，数据的读取写入必须阻塞在一个线程内等待其完成,NIO:同时支持阻塞与非阻塞模式，但这里我们以其同步非阻塞I/O模式来说明,selector(多路复用器)不断轮询IO的状态，只有在channel有Buffer可读或者可写时，应用程序才去处理它，在线程的使用上，就不需要一个IO请求对应一个处理线程了，而是在确实是需要进行IO操作是，才会使用一个线程去处理，这样避免了BIO模型下大量线程处于阻塞等待的情景。相对于BIO的流，NIO抽象出了channel作为输入输出的通道，并且提供了buffer的支持，在进行读操作时，需要使用buffer分配空间，然后将数据从channel中读入Buffer中，对于写操作，需要将数据写入Buffer中，然后将buffer写入Channel中  </p>
+</li>
+<li><p>List和HashMap:</p>
+<ul>
+<li>HashMap1.7 :给定的默认容量是16，负载因子为0.75，map在使用过程当中当元素容量达到了阈值时即负载因子*默认容量时，开始进行扩容操作，扩容操作是一项非常耗费性能的操作，需要进行rehash,数据复制等操作，建议提前预估HashMap的大小，减少扩容带来的性能损耗，Entry[]即table,</li>
+<li>put方法解析：<ul>
+<li>判断当前数组是否需要初始化，如果Key为空，则puty一个空值进去，</li>
+<li>根据Key计算出hashcode，根据计算出的hashcode定位出所在的桶，即数组的索引，</li>
+<li>如果对应索引的元素（Entry）是一个链表，则需要遍历判断里面的hashcode,key是否和传入的key相等，</li>
+<li>如果相等则进行覆盖，如果该索引处的元素为空，说明当前位置没有数据存入，直接新增一个Entry对象写入当前位置<ul>
+<li>jdk1.8:put方法():  </li>
+<li>首先初始化table是否为空，如果为空则在resize()方法中进行初始化操作，  </li>
+<li>然后计算该key（根据hash值）在table中的索引位置，如果该索引处的桶为空，则没有发生冲突，直接在此位置上new一个新桶即可。</li>
+<li>否则则比较当前桶的key和hash是否和传入的key和hash是否相等，相等就赋值给e,后续会进行覆盖操作，</li>
+<li>上面条件若不成立则会进行判断是否是树节点，如果是红黑树，则按照红黑树的方式进行put.</li>
+<li>上面两条件若都不成立，则进行判断是否为链表，若是，则遍历链表，查看是否有和传入的key相同的链表元素存在，查找到会结束循环.否则则在该<br>桶后append链表元素。当链表的长度达到转变为红黑树的阈值时，将链表转化为红黑树，结束循环。</li>
+<li>如果e不等于null,就相当于存在相同的key,那就需要将值覆盖，最后判断是否需要进行扩容.  </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>注解@Autowired,@Inject,@Resource</p>
+<ul>
+<li>@Autowired是spring自带的，@Inject是JSR330规范实现的，@Resource是JSR250规范实现的，需要导入不同的包</li>
+<li>@Autowired、@Inject用法基本一样，不同的是@Autowired有一个request属性</li>
+<li>@Autowired、@Inject是默认按照类型匹配的，@Resource是按照名称匹配的</li>
+<li>@Autowired如果需要按照名称匹配需要和@Qualifier一起使用，@Inject和@Name一起使用  </li>
+</ul>
+</li>
+<li><p>线程启动方式：实现Runable,继承Thread,实现Callable接口（具有返回值，超时异常），start()会启用一个线程，执行这个线程类的run()方法里的代码块，run()会被当做普通方法。</p>
+</li>
+<li><p>ioc 容器的初始化:AbstractApplicationContext.refresh()方法，大体分为三个步骤</p>
+<ul>
+<li>BeanDifinition的Resource定位</li>
+<li>BeanDifinition的载入与解析(涉及bean的解析过程非常复杂，功能被分的很细，因为涉及到的扩展点很多，一个配置<bean>节点有很多东西，必须保证足够的灵活性，应对可能的变化)。</bean></li>
+<li>BeanDifinition在Ioc容器中的注册  </li>
+</ul>
+</li>
+<li><p>类被加载的时机：（从被加载到虚拟机内存，到卸载出内存为止，实例化）加载，连接, 初始化，使用，卸载  </p>
+</li>
+<li><p>衡量一个服务性能的高低好坏（Tps）:每秒事务处理数。影响tps的主要是并发处理能力。</p>
+<ul>
+<li>java 内存模型：java内存模型的主要目标是定义程序中各个变量的访问规则 ，JVM中的变量和 代码中的变量定义不同，JVM的变量指的是实例变量，<br>静态变量和构成数组的元素，但不包括方法内的局部变量和实参变量，因为方法内的变量是线程私有的，不存在共享问题。 </li>
+<li>主内存和工作内存的交互协议：Java内存模型定义了8种操作来实现变量的交互细节，这8中操作都是原子性的，不可分割的（double和long类型例外）分别是：<ul>
+<li>lock:作用于主内存的变量，他把一个变量标识为线程独占的状态。</li>
+<li>unlock:作用于主内存的变量，他把一个处于锁定状态的变量释放出来，此后这个变量才能被其他线程锁定。</li>
+<li>read:作用于主内存的变量，他把一个变量的值从主内存传输到线程的工作内存中，以便随后的load动作使用。</li>
+<li>load:作用于工作内存的变量，他把read操作传输过来的值放入工作内存的变量副本中。</li>
+<li>use:作用于工作内存的变量，他把工作内存中国一个变量的值传递给执行引擎，每当虚拟机遇到一个需要使用到变量的值得字节码指令时将会使用此操作。</li>
+<li>assign(赋值):作用于工作内存的变量，他把一个执行引擎接收到的值赋给工作内存中的变量，每当虚拟机遇到一个给变量赋值的字节码指令时执行这个操作。</li>
+<li>store(存储):作用于工作内存的变量，他把工作内存中一个变量的值传送到主内存中，以便以后的write使用。</li>
+<li>write:作用于主内存中：他把store操作从工作内存中得到的变量的值放入主内存的变量中。</li>
+</ul>
+</li>
+<li>volitail变量的特殊规则，volitail类型变量能保证可见性和禁止指令重排序，但无法保证运算场景的并发安全性，因为对volitail类型的运算可能不是<br>线程安全的，有两种情况他是线程不安全的：<ul>
+<li>(1)运算结果并不依赖变量的当前值，或者能够确保只有单一的线程修改变量的值。</li>
+<li>(2)变量不需要你与其他状态变量共同参与不变约束。  </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>在ajax post 请求中，请求体数据可以是两种类型，既content-type:application/x-www-form-urlencoded或者是application/json, application/xml这种，前者常用来发送简单的请求体数据，如{“a”:”b”,”c”:1}，在SpringMVC的处理也比较简单，传入几个参数，控制器方法几个参数即可，默认这种简单数据类型转换是由ConversionService配置的转换器完成，同样，也可在方法的参数上注入@RequestParam 注解，效果相同，（此注解只针对String,int等基本数据类型的转换)。</li>
+</ul>
+</li>
+</ul>
+<p>另外，针对对象类型既model类的请求体，通常采用@ResponseBody 注解在相应的方法参数上，作为ajax 请求体数据的映射，@ResponseBody 也可以省略，@ResponseBody通常和ContentType:application/json, ContentType:application/xml,搭配使用。</p>
+<p>最后，针对既有对象类型，又有普通数据类型的请求体数据，可在前端将请求体转化为Json字符串，在拼接成一个基本数据类型的请求体,如{“key”:”JSon字符串”}，后端MVC只通过简单的@RequestParam注解即可获取相应的值，然后进行JSON字符串的解析即可拿到相应的里面的对象和其他基本数据类型。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;学习笔记&quot;&gt;&lt;a href=&quot;#学习笔记&quot; class=&quot;headerlink&quot; title=&quot;学习笔记&quot;&gt;&lt;/a&gt;学习笔记&lt;/h3&gt;&lt;p&gt;工厂方法模式中有一个问题，添加一个新的产品时，可以在客户端代码中直接通过xml+反射机制来生成产品对象，在定义产品对象时使用抽象类型，同样可以确保系统的灵活性和可扩展性，增加新的具体产品类无须修改源代码，只需要将其作为抽象产品类的子类再修改配置文件即可，根本不需要抽象工厂类和具体工厂类，这个答案应该是：创建对象与使用对象-工厂的作用-&lt;a href=&quot;https://blog.csdn.net/will130/article/details/50446287&quot;&gt;https://blog.csdn.net/will130/article/details/50446287&lt;/a&gt;&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="设计模式" scheme="https://l-tlon.coding.me%20%7C%7C%20https://lavaong.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+      <category term="Java Web - 面试" scheme="https://l-tlon.coding.me%20%7C%7C%20https://lavaong.github.io/tags/Java-Web-%E9%9D%A2%E8%AF%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Nettyt通信框架实战</title>
+    <link href="https://l-tlon.coding.me%20%7C%7C%20https://lavaong.github.io/2018/09/17/Nettty%E9%80%9A%E4%BF%A1%E6%A1%86%E6%9E%B6%E5%AE%9E%E6%88%98/"/>
+    <id>https://l-tlon.coding.me || https://lavaong.github.io/2018/09/17/Nettty通信框架实战/</id>
+    <published>2018-09-17T15:10:00.000Z</published>
+    <updated>2019-01-17T08:19:29.373Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Netty-Server启动流程"><a href="#Netty-Server启动流程" class="headerlink" title="Netty_Server启动流程"></a>Netty_Server启动流程</h1><blockquote>
+<p>Netty中的Reactor线程模型的主体类关系图  </p>
+</blockquote>
+<p><img src="/uploads/NioEventLoop.png" alt="NioEventLoop.png"><br><a id="more"></a></p>
+<h3 id="AbstractServerBootStrap分析"><a href="#AbstractServerBootStrap分析" class="headerlink" title="AbstractServerBootStrap分析"></a>AbstractServerBootStrap分析</h3><p>   服务启动的方法入口是sbs.bind(port),需要验证sbs(ServerBootStrap)对象绑定的Group和channel和InetSocketDresss是否为空,不为空继续下一步，接下来就是初始化并且注册到Selector上去，绑定到本地端口。  </p>
+<blockquote>
+<p>initAndRegister()  </p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">final</span> ChannelFuture <span class="title">initAndRegister</span><span class="params">()</span> </span>&#123;  </div><div class="line">    Channel channel = <span class="keyword">null</span>;  </div><div class="line">     <span class="keyword">try</span> &#123;  </div><div class="line">        channel = channelFactory.newChannel();  </div><div class="line">        init(channel);  </div><div class="line">     &#125; <span class="keyword">catch</span> (Throwable t)&#123;&#125;</div><div class="line">     ChannelFuture regFuture = config().group().register(channel);  </div><div class="line">     <span class="keyword">if</span> (regFuture.cause() != <span class="keyword">null</span>) &#123;  </div><div class="line">        <span class="keyword">if</span> (channel.isRegistered()) &#123;  </div><div class="line">            channel.close();  </div><div class="line">        &#125; <span class="keyword">else</span> &#123;  </div><div class="line">            channel.unsafe().closeForcibly();  </div><div class="line">        &#125;  </div><div class="line">     &#125;  </div><div class="line">    &#125;  </div><div class="line">&#125;</div><div class="line">```  </div><div class="line">   channelFactory.newChannel()方法，其中channelFactory在AbstractBootStarp类中被赋值的地方可以发现:  </div><div class="line">&gt; channel()  </div><div class="line"></div><div class="line">```<span class="function">Java</span></div><div class="line"><span class="keyword">public</span> B <span class="title">channel</span><span class="params">(Class&lt;? extends C\&gt; channelClass)</span> &#123;  </div><div class="line">    <span class="keyword">if</span> (channelClass == <span class="keyword">null</span>) &#123;  </div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException(<span class="string">"channelClass"</span>);  </div><div class="line">    &#125;  </div><div class="line">    <span class="keyword">return</span> channelFactory(<span class="keyword">new</span> ReflectiveChannelFactory&lt;C&gt;(channelClass));  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>   其实他是一个ReflectiveChannelFactory实例，进入此实例中发现其工厂类真正实现方法主体如下:</p>
+<blockquote>
+<p>newChannel()  </p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">try</span> &#123;  </div><div class="line">    <span class="keyword">return</span> clazz.newInstance();  </div><div class="line">&#125; <span class="keyword">catch</span> (Throwable t) &#123;  </div><div class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> ChannelException(<span class="string">"Unable to create Channel from class "</span> \+ clazz, t);  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>   <em>channelClass</em>其实就是我们在Server启动类中调用的<em>serverBootStrap.group.channel(NioServerSocketChannel.class)</em>,由此可见，这里真正的Channel实例就是<em>NioServerSocketChannel</em>，在NioServerSocketChannel类的初始化过程中，初始化了一系列的netty核心组件，如Channel ,ChannelConfig,ChannelId,Unsafe,ChannelPipline,ChannelHandler等。<br>   然后我们进入init方法，实现是在其子类ServerBootStrap中,此方法的前戏是对一些我们在启动类中的属性和选项的设置，略过，真正主体是如下方法代码,</p>
+<blockquote>
+<p>init()</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//...</span></div><div class="line">channel.config().setOptions(options);</div><div class="line"><span class="comment">//...</span></div><div class="line">channel.attr(key).set(e.getValue());</div><div class="line"><span class="comment">//...</span></div><div class="line">ChannelPipeline p = channel.pipeline();</div><div class="line"><span class="comment">//新连接 channel 的 ChildOptions 和 ChildAttr 设置...</span></div><div class="line"><span class="comment">//新连接 channel 加入处理</span></div><div class="line">p.addLast(<span class="keyword">new</span> ChannelInitializer&lt;Channel&gt;() &#123;  </div><div class="line">    <span class="meta">@Override</span>  </div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">initChannel</span><span class="params">(Channel ch)</span> <span class="keyword">throws</span> Exception </span>&#123;  </div><div class="line">        <span class="keyword">final</span> ChannelPipeline pipeline = ch.pipeline();  </div><div class="line">        ChannelHandler handler = config.handler();  </div><div class="line">        <span class="keyword">if</span> (handler != <span class="keyword">null</span>) &#123;  </div><div class="line">            pipeline.addLast(handler);  </div><div class="line">        &#125;  </div><div class="line">       ch.eventLoop().execute(<span class="keyword">new</span> Runnable() &#123;  </div><div class="line">            <span class="meta">@Override</span>  </div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;  </div><div class="line">                pipeline.addLast(<span class="keyword">new</span> ServerBootstrapAcceptor(  </div><div class="line">                        currentChildGroup, currentChildHandler, currentChildOptions, currentChildAttrs));  </div><div class="line">                &#125;  </div><div class="line">            &#125;);  </div><div class="line">       &#125;  </div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>   init方法也并没有将此channel 注册到某个事件循环器上只是初始化了该serverChannel的一些属性，还有当有新的连接channel进来时的一些属性设置,并且将这些新的连接的属性封装成一个接入器对象里面，将这个接入器对象放入到该serverChannel的管道对象中，这些新的连接的处理都在Reactor事件循环器中被异步处理，继续进行下一个方法分析，<em>ChannelFuture regFuture = config().group().register(channel);</em>，通过ChannelConfig拿到EventLoopGroup对象，再进入到EventLoopGroup的实现MultithreadEventLoopGoup的register(channel)方法中。</p>
+<blockquote>
+<p>MultithreadEventLoopGroup：  </p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span>  </div><div class="line"><span class="function"><span class="keyword">public</span> ChannelFuture <span class="title">register</span><span class="params">(Channel channel)</span> </span>&#123;  </div><div class="line">    <span class="keyword">return</span> next().register(channel);  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>next()方法是EventExecutorChooser定义的方法，EventExecutorChooser.next()方法的默认实现是DefaultEventChooserFactory,查看此工厂类可知时间执行选择器的实现有两种（根据EvenetExecutor数组的长度是否是2的整数次幂决定选用那种Chooser），每种chooser获取eventExecutor的方式不同，一种是idx和数组长度做与运算，一种是idx模除数组长度，取绝对值拿到数组下标，取得对应的EventExecutor对象。获取到对象的EventExecutor对象后，强转为EventLoop接口对象，跳转到SingleThreadEventLoop类的register方法中，如下所示：  </p>
+<blockquote>
+<p>SingleThreadEventLoop  </p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span>  </div><div class="line"><span class="function"><span class="keyword">public</span> ChannelFuture <span class="title">register</span><span class="params">(Channel channel)</span> </span>&#123;  </div><div class="line">    <span class="keyword">return</span> register(<span class="keyword">new</span> DefaultChannelPromise(channel, <span class="keyword">this</span>));  </div><div class="line">&#125;  </div><div class="line"><span class="meta">@Override</span>  </div><div class="line"><span class="function"><span class="keyword">public</span> ChannelFuture <span class="title">register</span><span class="params">(<span class="keyword">final</span> ChannelPromise promise)</span> </span>&#123;  </div><div class="line">    ObjectUtil.*checkNotNull*(promise, <span class="string">"promise"</span>);  </div><div class="line">  promise.channel().unsafe().register(<span class="keyword">this</span>, promise);  </div><div class="line"> <span class="keyword">return</span> promise;  </div><div class="line">&#125;</div><div class="line">```  </div><div class="line">   拿到前期已经初始化的*AbstractUnsafe*对象进行注册操作，进入register方法中,判断事件循环执行器是否已经绑定到该ServerChannel上,判断该事件循环执行器是否属于NioEventLoop，既是否兼容，然后将该事件循环器绑定到该serverChannel上 =&gt; *AbstractChannel.<span class="keyword">this</span>.eventLoop = eventLoop* ,然后判断当前线程是不是事件循环执行器线程，如果是，执行register0()方法.  </div><div class="line">   </div><div class="line">&gt; AbstractChannel.AbstactUnsafe implements Unsafe</div><div class="line"></div><div class="line">```Java</div><div class="line"><span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">register</span><span class="params">(EventLoop eventLoop, <span class="keyword">final</span> ChannelPromise promise)</span> </span>&#123;</div><div class="line">            <span class="keyword">if</span> (eventLoop == <span class="keyword">null</span>) &#123;</div><div class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException(<span class="string">"eventLoop"</span>);</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span> (isRegistered()) &#123;</div><div class="line">                promise.setFailure(<span class="keyword">new</span> IllegalStateException(<span class="string">"registered to an event loop already"</span>));</div><div class="line">                <span class="keyword">return</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span> (!isCompatible(eventLoop)) &#123;</div><div class="line">                promise.setFailure(</div><div class="line">                        <span class="keyword">new</span> IllegalStateException(<span class="string">"incompatible event loop type: "</span> + eventLoop.getClass().getName()));</div><div class="line">                <span class="keyword">return</span>;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            AbstractChannel.<span class="keyword">this</span>.eventLoop = eventLoop;</div><div class="line"></div><div class="line">            <span class="keyword">if</span> (eventLoop.inEventLoop()) &#123;</div><div class="line">                register0(promise);</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    eventLoop.execute(<span class="keyword">new</span> Runnable() &#123;</div><div class="line">                        <span class="meta">@Override</span></div><div class="line">                        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">                            register0(promise);</div><div class="line">                        &#125;</div><div class="line">                    &#125;);</div><div class="line">                &#125; <span class="keyword">catch</span> (Throwable t) &#123;</div><div class="line">                    logger.warn(</div><div class="line">                            <span class="string">"Force-closing a channel whose registration task was not accepted by an event loop: &#123;&#125;"</span>,</div><div class="line">                            AbstractChannel.<span class="keyword">this</span>, t);</div><div class="line">                    closeForcibly();</div><div class="line">                    closeFuture.setClosed();</div><div class="line">                    safeSetFailure(promise, t);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div></pre></td></tr></table></figure>
+<p>register0方法中，先进行doRegister方法的调用，然后调用管道的invokeHandlerAddedIfNeeder(),方法，此时，handler才是被正式加入到pipline管道中。然后出发channel注册事件，该handler和pipeline管道正式进行绑定成功，在进行isActive()方法判断的时候，返回值为false,管道的fireChannelActive()方法未被执行.  </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">register0</span><span class="params">(ChannelPromise promise)</span> </span>&#123;</div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                <span class="keyword">boolean</span> firstRegistration = neverRegistered;</div><div class="line">                doRegister();</div><div class="line">                neverRegistered = <span class="keyword">false</span>;</div><div class="line">                registered = <span class="keyword">true</span>;</div><div class="line"></div><div class="line">                pipeline.invokeHandlerAddedIfNeeded();</div><div class="line"></div><div class="line">                safeSetSuccess(promise);</div><div class="line">                pipeline.fireChannelRegistered();</div><div class="line">                <span class="keyword">if</span> (isActive()) &#123;</div><div class="line">                    <span class="keyword">if</span> (firstRegistration) &#123;</div><div class="line">                        pipeline.fireChannelActive();</div><div class="line">                    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (config().isAutoRead()) &#123;</div><div class="line">                        <span class="comment">// This channel was registered before and autoRead() is set. This means we need to begin read</span></div><div class="line">                        <span class="comment">// again so that we process inbound data.</span></div><div class="line">                        <span class="comment">//</span></div><div class="line">                        <span class="comment">// See https://github.com/netty/netty/issues/4805</span></div><div class="line">                        beginRead();</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125; <span class="keyword">catch</span> (Throwable t) &#123;</div><div class="line">                <span class="comment">// Close the channel directly to avoid FD leak.</span></div><div class="line">                closeForcibly();</div><div class="line">                closeFuture.setClosed();</div><div class="line">                safeSetFailure(promise, t);</div><div class="line">            &#125;</div><div class="line">        &#125;</div></pre></td></tr></table></figure>
+<p>至此，register方法执行完毕，initAndRegister方法也执行完了，返回一个ChannelFuture对象到doBind()方法中：最后在此方法中进行一系列的判断，到达doBind0()方法：</p>
+<blockquote>
+<p>AbstarctBootStrap  </p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">doBind0</span><span class="params">(</span></span></div><div class="line">            <span class="keyword">final</span> ChannelFuture regFuture, <span class="keyword">final</span> Channel channel,</div><div class="line">            <span class="keyword">final</span> SocketAddress localAddress, <span class="keyword">final</span> ChannelPromise promise) &#123;</div><div class="line">        channel.eventLoop().execute(<span class="keyword">new</span> Runnable() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">                <span class="keyword">if</span> (regFuture.isSuccess()) &#123;</div><div class="line">                    channel.bind(localAddress, promise).addListener(ChannelFutureListener.CLOSE_ON_FAILURE);</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    promise.setFailure(regFuture.cause());</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>doBind0中的bind操作被加入到reactor线程组中异步执行绑定操作，我们定位到bind方法中，首先进入到AbstractChannel中的bind方法，接着进入到DefaultChannelPipline中的bind方法。</p>
+<blockquote>
+<p>AbstractChannel  </p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> ChannelFuture <span class="title">bind</span><span class="params">(SocketAddress localAddress, ChannelPromise promise)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> pipeline.bind(localAddress, promise);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>DefaultChannelPipline</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> ChannelFuture <span class="title">bind</span><span class="params">(SocketAddress localAddress, ChannelPromise promise)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> tail.bind(localAddress, promise);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>tail 对象在创建默认管道对象的时候被创建，现在不用理会，继续往下跟进，进入到</p>
+<blockquote>
+<p>AbstractChannel.AbstractUnsafe-&gt;NioMessageUnsafe</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span>  </div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">bind</span><span class="params">(<span class="keyword">final</span> SocketAddress localAddress, <span class="keyword">final</span> ChannelPromise promise)</span> </span>&#123;  </div><div class="line">    assertEventLoop();</div><div class="line">    <span class="comment">//...</span></div><div class="line">    <span class="keyword">boolean</span> wasActive = isActive();  </div><div class="line"> <span class="keyword">try</span> &#123;  </div><div class="line">        doBind(localAddress);  </div><div class="line">  &#125; <span class="keyword">catch</span> (Throwable t) &#123;  </div><div class="line">        safeSetFailure(promise, t);  </div><div class="line">        closeIfClosed();  </div><div class="line"> <span class="keyword">return</span>;  &#125;    </div><div class="line">    <span class="keyword">if</span> (!wasActive &amp;&amp; isActive()) &#123;  </div><div class="line">        invokeLater(<span class="keyword">new</span> Runnable() &#123;  </div><div class="line">            <span class="meta">@Override</span>  </div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;  </div><div class="line">                pipeline.fireChannelActive();  </div><div class="line">  &#125;  </div><div class="line">        &#125;);  </div><div class="line">  &#125;  </div><div class="line">  </div><div class="line">    safeSetSuccess(promise);  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>此方法的wasActive 是false,进入到dobind(localAddress)方法中：</p>
+<blockquote>
+<p>NioServerSocketChannel</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span>  </div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doBind</span><span class="params">(SocketAddress localAddress)</span> <span class="keyword">throws</span> Exception </span>&#123;  </div><div class="line">    <span class="keyword">if</span> (PlatformDependent.*javaVersion*() &gt;= <span class="number">7</span>) &#123;  </div><div class="line">        javaChannel().bind(localAddress, config.getBacklog());  </div><div class="line">  &#125; <span class="keyword">else</span> &#123;  </div><div class="line">        javaChannel().socket().bind(localAddress, config.getBacklog());  </div><div class="line">  &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里面的代码是调用JDK的Socket端口绑定方法进行绑定。绑定后 isActive()方法就是返回true了（已经被绑定成功），就会进入上个方法if判断条件中，进入下一步的pipline.fireChannelActive()方法。</p>
+<blockquote>
+<p>DefaultChannelPipline</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> ChannelPipeline <span class="title">fireChannelActive</span><span class="params">()</span> </span>&#123;</div><div class="line">    AbstractChannelHandlerContext.invokeChannelActive(head);</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>AbstractChannelHandlerContext</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">invokeChannelActive</span><span class="params">(<span class="keyword">final</span> AbstractChannelHandlerContext next)</span> </span>&#123;</div><div class="line">    EventExecutor executor = next.executor();</div><div class="line">    <span class="keyword">if</span> (executor.inEventLoop()) &#123;</div><div class="line">        next.invokeChannelActive();</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        executor.execute(<span class="keyword">new</span> Runnable() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">                next.invokeChannelActive();</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">invokeChannelActive</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (invokeHandler()) &#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            ((ChannelInboundHandler) handler()).channelActive(<span class="keyword">this</span>);</div><div class="line">        &#125; <span class="keyword">catch</span> (Throwable t) &#123;</div><div class="line">            notifyHandlerException(t);</div><div class="line">        &#125;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        fireChannelActive();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>拿到ServerChannel的事件循环执行器，next对象即是abstractChannelHandlerContext对象。继续进入((ChannelInboundHandler) handler().channelActive(this)方法。此方法第一次调用时会进入如下；</p>
+<blockquote>
+<p>DefaultChannelPipline.HeadContext</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">channelActive</span><span class="params">(ChannelHandlerContext ctx)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">    ctx.fireChannelActive();</div><div class="line">    readIfIsAutoRead();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>继续向下执行回调到AbstactChannelHandlerContext类中的方法,又会执行到((ChannelInboundHandler) handler().channelActive(this)方法，这里的handler()方法每次返回的对象都不一样，导致这个方法会重复调用三次，第二次调用channelActive(this)方法会进入到ChannelInboundHandlerAdapter中，</p>
+<blockquote>
+<p>ChannelInboundHandlerAdapter</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">channelActive</span><span class="params">(ChannelHandlerContext ctx)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">    ctx.fireChannelActive();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>方法执行回到AbstractChannelHandlerContext中，会第三次调用ChannelActive(this)方法，</p>
+<blockquote>
+<p>AbstractChannelHandlerContext</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span>  </div><div class="line"><span class="function"><span class="keyword">public</span> ChannelHandlerContext <span class="title">fireChannelActive</span><span class="params">()</span> </span>&#123;  </div><div class="line">    <span class="keyword">final</span> AbstractChannelHandlerContext next = findContextInbound();  </div><div class="line">    *invokeChannelActive*(next);  </div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;&#125;</div></pre></td></tr></table></figure>
+<p>第三次调用channelActive(this)方法会跳转到，DefaultChannelPipline.TailContext的方法中：</p>
+<blockquote>
+<p>DefaultChannelPipline.TailContext</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">channelActive</span><span class="params">(ChannelHandlerContext ctx)</span> <span class="keyword">throws</span> Exception </span>&#123; &#125;</div></pre></td></tr></table></figure>
+<p>自此，执行完毕。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Netty-Server启动流程&quot;&gt;&lt;a href=&quot;#Netty-Server启动流程&quot; class=&quot;headerlink&quot; title=&quot;Netty_Server启动流程&quot;&gt;&lt;/a&gt;Netty_Server启动流程&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;Netty中的Reactor线程模型的主体类关系图  &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&quot;/uploads/NioEventLoop.png&quot; alt=&quot;NioEventLoop.png&quot;&gt;&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="Netty" scheme="https://l-tlon.coding.me%20%7C%7C%20https://lavaong.github.io/tags/Netty/"/>
+    
+      <category term="NIO" scheme="https://l-tlon.coding.me%20%7C%7C%20https://lavaong.github.io/tags/NIO/"/>
+    
+  </entry>
   
   <entry>
     <title>eureka_源码解析</title>
@@ -62,11 +279,91 @@
   </entry>
   
   <entry>
-    <title>SpringCloud微服务实战（1）</title>
-    <link href="https://l-tlon.coding.me%20%7C%7C%20https://lavaong.github.io/2018/05/02/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%EF%BC%881%EF%BC%89/"/>
-    <id>https://l-tlon.coding.me || https://lavaong.github.io/2018/05/02/SpringCloud微服务实战（1）/</id>
+    <title>并发相关</title>
+    <link href="https://l-tlon.coding.me%20%7C%7C%20https://lavaong.github.io/2018/07/14/%E5%B9%B6%E5%8F%91%E7%9B%B8%E5%85%B3/"/>
+    <id>https://l-tlon.coding.me || https://lavaong.github.io/2018/07/14/并发相关/</id>
+    <published>2018-07-14T06:56:08.000Z</published>
+    <updated>2019-01-17T08:18:00.516Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="并发模型"><a href="#并发模型" class="headerlink" title="并发模型"></a>并发模型</h3><p><strong>并发系统可以采用多种并发编程模型实现，并发模型制定了系统中对作业的协调和分配，不同的操作系统有不同的分配方式，同时线程间的协作和交互方式也不同，故效率也有所不同.</strong><br><a id="more"></a></p>
+<h4 id="PPC"><a href="#PPC" class="headerlink" title="PPC"></a>PPC</h4><p>PPC(Process Per Connection): 每次有新的连接就新建一个进程专门处理这个连接的请求。父进程通过预先fork 子进程，在子进程里处理连接的读写请求和业务操作。进程创建占用内存资源高，父子进程通信复杂，连接关闭需要所有父进程中的子进程都关闭才能正确的被关闭。</p>
+<h4 id="TPC"><a href="#TPC" class="headerlink" title="TPC"></a>TPC</h4><p>TPC (Thread Per Connection): 每次有新的连接就新建一个线程专门处理这个连接的请求，共享进程内的内存空间，线程间的通信方式也更简单。高并发是还是存在性能问题，线程间的共享和互斥会导致死锁问题，某一进程中的线程异常会导致进程直接退出。</p>
+<h4 id="Reactor"><a href="#Reactor" class="headerlink" title="Reactor"></a>Reactor</h4><p>PPC模式最主要的问题就是每个连接都要创建一个进程，连接使用完毕就被销毁，进程也被销毁，没有考虑到复用，Reactor模式，也成为反应堆模式，采用了池化技术，建立进程池，将连接分配给进程池里的进程，一个进程可以accept多个来自客户端的连接。并且对连接的数据处理做了优化，采用IO多路复用技术，提高了IO的利用效率，意思是将进程连接中的数据处理转变为非阻塞的，只有当一个连接有数据需要处理时进程才会去处理，一个进程不会一直阻塞在某一个连接的业务处理数据上。  </p>
+<h3 id="Synchornize"><a href="#Synchornize" class="headerlink" title="Synchornize"></a>Synchornize</h3><p><strong>Java对象头和moniter</strong>  </p>
+<h4 id="Java对象头"><a href="#Java对象头" class="headerlink" title="Java对象头"></a>Java对象头</h4><p>   Java对象头是指在虚拟机中存储对象相关的一些信息，其中就包括synchornize 持有的对象锁；Java对象头包括两个部分，Kclass Pointer (类型指针) 和MarkWord(标记字段)，类型指针指向内存中类元数据，MarkWord 用于存储对象运行时的数据。</p>
+<ol>
+<li>MarkWord 存储的对象的运行时数据包括哈希码，GC分带年龄，锁状态标志，线程持有的锁，偏向线程id（偏向锁），偏向时间戳等</li>
+<li>Kclass Pointer 虚拟机通过这个指针来确定某个对象是那个类的实例   <h4 id="Mointer"><a href="#Mointer" class="headerlink" title="Mointer"></a>Mointer</h4>Moniter为一个同步工具，同时也是一个对象,Moniter是线程私有的数据结构，每一个线程都会有一个可用的 moniter record(监控记录表)，每一个被锁住的对象都和一个moniter相关连，moniter中的某个字段存储拥有该锁的该线程相关的东西，如该线程ID。 </li>
+</ol>
+<h3 id="基于Synchornize的锁优化"><a href="#基于Synchornize的锁优化" class="headerlink" title="基于Synchornize的锁优化"></a>基于Synchornize的锁优化</h3><p><strong>jdk1.6以后对Synchronize这种锁实现了大量的优化选项，如自旋锁，适应性自旋锁，锁消除，锁粗化，偏向锁 轻量级锁等技术来提高锁的性能，减少对性能的开销。<br>   锁的状态（从低到高）:无锁态-&gt;偏向锁态-&gt;轻量级锁态-&gt;重量级锁态。（锁只能升级不能降级）。</strong></p>
+<h4 id="自旋锁"><a href="#自旋锁" class="headerlink" title="自旋锁"></a>自旋锁</h4><p>   线程的阻塞和唤醒状态的切换需要CPU从用户态（CPU较低特权-用户空间）转化为核心态（CPU较高特权-底层），同时，大多数应用线程对锁的持有都是短时间且频繁的，这种频繁的切换势必会导致CPU负载的提高和性能消耗（态的转化），自旋锁的出现就是为了解决这种问题，自旋锁就是让线程等待一段时间（执行一段时间无意义的代码），不会被立即挂起（进入阻塞状态），这是以占用CPU的执行时间片为代价的（CPU的并行时间片处理方式），但是如果有些线程持有的自旋锁迟迟不肯释放，就会白白浪费CPU的执行资源，所以，自旋不能完全代替阻塞，只能说在某些场景上，比较适用，我们需要定义一个合适的自旋等待时间（自旋次数决定），如果超出这个时间还没释放锁，就可以认为这个线程不适用适用自旋锁，应该改用立即挂起（线程阻塞方式）来持有锁。</p>
+<h4 id="锁消除"><a href="#锁消除" class="headerlink" title="锁消除"></a>锁消除</h4><p>   JVM基于对变量的逃逸数据分析（？），会消除无用的锁，既如果锁中的代码不存在共享变量和竞争，这种锁有时候不是显示的，有时候是隐式的，如Vector.add方法，StringBuffer.append()方法等等，</p>
+<h4 id="锁粗化"><a href="#锁粗化" class="headerlink" title="锁粗化"></a>锁粗化</h4><p>   对于频繁的在一段代码内进行加锁，去锁的操作，会导致更多的cpu消耗，这时，使用锁粗化技术放大加锁的范围，减少加锁的次数可以明显提高性能。</p>
+<h4 id="轻量级锁"><a href="#轻量级锁" class="headerlink" title="轻量级锁"></a>轻量级锁</h4><p>   轻量级锁是由偏向锁转化而来的（可以认为他是比偏向锁的一个稍重的备份锁），轻量级锁的使用是在没有多线程竞争的情况下 ，减少重量级锁的性能消耗过大情况，每次获取锁，释放锁的操作依赖于底层多次CAS操作</p>
+<h4 id="重量级锁"><a href="#重量级锁" class="headerlink" title="重量级锁"></a>重量级锁</h4><p>   重量级锁通过对象内部的Moniter对象实现的，本质上依赖于操作系统的Muter Lock指令实现  </p>
+<h3 id="Volatile"><a href="#Volatile" class="headerlink" title="Volatile"></a>Volatile</h3><p>   <strong>定义：Java编程语言允许线程访问共享变量，为了确保共享变量能被准确和一致地更新，线程应该确保通过排他锁单独获得这个变量。</strong><br>   volatile 可以保证变量对线程的可见性，被volatile 关键字修饰的变量，Java可以确保此变量对于所有线程来说，同一时刻，他们get到的都是相同的值，并且对该变量的更新，也会让所有的线程都知晓，表现为所有线程都能获取到此变量的最新的值。<br>   volatile 无法保证复合操作的原子性，Java中基本数据类型的操作是原子性的.<br>   votalile 可以禁止指令重排序，volatile禁止重排序的实现是通过底层的内存屏障（lock前缀指令，一系列的指令）。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;并发模型&quot;&gt;&lt;a href=&quot;#并发模型&quot; class=&quot;headerlink&quot; title=&quot;并发模型&quot;&gt;&lt;/a&gt;并发模型&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;并发系统可以采用多种并发编程模型实现，并发模型制定了系统中对作业的协调和分配，不同的操作系统有不同的分配方式，同时线程间的协作和交互方式也不同，故效率也有所不同.&lt;/strong&gt;&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="Java" scheme="https://l-tlon.coding.me%20%7C%7C%20https://lavaong.github.io/tags/Java/"/>
+    
+      <category term="并发" scheme="https://l-tlon.coding.me%20%7C%7C%20https://lavaong.github.io/tags/%E5%B9%B6%E5%8F%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Go基础实战</title>
+    <link href="https://l-tlon.coding.me%20%7C%7C%20https://lavaong.github.io/2018/05/02/Go%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98/"/>
+    <id>https://l-tlon.coding.me || https://lavaong.github.io/2018/05/02/Go基础实战/</id>
     <published>2018-05-02T15:25:38.000Z</published>
-    <updated>2018-06-15T01:54:48.948Z</updated>
+    <updated>2019-01-17T08:20:33.346Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="Go语言基础"><a href="#Go语言基础" class="headerlink" title="Go语言基础"></a>Go语言基础</h3><p>Go（Golang） 作为一款Google 内部推行的开发语言，有很多其优点值得进行学习，下面是一遍基础的语法和实践，帮助认知和学习它.</p>
+<blockquote>
+<p>一个Go 文件可以直接被运行，命令是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">go run main.go</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p>但是Go 还是一门编译性语言，所以他的编译过程是存在的，编译命令为:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">go build main.go</div></pre></td></tr></table></figure></p>
+<p>Go的安装在Linux(CentOS)或者MacOS上都比较简单，在Windows上需要下载解压包，如：go1.11.2.windows-amd64.zip，官网下载，需要翻墙或者国内镜像，安装完成后，需要配置环境变量，*nix或者mac需要配置~/.bashrc文件，将<em>export GOPATH=你的go的工作空间的位置</em>缀入文件末尾即可。但是在win上，要配置GOROOT此项环境变量，如下图:  </p>
+<p><img src="/uploads/1544414420(1" alt="go环境变量设置">.jpg)</p>
+<ol>
+<li>Go中的变量，变量声明方式有三种，分别是：  <figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> i <span class="keyword">int</span> = <span class="number">0</span></div><div class="line"><span class="keyword">var</span> i = <span class="number">0</span> </div><div class="line">i := <span class="number">0</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>其中在循环判断中只能使用第三种变量声明方式，另外，全局变量建议使用第一种声明方式，局部变量使用第二种声明方式即可。</p>
+<ol>
+<li><p>Go的循环语句只有for ,并且for的循环判断不需要括号，常规的循环中断也是支持的，包括 continue和break ，当然还有goto，当然goto 的建议用法是，不要用来控制流程中转，但是用到循环中断是可以的。其他的if else 判断也不需要括号，swtich 提供了两种方式的匹配，一种是值匹配，一种是表达式匹配：  </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//第一种，值匹配</span></div><div class="line"><span class="keyword">switch</span> x &#123;</div><div class="line"><span class="keyword">case</span> <span class="number">1</span>:</div><div class="line">    <span class="keyword">return</span> <span class="number">1</span></div><div class="line"><span class="keyword">default</span>:</div><div class="line">    <span class="keyword">return</span> <span class="string">""</span></div><div class="line">&#125;</div><div class="line"><span class="comment">//第二种表达式匹配</span></div><div class="line"><span class="keyword">switch</span> &#123;</div><div class="line"><span class="keyword">case</span> param &lt; x :</div><div class="line">    <span class="keyword">return</span> <span class="string">""</span></div><div class="line"><span class="keyword">default</span>:</div><div class="line">    <span class="keyword">return</span> <span class="string">""</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Go中的数据结构的数组有两种形式，一种是常规的静态数组，长度固定，类似Java。一种是切片，提供了灵活的长度变更的动态数组。<br>数组变量的定义其实类似普通变量的定义，如：var arr [10]int, var arr [10]int = [10]int{1，…10},var arr = [10]int {1,…10 }, c:= [10]int{1,2,….10}</p>
+</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;Go语言基础&quot;&gt;&lt;a href=&quot;#Go语言基础&quot; class=&quot;headerlink&quot; title=&quot;Go语言基础&quot;&gt;&lt;/a&gt;Go语言基础&lt;/h3&gt;&lt;p&gt;Go（Golang） 作为一款Google 内部推行的开发语言，有很多其优点值得进行学习，下面是一遍基础的语
+    
+    </summary>
+    
+    
+      <category term="Go" scheme="https://l-tlon.coding.me%20%7C%7C%20https://lavaong.github.io/tags/Go/"/>
+    
+      <category term="Golang" scheme="https://l-tlon.coding.me%20%7C%7C%20https://lavaong.github.io/tags/Golang/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>SpringCloud微服务实战-1</title>
+    <link href="https://l-tlon.coding.me%20%7C%7C%20https://lavaong.github.io/2018/05/02/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98-1/"/>
+    <id>https://l-tlon.coding.me || https://lavaong.github.io/2018/05/02/SpringCloud微服务实战-1/</id>
+    <published>2018-05-02T15:25:38.000Z</published>
+    <updated>2019-01-17T08:16:34.190Z</updated>
     
     <content type="html"><![CDATA[<h2 id="记录学习Spring-Cloud的中Eureka集群的问题"><a href="#记录学习Spring-Cloud的中Eureka集群的问题" class="headerlink" title="记录学习Spring-Cloud的中Eureka集群的问题"></a>记录学习Spring-Cloud的中Eureka集群的问题</h2><p>在Eureka单节点的配置文件: <strong>application.properties</strong>:  </p>
 <pre><code>server.port=8081
@@ -136,39 +433,11 @@ eureka.client.service-url.defaultZone=http://${eureka.instance.hostname}:${serve
   </entry>
   
   <entry>
-    <title>MySql安装问题</title>
-    <link href="https://l-tlon.coding.me%20%7C%7C%20https://lavaong.github.io/2018/04/28/MySql-For-Windows7-Regedit-service-error/"/>
-    <id>https://l-tlon.coding.me || https://lavaong.github.io/2018/04/28/MySql-For-Windows7-Regedit-service-error/</id>
+    <title>面试知识点整理-1</title>
+    <link href="https://l-tlon.coding.me%20%7C%7C%20https://lavaong.github.io/2018/04/28/%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86-1/"/>
+    <id>https://l-tlon.coding.me || https://lavaong.github.io/2018/04/28/面试知识点整理-1/</id>
     <published>2018-04-28T09:42:57.000Z</published>
-    <updated>2018-06-15T01:57:43.241Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="记一次Mysql注册服务相关问题"><a href="#记一次Mysql注册服务相关问题" class="headerlink" title="记一次Mysql注册服务相关问题"></a>记一次Mysql注册服务相关问题</h2><h3 id="mysql解压版本的正确启动："><a href="#mysql解压版本的正确启动：" class="headerlink" title="mysql解压版本的正确启动："></a>mysql解压版本的正确启动：</h3><ol>
-<li>需要配置环境变量，环境变量的配置建议在系统Path中配置，配置完bin目录后.</li>
-<li>需要配置默认的my-default.ini配置文件，主要就是设置字符编码和basedir和datadir两个配置选项，分别为mysql的解压目录和mysql的数据存储目录，数据存储目录需要我们手动在mysql的根目录下建立data文件夹<a id="more"></a></li>
-<li>初始化mysql命令:mysqld –initialize-insecure –user=mysql</li>
-<li>注册mysql服务：mysqld –install mysql服务名（可自定义）–defaults-file=”mysql配置文件的路径”，<strong>注意</strong>，此处注册的mysql的配置文件不可以用其默认的my-default.ini，必须另外建立一个该文件的副本如my.ini,否则会导致服务启动失败，如下图所示：<br><img src="/uploads\mysql service error.png" alt="error">  </li>
-</ol>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;记一次Mysql注册服务相关问题&quot;&gt;&lt;a href=&quot;#记一次Mysql注册服务相关问题&quot; class=&quot;headerlink&quot; title=&quot;记一次Mysql注册服务相关问题&quot;&gt;&lt;/a&gt;记一次Mysql注册服务相关问题&lt;/h2&gt;&lt;h3 id=&quot;mysql解压版本的正确启动：&quot;&gt;&lt;a href=&quot;#mysql解压版本的正确启动：&quot; class=&quot;headerlink&quot; title=&quot;mysql解压版本的正确启动：&quot;&gt;&lt;/a&gt;mysql解压版本的正确启动：&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;需要配置环境变量，环境变量的配置建议在系统Path中配置，配置完bin目录后.&lt;/li&gt;
-&lt;li&gt;需要配置默认的my-default.ini配置文件，主要就是设置字符编码和basedir和datadir两个配置选项，分别为mysql的解压目录和mysql的数据存储目录，数据存储目录需要我们手动在mysql的根目录下建立data文件夹
-    
-    </summary>
-    
-    
-      <category term="work" scheme="https://l-tlon.coding.me%20%7C%7C%20https://lavaong.github.io/tags/work/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>面试知识点整理</title>
-    <link href="https://l-tlon.coding.me%20%7C%7C%20https://lavaong.github.io/2018/04/28/%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/"/>
-    <id>https://l-tlon.coding.me || https://lavaong.github.io/2018/04/28/面试知识点整理/</id>
-    <published>2018-04-28T09:42:57.000Z</published>
-    <updated>2018-06-15T01:57:16.646Z</updated>
+    <updated>2019-01-17T08:08:33.283Z</updated>
     
     <content type="html"><![CDATA[<h2 id="JAVA基础部分："><a href="#JAVA基础部分：" class="headerlink" title="JAVA基础部分："></a>JAVA基础部分：</h2><h3 id="final-finally-finalize区别："><a href="#final-finally-finalize区别：" class="headerlink" title="final,finally,finalize区别："></a>final,finally,finalize区别：</h3><ul>
 <li>final可以修饰方法，类，成员变量，当final修饰基本类型的成员变量时，该成员变量的值不可变，当fina修饰引用变量时，改引用指向的对象实体不可变，但是对象实体中的内容可变。当修饰类时，final和abstract不可同时使用，abstract意指该类是抽象的，用于扩展的。final修饰类时则意味着该类是不可被继承和扩展的。修饰方法时，该方法不可被重写。修饰形参时，该形参不可在方法内被重新赋值。<a id="more"></a>
@@ -272,7 +541,37 @@ eureka.client.service-url.defaultZone=http://${eureka.instance.hostname}:${serve
     </summary>
     
     
-      <category term="Java面试知识" scheme="https://l-tlon.coding.me%20%7C%7C%20https://lavaong.github.io/tags/Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86/"/>
+      <category term="Java" scheme="https://l-tlon.coding.me%20%7C%7C%20https://lavaong.github.io/tags/Java/"/>
+    
+      <category term="面试" scheme="https://l-tlon.coding.me%20%7C%7C%20https://lavaong.github.io/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MySql安装问题</title>
+    <link href="https://l-tlon.coding.me%20%7C%7C%20https://lavaong.github.io/2018/04/28/MySql-For-Windows7-Regedit-service-error/"/>
+    <id>https://l-tlon.coding.me || https://lavaong.github.io/2018/04/28/MySql-For-Windows7-Regedit-service-error/</id>
+    <published>2018-04-28T09:42:57.000Z</published>
+    <updated>2018-06-15T01:57:43.241Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="记一次Mysql注册服务相关问题"><a href="#记一次Mysql注册服务相关问题" class="headerlink" title="记一次Mysql注册服务相关问题"></a>记一次Mysql注册服务相关问题</h2><h3 id="mysql解压版本的正确启动："><a href="#mysql解压版本的正确启动：" class="headerlink" title="mysql解压版本的正确启动："></a>mysql解压版本的正确启动：</h3><ol>
+<li>需要配置环境变量，环境变量的配置建议在系统Path中配置，配置完bin目录后.</li>
+<li>需要配置默认的my-default.ini配置文件，主要就是设置字符编码和basedir和datadir两个配置选项，分别为mysql的解压目录和mysql的数据存储目录，数据存储目录需要我们手动在mysql的根目录下建立data文件夹<a id="more"></a></li>
+<li>初始化mysql命令:mysqld –initialize-insecure –user=mysql</li>
+<li>注册mysql服务：mysqld –install mysql服务名（可自定义）–defaults-file=”mysql配置文件的路径”，<strong>注意</strong>，此处注册的mysql的配置文件不可以用其默认的my-default.ini，必须另外建立一个该文件的副本如my.ini,否则会导致服务启动失败，如下图所示：<br><img src="/uploads\mysql service error.png" alt="error">  </li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;记一次Mysql注册服务相关问题&quot;&gt;&lt;a href=&quot;#记一次Mysql注册服务相关问题&quot; class=&quot;headerlink&quot; title=&quot;记一次Mysql注册服务相关问题&quot;&gt;&lt;/a&gt;记一次Mysql注册服务相关问题&lt;/h2&gt;&lt;h3 id=&quot;mysql解压版本的正确启动：&quot;&gt;&lt;a href=&quot;#mysql解压版本的正确启动：&quot; class=&quot;headerlink&quot; title=&quot;mysql解压版本的正确启动：&quot;&gt;&lt;/a&gt;mysql解压版本的正确启动：&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;需要配置环境变量，环境变量的配置建议在系统Path中配置，配置完bin目录后.&lt;/li&gt;
+&lt;li&gt;需要配置默认的my-default.ini配置文件，主要就是设置字符编码和basedir和datadir两个配置选项，分别为mysql的解压目录和mysql的数据存储目录，数据存储目录需要我们手动在mysql的根目录下建立data文件夹
+    
+    </summary>
+    
+    
+      <category term="work" scheme="https://l-tlon.coding.me%20%7C%7C%20https://lavaong.github.io/tags/work/"/>
     
   </entry>
   
@@ -369,7 +668,7 @@ eureka.client.service-url.defaultZone=http://${eureka.instance.hostname}:${serve
     <link href="https://l-tlon.coding.me%20%7C%7C%20https://lavaong.github.io/2017/06/27/DNS-%E5%9F%9F%E5%90%8D%E7%B3%BB%E7%BB%9F-%E5%9F%BA%E6%9C%AC%E8%A7%A3%E6%9E%90/"/>
     <id>https://l-tlon.coding.me || https://lavaong.github.io/2017/06/27/DNS-域名系统-基本解析/</id>
     <published>2017-06-27T02:47:03.000Z</published>
-    <updated>2018-06-15T01:55:39.288Z</updated>
+    <updated>2019-01-17T07:34:09.975Z</updated>
     
     <content type="html"><![CDATA[<h3 id="DNS-Domain-Name-System"><a href="#DNS-Domain-Name-System" class="headerlink" title="DNS(Domain Name System)"></a>DNS(Domain Name System)</h3><p>此协议根据域名解析到此域名对应的相应的ip地址，然后再来访问此IP地址对应得网站或者主机。首先，本机一定要知道DNS服务器的IP地址，否则上不了网，通过DNS服务器，才能知道某个域名的IP地址到底是什么,DNS服务器的IP地址，有可能是动态的，每次上网是由网关分配，这叫做DHCP机制，也有可能是事先固定的地址，一些公网的DNS服务器，也可以使用，其中最有名的就是Google的8.8.8.8和Level3 的4.2.2.2<br><a id="more"></a></p>
 <h3 id="过程采用了分级查询–域名的层级结构如下："><a href="#过程采用了分级查询–域名的层级结构如下：" class="headerlink" title="过程采用了分级查询–域名的层级结构如下："></a>过程采用了分级查询–域名的层级结构如下：</h3><p>主机名（这是用户在自己的域里面为服务器分配的名称，用户可以任意分配）.次级域名.顶级域名.root(根域名，默认是省略的)。每一级都有自己的NS记录（NameServer）此记录指向该级域名的域名服务器，此服务器知道下一级域名的各种记录。</p>
