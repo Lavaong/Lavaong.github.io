@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+<script type="text/javascript">
+    var host = "l-tlon.top";
+    if ((host == window.location.host) && (window.location.protocol != "https:"))
+        window.location.protocol = "https";
+</script>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Mysql," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="l-tlon" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="Mysql的一些重要知识点
+Mysql 分为Server 层和存储引擎层
+server层：
+连接器：连接器负责跟客户端建立连接，获取权限，维持和管理连接。
+缓存层：链接建立后，mysql首先进行缓存层的查询（查询语句+结果形式的缓存），如果缓存层没有此结果，则进行下一步。但是，查询缓存的失效率很高，只要对一个表有更新，此表上所有查询缓存都会被清空，所以，查询缓存的使用场景是在静态表上（不经常进行更">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySql实战">
+<meta property="og:url" content="https://l-tlon.coding.me || https://lavaong.github.io/2018/04/28/Mysql实战/index.html">
+<meta property="og:site_name" content="l-tlon">
+<meta property="og:description" content="Mysql的一些重要知识点
+Mysql 分为Server 层和存储引擎层
+server层：
+连接器：连接器负责跟客户端建立连接，获取权限，维持和管理连接。
+缓存层：链接建立后，mysql首先进行缓存层的查询（查询语句+结果形式的缓存），如果缓存层没有此结果，则进行下一步。但是，查询缓存的失效率很高，只要对一个表有更新，此表上所有查询缓存都会被清空，所以，查询缓存的使用场景是在静态表上（不经常进行更">
+<meta property="og:updated_time" content="2019-03-29T11:33:35.493Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MySql实战">
+<meta name="twitter:description" content="Mysql的一些重要知识点
+Mysql 分为Server 层和存储引擎层
+server层：
+连接器：连接器负责跟客户端建立连接，获取权限，维持和管理连接。
+缓存层：链接建立后，mysql首先进行缓存层的查询（查询语句+结果形式的缓存），如果缓存层没有此结果，则进行下一步。但是，查询缓存的失效率很高，只要对一个表有更新，此表上所有查询缓存都会被清空，所以，查询缓存的使用场景是在静态表上（不经常进行更">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://l-tlon.coding.me || https://lavaong.github.io/2018/04/28/Mysql实战/"/>
+
+
+
+
+
+  <title>MySql实战 | l-tlon</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b0baab9264dd30e6f8e9fbc0fc19c9d9";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">l-tlon</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://l-tlon.coding.me || https://lavaong.github.io/2018/04/28/Mysql实战/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Lavaong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="l-tlon">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">MySql实战</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-28T17:42:57+08:00">
+                2018-04-28
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-03-29T19:33:35+08:00">
+                2019-03-29
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/28/Mysql实战/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/04/28/Mysql实战/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/04/28/Mysql实战/" class="leancloud_visitors" data-flag-title="MySql实战">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Mysql的一些重要知识点"><a href="#Mysql的一些重要知识点" class="headerlink" title="Mysql的一些重要知识点"></a>Mysql的一些重要知识点</h3><ol>
+<li>Mysql 分为Server 层和存储引擎层<ul>
+<li>server层：<ul>
+<li>连接器：连接器负责跟客户端建立连接，获取权限，维持和管理连接。</li>
+<li>缓存层：链接建立后，mysql首先进行缓存层的查询（查询语句+结果形式的缓存），如果缓存层没有此结果，则进行下一步。但是，查询缓存的失效率很高，只要对一个表有更新，此表上所有查询缓存都会被清空，所以，查询缓存的使用场景是在静态表上（不经常进行更新操作的表，如系统配置表），mysql关闭查询缓存的参数是：<em>query_cache_type = DEMAND</em>,而对于显示指定查询缓存的命令是 <em>select SQL_CACHE </em> from T where ID=1;*。</li>
+<li>分析器：做sql 语句的词法分析（将关键字和字段名，表名识别出来）和语法分析（sql的固定语法模式匹配)。 </li>
+<li>优化器：进行索引选择</li>
+<li>执行器：查看对表是否有查询权限，若有，则执行真正的存储引擎提供的查询接口的调用.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Mysql中的bin log 和 redo log<ul>
+<li>WAL（Write Ahead Logging）技术：先写日志，在写磁盘（EX:在更新一条记录的时候，InnoDB引擎会先把记录写到redo log中，并更新内存，在引擎空闲的时候，会将这个更新记录写到磁盘上）。</li>
+<li>redo log : 在InnoDB存储引擎中是固定大小的，redo log文件借助两个指针不断移动保持着记录的书写和擦除。redo log 可以保证数据库的crash_safe，即一但数据库发生异常重启，数据库也能从redo log 中恢复所有已经提交的记录。参数：<em>innodb_flush_log_at_trx_commit = 1</em>，表示每次事务的redo log 都持久化到磁盘上， (默认开启)</li>
+<li>redo_log 写入磁盘的时机：（1）当redo_log 满载的时候，系统停止所有的更新操作，将擦除指针进行推进，以便于redo_log腾出空间继续进行日志的记录。（2）当系统内存不足时，无法申请新的内存页来进行redo_log的flush操作。（3）当系统空闲时。（4）Mysql正常关闭的时候。</li>
+<li>bin_log：bin_log是MySQL Server层独有的日志系统，即归档日志系统（bin log）,bin_log是逻辑日志不同于redo log是物理日志（直接书写在文件上），逻辑日志类似于“给字段X加上1这种”、binlog 没有固定大小，可以一直追加文件的形式增加。参数：<em>sync_binlog =1</em> 表示每次事务的binlog 都持久化到磁盘上（默认开启）。<br>bin log 和 redo log使用二阶段提交协议来保证整个数据的更新不会存在数据一致性问题，因为 Server层和存储引擎可以看做是两个不同子系统的交互。同时，数据的一致性也保证了数据备份恢复的一致性。</li>
+</ul>
+</li>
+<li>事务：<ul>
+<li>隔离级别（读未提交，读已提交，可重复读，串行化）： 隔离级别的实现是通过 <strong>一致性读视图（consistent read view）</strong> 这种方式实现的，在可重复读(ReapeatableRead)级别下，视图在事务启动时候创建，整个事务存在期间都用这个视图，在读已经提交(ReadCommit)的级别下，视图是在每个sql开始执行的时候创建的，其余两种隔离级别没有使用视图的概念实现。更改数据库隔离级别的参数为 ：<em>transaction-isolation = READ-COMMITED</em>。</li>
+<li>可重复读隔离级别的具体实现：Mysql 中的每条更新记录都会同时记录一条回滚记录(undo_log)，记录上的最新值，都可以通过回滚记录回滚到上一个状态，同一条记录在系统中可以存在多个版本(row),每个版本有自己的row_trx_id，就是数据库的多版本并发控制（MVCC）.<ul>
+<li>普通查询：一致性读视图有4种情况来确定当前版本的可见性：<ul>
+<li>如果是自己的事务的更新，则可见最新的记录</li>
+<li>其他版本未提交，当前事务的一致性读视图不可见其他事务最新版本的数据，只可见小于当前版本row_trx_id的版本数据（需要通过undo-log回滚才能可见）。</li>
+<li>其他版本已经提交，且在当前事务创建之前提交的，当前一致性读视图可见其他事务最新版本的数据，</li>
+<li>其他版本已经提交，但是在当前事务创建之后提交的，当前一致性读视图不可见其他事务的最新版本的数据。只可见小于当前版本row_trx_id的版本数据（需要通过undo-log回滚才能可见）。</li>
+</ul>
+</li>
+<li>更新：更新数据都是先读后写，这个读不是一致性读视图中的读的情况，是另一种读，读的是最新版本的值，这称为<strong>当前读</strong><ul>
+<li>当前读会拿到最新版本的数据,然后进行更新，版本是在记录被更新完后立马生成的。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>事务的启动方式：<ul>
+<li>显示启动事务语句:begain 或者 start transcation  ,commit,rollback ……</li>
+<li>set autocommit=0; 这个命令会将这个线程的自动提交关闭，直到你手动提交commit,整个事务进程才算结束。所以，如果你又是使用的长连接，回导致该事务演变成长事务，长事务会阻塞锁，并导致数据库视图回滚段资源一直得不到释放。因为建议将 <em>set autocommit = 1</em> 这样设置，打开自动提交，避免演变成长事务，在需要事务的时候，通过显示指明事务语句-begain来开启一个事务，并通过commit work and chain 提交当前事务，且开启下一个事务。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>索引：<ul>
+<li>Innodb 索引模型，在Innodb中，表都是根据主键顺序以索引的形式存放的，这种存储方式的表称为索引组织表。每一个索引在Innodb 里面都是一颗B+树。</li>
+<li>索引类型分为：<ul>
+<li>主键索引(聚簇索引)：叶子节点存储的是整行的内容。</li>
+<li>非主键索引(普通索引，二级索引)：叶子节点存储的是主键的值。</li>
+<li>唯一索引: unique key</li>
+<li>全文索引</li>
+<li><strong>数据页</strong>：<br>Innodb的数据是按照页为单位来读写的，当读取一行记录时，是将此行所在的页为整体读入内存，页的大小为16kb,在使用普通索引和唯一索引的选择上，尽量使用普通索引，因为大多数场景下，普通索引的性能都比唯一索引好一些（原因在于更新时，在数据也不在内存中时，唯一索引需要把记录所在页的数据从磁盘中读入内存，然后进行计算是否唯一，磁盘到内存会导致随机IO访问，极大耗费资源，少部分情况是如果更新数据后需要马上查询，这种情况使用普通索引和唯一索引没什么区别，但普通索引会有一个change buffer 的merge操作，会耗费Buffer pool等资源，建议将change buffer关闭。）    </li>
+</ul>
+</li>
+<li>索引的维护：<ul>
+<li>B+树是一颗平衡N叉树，所以为了时刻维护平衡性，在对索引更新时（插入，删除，更改），有空间利用率（页分裂）和性能的问题，主要是主键索引保持顺序性，这时候，如果可以使用自增主键，则主键的更新就不会对索引产生太大的影响，从性能和空间上来看，自增主键比较好用，但是有些场景适合使用业务字段做主键，比如说，在一个表中只能 使用一个索引的情况下，且该索引必须是唯一索引，这时候，就可以使用该业务字段当主键并绑定索引。</li>
+</ul>
+</li>
+<li><strong>索引使用</strong>：<ul>
+<li>覆盖索引，即查询的字段 = 索引，不访问其他列的数据（不会回表）。</li>
+<li>全值匹配，和索引中的所有列进行匹配。</li>
+<li>最左前缀匹配，利用B+树的特性，对于联合索引，只有查询的字段符合联合索引定义的顺序（不用使用联合索引中的全部字段），即可使用该联合索引，加快查询速度。总结来说就是联合索引左边N个字段，也可以是字符串索引的最左M个字符。</li>
+<li>匹配范围值，<br>对于VARCHAR，BLOB,TEXT类型的索引，必须使用前缀索引（规定），但是需要考虑重复性，而且使用前缀索引会使Order by 和 Group By无法使用该索引（失效）。<br>Mysql 不能再索引中使用通配符+<strong>LIKE</strong>+通配符的操作，但可以使用满足最左前缀原则的LIKE操作，原因是会将这个LIKE操作转化为比较简单的比较操作，这是底层存储引擎API的限制。<br><strong>索引的选择性</strong>：不重复的索引值（也称呼为基数）和数据表的记录总数T的比值，这个比值的范围在1/T到1之间，索引的越高，则代表索引的查询效率越高。唯一索引的选择性是1。<br><strong>索引排序使用</strong>：只有当索引的列顺序和ORDER BY子句的顺序完全一致（最左前缀），并且ORDER BY后所有要排列的列的方向都一样时，可以使用索引进行排序，如果查询需要关联多张表，则只有当ORDER BY子句引用的字段全部为第一个表的字段时，才能使用。当前导列为常数项时。也可以进行查询排序操作。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>锁：<ul>
+<li>共享锁：一旦锁定任何其他客户端都不可读写，加锁的客户端可以进行读操作，但不能进行写操作。</li>
+<li>排他（独占）锁：只有加锁的客户端可读可写，其他客户端不可读不可写</li>
+<li>全局锁：<ul>
+<li>对整个数据库实现加锁： 命令是 <strong>Flush tables with read lock</strong>,此命令会使整个库处于只读状态。客户端断开连接的时候或发生异常的时候回主动释放该锁，此锁的使用场景是<strong>全库备份</strong>。</li>
+</ul>
+</li>
+<li>表锁（表锁和元数据锁）：<ul>
+<li>对整个表实现加锁：命令是<strong>lock tables tableName read/write</strong>。 解锁命令是 <strong>unlock tables tableName read/write</strong>，其中read是共享锁，锁定后，任何客户端都不可读写；write是独占锁，只有加锁的客户端可读可写，其他客户端不可读也不可写。</li>
+<li>元数据锁：元数据锁是被隐式使用的，当对一个表进行增删改查擦操作时，会先加MDL(元数据)读锁，当要对表结构做变更操作的时候，默认会先加MDL写锁。MDL读锁之间不互斥，因此增删改查可以多线程并行操作。MDL写锁和MDL读锁、MDL写锁互斥，因此表结构变更和表操作不能同时进行。<br>问题：MDL锁会在事务结束之后才释放，因此，如果有一个长事务在此表上，很可能会造成数据库崩溃现象（线程访问过载），<br>解决方法：在DDL表结构变更语句后设定等待时间（alter table ……times）,此段时间内如果没有拿到MDL写锁，就不执行变更，然后过一段时间DBA在重试这个过程。</li>
+</ul>
+</li>
+<li>行锁：针对表中的行记录的锁，innodb的行锁，是一个范围锁，根据条件锁定部分范围，而不是映射到具体的行上，因此它又叫间隙锁。<strong>Innodb事务中，行锁是被隐式加上的，行锁的释放时间是当事务被提交以后</strong> 这是<strong>两阶段锁协议</strong>。如果事务中有多行锁需要并发的更新，把更新频率最频繁的行放到末尾，减少行持有锁的时间，增加并行度。<br>select <em> from <table_name> where &lt;条件&gt; Lock in share mode,对查询的记录添加共享锁。<br>select </table_name></em> from <table_name> where &lt;条件&gt; For update,对查询的记录增加排它锁。</table_name></li>
+<li>死锁和死锁检测：<ul>
+<li>线程出现循环依赖，互相等待释放彼此持有的资源，就会造成死锁现象，当数据库中出现行死锁现象后，Innodb有两种处理方式：<ul>
+<li>一种是直接进入等待超时，参数设置 <strong>innodb_lock_wait_timeout</strong>。</li>
+<li>另一种是发起死锁检测（消耗CPU资源），发现死锁后，主动回滚死锁链条中的一条事务，让其他事务得以继续执行，参数设置<strong>innodb_deadlock_detect = on</strong>。 必要使用数据库中间件做并发度控制（性能考虑），才能适应热点行的并发更新。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>当遇到插入过程非常缓慢的时候，比如插入10万调数据需要大约半个小时这种，可能是Mysql 默认开启了innodb_flush_log_at_trx_commit 和sync_binlog这两个参数，</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Mysql/" rel="tag"># Mysql</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/28/MySql-For-Windows7-Regedit-service-error/" rel="next" title="MySql安装问题">
+                <i class="fa fa-chevron-left"></i> MySql安装问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/02/Go基础实战/" rel="prev" title="Go基础实战">
+                Go基础实战 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.png"
+                alt="Lavaong" />
+            
+              <p class="site-author-name" itemprop="name">Lavaong</p>
+              <p class="site-description motion-element" itemprop="description">read read coding</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+			
+			<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+			<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+			<div class="widget-wrap"> 
+			<div id="myCanvasContainer" class="widget tagcloud">
+			<canvas width="250" height="250" id="resCanvas" style="width=100%">
+				<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Go/">Go</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang/">Golang</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JIT/">JIT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Web-面试/">Java Web - 面试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/">Mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NIO/">NIO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Netty/">Netty</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/">Redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/">SpringBoot</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringCloud/">SpringCloud</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ip/">ip</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tcp/">tcp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/work/">work</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/中间件/">中间件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">2</span></li></ul>
+			</canvas>
+			</div>
+			</div>
+			
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Lavaong" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="litianlong599@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mysql的一些重要知识点"><span class="nav-number">1.</span> <span class="nav-text">Mysql的一些重要知识点</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i id="heart" class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lavaong</span>
+
+  
+</div>
+
+
+  <div class="powered-by">  LMY</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">LTL &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://lavaong.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://l-tlon.coding.me || https://lavaong.github.io/2018/04/28/Mysql实战/';
+          this.page.identifier = '2018/04/28/Mysql实战/';
+          this.page.title = 'MySql实战';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://lavaong.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'Psidx2aBInOaQFbUdWL6EWYX-gzGzoHsz',
+        appKey: 'ctJDnnbs3u17j5iJPICPpgty',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("Psidx2aBInOaQFbUdWL6EWYX-gzGzoHsz", "ctJDnnbs3u17j5iJPICPpgty");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+</body>
+</html>

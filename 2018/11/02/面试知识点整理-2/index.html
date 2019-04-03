@@ -99,7 +99,7 @@
 <meta property="og:url" content="https://l-tlon.coding.me || https://lavaong.github.io/2018/11/02/面试知识点整理-2/index.html">
 <meta property="og:site_name" content="l-tlon">
 <meta property="og:description" content="学习笔记工厂方法模式中有一个问题，添加一个新的产品时，可以在客户端代码中直接通过xml+反射机制来生成产品对象，在定义产品对象时使用抽象类型，同样可以确保系统的灵活性和可扩展性，增加新的具体产品类无须修改源代码，只需要将其作为抽象产品类的子类再修改配置文件即可，根本不需要抽象工厂类和具体工厂类，这个答案应该是：创建对象与使用对象-工厂的作用-https://blog.csdn.net/will13">
-<meta property="og:updated_time" content="2019-01-17T08:26:21.564Z">
+<meta property="og:updated_time" content="2019-03-06T14:26:22.760Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面试知识点整理-2">
 <meta name="twitter:description" content="学习笔记工厂方法模式中有一个问题，添加一个新的产品时，可以在客户端代码中直接通过xml+反射机制来生成产品对象，在定义产品对象时使用抽象类型，同样可以确保系统的灵活性和可扩展性，增加新的具体产品类无须修改源代码，只需要将其作为抽象产品类的子类再修改配置文件即可，根本不需要抽象工厂类和具体工厂类，这个答案应该是：创建对象与使用对象-工厂的作用-https://blog.csdn.net/will13">
@@ -364,8 +364,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-01-17T16:26:21+08:00">
-                2019-01-17
+              <time title="更新于" itemprop="dateModified" datetime="2019-03-06T22:26:22+08:00">
+                2019-03-06
               </time>
             
           </span>
@@ -428,37 +428,6 @@
 </li>
 <li><p>spring的IOC和DI: <a href="https://blog.csdn.net/luoyepiaoxue2014/article/details/72426666" target="_blank" rel="external">https://blog.csdn.net/luoyepiaoxue2014/article/details/72426666</a>  </p>
 </li>
-<li><p>session共享问题:</p>
-<ul>
-<li>cookie和session都是一种客户端和服务端会话保持技术，</li>
-<li>由于Http是一种无状态的协议，cookie有 version0和version1两个版本，两个版本的差别在于 set-cookie2响应头的属性项多了一些，在JavaWeb的Servlet规范中不支持Set-Cookie2这种响应头，但是在实际应用开发中我们却可以使用Set-Cookie:响应头里设置Set-Cookie2属性项。cookie可以让服务端程序跟踪每个客户端的访问，但是每次客户端的访问都必须回传这些Cookie,如果Cookie很多，会加大服务端和客户端的带宽等消耗，另外，不同的浏览器对cookie的数量和大小都有限制，session可以解决这些问题。</li>
-<li>基本上大多数session都是基于cookie来工作的，第一次客户端访问应用时会生成一个JSESSIONID,此ID对于每个客户端是唯一的，然后通过Cookie回传到客户端，等下次访问服务器时，就携带者这个Cookie,根据这个Cookie的Id会检查服务器中的Sessiond对象是否存在，不存在就创建，存在就设置值，并将这些生成的session对象放置到SessionManager容器中管理，这个容器将管理所有session对象的生命周期，这就是session的会话保持技术。</li>
-<li>分布式环境下Session的共享问题，分布式环境下，因为cookie储存在客户端浏览器中，每次访问不同的服务器都会携带会话状态信息，所以不存在不同服务器会话不一致问题，但是会有其他的问题，比如说，大小和数量限制问题导致的Cookie丢失，安全问题，cookie窃取，虽然可以设置HttpOnly属性防止私密Cookie被访问（加密Cookie,维护问题）。Session的共享需要放置在分布式缓存当中，MemCache集群，Tail等，分布式缓存框架的实现：重新实现HttpSession接口，定义自己的Session操作类，这个操作必须在进入应用之前完成，所以需要一个拦截器Filter拦截进入Mvc框架之前的请求，并封装HttpRequest和HttpResponse,然后根据SESSIONID获取到用户的私密信息（从分布式缓存中获取），然后将我们自己定义的Session对象设置到request和response对象中，最后将最新的会话信息保存到分布式缓存中。</li>
-</ul>
-</li>
-<li><p>BIO和NIO：BIO:同步阻塞I/O模式，数据的读取写入必须阻塞在一个线程内等待其完成,NIO:同时支持阻塞与非阻塞模式，但这里我们以其同步非阻塞I/O模式来说明,selector(多路复用器)不断轮询IO的状态，只有在channel有Buffer可读或者可写时，应用程序才去处理它，在线程的使用上，就不需要一个IO请求对应一个处理线程了，而是在确实是需要进行IO操作是，才会使用一个线程去处理，这样避免了BIO模型下大量线程处于阻塞等待的情景。相对于BIO的流，NIO抽象出了channel作为输入输出的通道，并且提供了buffer的支持，在进行读操作时，需要使用buffer分配空间，然后将数据从channel中读入Buffer中，对于写操作，需要将数据写入Buffer中，然后将buffer写入Channel中  </p>
-</li>
-<li><p>List和HashMap:</p>
-<ul>
-<li>HashMap1.7 :给定的默认容量是16，负载因子为0.75，map在使用过程当中当元素容量达到了阈值时即负载因子*默认容量时，开始进行扩容操作，扩容操作是一项非常耗费性能的操作，需要进行rehash,数据复制等操作，建议提前预估HashMap的大小，减少扩容带来的性能损耗，Entry[]即table,</li>
-<li>put方法解析：<ul>
-<li>判断当前数组是否需要初始化，如果Key为空，则puty一个空值进去，</li>
-<li>根据Key计算出hashcode，根据计算出的hashcode定位出所在的桶，即数组的索引，</li>
-<li>如果对应索引的元素（Entry）是一个链表，则需要遍历判断里面的hashcode,key是否和传入的key相等，</li>
-<li>如果相等则进行覆盖，如果该索引处的元素为空，说明当前位置没有数据存入，直接新增一个Entry对象写入当前位置<ul>
-<li>jdk1.8:put方法():  </li>
-<li>首先初始化table是否为空，如果为空则在resize()方法中进行初始化操作，  </li>
-<li>然后计算该key（根据hash值）在table中的索引位置，如果该索引处的桶为空，则没有发生冲突，直接在此位置上new一个新桶即可。</li>
-<li>否则则比较当前桶的key和hash是否和传入的key和hash是否相等，相等就赋值给e,后续会进行覆盖操作，</li>
-<li>上面条件若不成立则会进行判断是否是树节点，如果是红黑树，则按照红黑树的方式进行put.</li>
-<li>上面两条件若都不成立，则进行判断是否为链表，若是，则遍历链表，查看是否有和传入的key相同的链表元素存在，查找到会结束循环.否则则在该<br>桶后append链表元素。当链表的长度达到转变为红黑树的阈值时，将链表转化为红黑树，结束循环。</li>
-<li>如果e不等于null,就相当于存在相同的key,那就需要将值覆盖，最后判断是否需要进行扩容.  </li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
 <li><p>注解@Autowired,@Inject,@Resource</p>
 <ul>
 <li>@Autowired是spring自带的，@Inject是JSR330规范实现的，@Resource是JSR250规范实现的，需要导入不同的包</li>
@@ -467,44 +436,11 @@
 <li>@Autowired如果需要按照名称匹配需要和@Qualifier一起使用，@Inject和@Name一起使用  </li>
 </ul>
 </li>
-<li><p>线程启动方式：实现Runable,继承Thread,实现Callable接口（具有返回值，超时异常），start()会启用一个线程，执行这个线程类的run()方法里的代码块，run()会被当做普通方法。</p>
+<li><p>在ajax post 请求中，请求体数据可以是两种类型，既content-type:application/x-www-form-urlencoded或者是application/json, application/xml这种，前者常用来发送简单的请求体数据，如{“a”:”b”,”c”:1}，在SpringMVC的处理也比较简单，传入几个参数，控制器方法几个参数即可，默认这种简单数据类型转换是由ConversionService配置的转换器完成，同样，也可在方法的参数上注入@RequestParam 注解，效果相同，（此注解只针对String,int等基本数据类型的转换)。</p>
 </li>
-<li><p>ioc 容器的初始化:AbstractApplicationContext.refresh()方法，大体分为三个步骤</p>
-<ul>
-<li>BeanDifinition的Resource定位</li>
-<li>BeanDifinition的载入与解析(涉及bean的解析过程非常复杂，功能被分的很细，因为涉及到的扩展点很多，一个配置<bean>节点有很多东西，必须保证足够的灵活性，应对可能的变化)。</bean></li>
-<li>BeanDifinition在Ioc容器中的注册  </li>
+<li>另外，针对对象类型既model类的请求体，通常采用@ResponseBody 注解在相应的方法参数上，作为ajax 请求体数据的映射，@ResponseBody 也可以省略，@ResponseBody通常和ContentType:application/json, ContentType:application/xml,搭配使用。</li>
+<li>最后，针对既有对象类型，又有普通数据类型的请求体数据，可在前端将请求体转化为Json字符串，在拼接成一个基本数据类型的请求体,如{“key”:”JSon字符串”}，后端MVC只通过简单的@RequestParam注解即可获取相应的值，然后进行JSON字符串的解析即可拿到相应的里面的对象和其他基本数据类型。</li>
 </ul>
-</li>
-<li><p>类被加载的时机：（从被加载到虚拟机内存，到卸载出内存为止，实例化）加载，连接, 初始化，使用，卸载  </p>
-</li>
-<li><p>衡量一个服务性能的高低好坏（Tps）:每秒事务处理数。影响tps的主要是并发处理能力。</p>
-<ul>
-<li>java 内存模型：java内存模型的主要目标是定义程序中各个变量的访问规则 ，JVM中的变量和 代码中的变量定义不同，JVM的变量指的是实例变量，<br>静态变量和构成数组的元素，但不包括方法内的局部变量和实参变量，因为方法内的变量是线程私有的，不存在共享问题。 </li>
-<li>主内存和工作内存的交互协议：Java内存模型定义了8种操作来实现变量的交互细节，这8中操作都是原子性的，不可分割的（double和long类型例外）分别是：<ul>
-<li>lock:作用于主内存的变量，他把一个变量标识为线程独占的状态。</li>
-<li>unlock:作用于主内存的变量，他把一个处于锁定状态的变量释放出来，此后这个变量才能被其他线程锁定。</li>
-<li>read:作用于主内存的变量，他把一个变量的值从主内存传输到线程的工作内存中，以便随后的load动作使用。</li>
-<li>load:作用于工作内存的变量，他把read操作传输过来的值放入工作内存的变量副本中。</li>
-<li>use:作用于工作内存的变量，他把工作内存中国一个变量的值传递给执行引擎，每当虚拟机遇到一个需要使用到变量的值得字节码指令时将会使用此操作。</li>
-<li>assign(赋值):作用于工作内存的变量，他把一个执行引擎接收到的值赋给工作内存中的变量，每当虚拟机遇到一个给变量赋值的字节码指令时执行这个操作。</li>
-<li>store(存储):作用于工作内存的变量，他把工作内存中一个变量的值传送到主内存中，以便以后的write使用。</li>
-<li>write:作用于主内存中：他把store操作从工作内存中得到的变量的值放入主内存的变量中。</li>
-</ul>
-</li>
-<li>volitail变量的特殊规则，volitail类型变量能保证可见性和禁止指令重排序，但无法保证运算场景的并发安全性，因为对volitail类型的运算可能不是<br>线程安全的，有两种情况他是线程不安全的：<ul>
-<li>(1)运算结果并不依赖变量的当前值，或者能够确保只有单一的线程修改变量的值。</li>
-<li>(2)变量不需要你与其他状态变量共同参与不变约束。  </li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>在ajax post 请求中，请求体数据可以是两种类型，既content-type:application/x-www-form-urlencoded或者是application/json, application/xml这种，前者常用来发送简单的请求体数据，如{“a”:”b”,”c”:1}，在SpringMVC的处理也比较简单，传入几个参数，控制器方法几个参数即可，默认这种简单数据类型转换是由ConversionService配置的转换器完成，同样，也可在方法的参数上注入@RequestParam 注解，效果相同，（此注解只针对String,int等基本数据类型的转换)。</li>
-</ul>
-</li>
-</ul>
-<p>另外，针对对象类型既model类的请求体，通常采用@ResponseBody 注解在相应的方法参数上，作为ajax 请求体数据的映射，@ResponseBody 也可以省略，@ResponseBody通常和ContentType:application/json, ContentType:application/xml,搭配使用。</p>
-<p>最后，针对既有对象类型，又有普通数据类型的请求体数据，可在前端将请求体转化为Json字符串，在拼接成一个基本数据类型的请求体,如{“key”:”JSon字符串”}，后端MVC只通过简单的@RequestParam注解即可获取相应的值，然后进行JSON字符串的解析即可拿到相应的里面的对象和其他基本数据类型。</p>
 
       
     </div>
@@ -546,6 +482,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/19/面试知识点整理-3/" rel="prev" title="面试知识点整理-3">
+                面试知识点整理-3 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -636,7 +576,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -650,7 +590,7 @@
 			<div class="widget-wrap"> 
 			<div id="myCanvasContainer" class="widget tagcloud">
 			<canvas width="250" height="250" id="resCanvas" style="width=100%">
-				<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Go/">Go</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang/">Golang</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JIT/">JIT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Web-面试/">Java Web - 面试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NIO/">NIO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Netty/">Netty</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/">SpringBoot</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringCloud/">SpringCloud</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ip/">ip</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tcp/">tcp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/work/">work</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/中间件/">中间件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">1</span></li></ul>
+				<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Go/">Go</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang/">Golang</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JIT/">JIT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Web-面试/">Java Web - 面试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/">Mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NIO/">NIO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Netty/">Netty</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/">Redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/">SpringBoot</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringCloud/">SpringCloud</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ip/">ip</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tcp/">tcp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/work/">work</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/中间件/">中间件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">2</span></li></ul>
 			</canvas>
 			</div>
 			</div>

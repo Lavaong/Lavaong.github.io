@@ -99,7 +99,7 @@
 <meta property="og:url" content="https://l-tlon.coding.me || https://lavaong.github.io/2018/07/14/并发相关/index.html">
 <meta property="og:site_name" content="l-tlon">
 <meta property="og:description" content="并发模型并发系统可以采用多种并发编程模型实现，并发模型制定了系统中对作业的协调和分配，不同的操作系统有不同的分配方式，同时线程间的协作和交互方式也不同，故效率也有所不同.">
-<meta property="og:updated_time" content="2019-01-17T08:18:00.516Z">
+<meta property="og:updated_time" content="2019-03-12T09:56:25.187Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="并发相关">
 <meta name="twitter:description" content="并发模型并发系统可以采用多种并发编程模型实现，并发模型制定了系统中对作业的协调和分配，不同的操作系统有不同的分配方式，同时线程间的协作和交互方式也不同，故效率也有所不同.">
@@ -364,8 +364,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-01-17T16:18:00+08:00">
-                2019-01-17
+              <time title="更新于" itemprop="dateModified" datetime="2019-03-12T17:56:25+08:00">
+                2019-03-12
               </time>
             
           </span>
@@ -430,7 +430,7 @@
 <li>MarkWord 存储的对象的运行时数据包括哈希码，GC分带年龄，锁状态标志，线程持有的锁，偏向线程id（偏向锁），偏向时间戳等</li>
 <li>Kclass Pointer 虚拟机通过这个指针来确定某个对象是那个类的实例   <h4 id="Mointer"><a href="#Mointer" class="headerlink" title="Mointer"></a>Mointer</h4>Moniter为一个同步工具，同时也是一个对象,Moniter是线程私有的数据结构，每一个线程都会有一个可用的 moniter record(监控记录表)，每一个被锁住的对象都和一个moniter相关连，moniter中的某个字段存储拥有该锁的该线程相关的东西，如该线程ID。 </li>
 </ol>
-<h3 id="基于Synchornize的锁优化"><a href="#基于Synchornize的锁优化" class="headerlink" title="基于Synchornize的锁优化"></a>基于Synchornize的锁优化</h3><p><strong>jdk1.6以后对Synchronize这种锁实现了大量的优化选项，如自旋锁，适应性自旋锁，锁消除，锁粗化，偏向锁 轻量级锁等技术来提高锁的性能，减少对性能的开销。<br>   锁的状态（从低到高）:无锁态-&gt;偏向锁态-&gt;轻量级锁态-&gt;重量级锁态。（锁只能升级不能降级）。</strong></p>
+<h3 id="基于Synchornize的锁优化"><a href="#基于Synchornize的锁优化" class="headerlink" title="基于Synchornize的锁优化"></a>基于Synchornize的锁优化</h3><p><strong>jdk1.6以后对Synchronize这种锁实现了大量的优化选项，如自旋锁，适应性自旋锁，锁消除，锁粗化，偏向锁 轻量级锁等技术来提高锁的性能，减少对性能的开销。<br>   锁的状态（从低到高）:无锁态-&gt;偏向锁态-&gt;轻量级锁态-&gt;重量级锁态。</strong></p>
 <h4 id="自旋锁"><a href="#自旋锁" class="headerlink" title="自旋锁"></a>自旋锁</h4><p>   线程的阻塞和唤醒状态的切换需要CPU从用户态（CPU较低特权-用户空间）转化为核心态（CPU较高特权-底层），同时，大多数应用线程对锁的持有都是短时间且频繁的，这种频繁的切换势必会导致CPU负载的提高和性能消耗（态的转化），自旋锁的出现就是为了解决这种问题，自旋锁就是让线程等待一段时间（执行一段时间无意义的代码），不会被立即挂起（进入阻塞状态），这是以占用CPU的执行时间片为代价的（CPU的并行时间片处理方式），但是如果有些线程持有的自旋锁迟迟不肯释放，就会白白浪费CPU的执行资源，所以，自旋不能完全代替阻塞，只能说在某些场景上，比较适用，我们需要定义一个合适的自旋等待时间（自旋次数决定），如果超出这个时间还没释放锁，就可以认为这个线程不适用适用自旋锁，应该改用立即挂起（线程阻塞方式）来持有锁。</p>
 <h4 id="锁消除"><a href="#锁消除" class="headerlink" title="锁消除"></a>锁消除</h4><p>   JVM基于对变量的逃逸数据分析（？），会消除无用的锁，既如果锁中的代码不存在共享变量和竞争，这种锁有时候不是显示的，有时候是隐式的，如Vector.add方法，StringBuffer.append()方法等等，</p>
 <h4 id="锁粗化"><a href="#锁粗化" class="headerlink" title="锁粗化"></a>锁粗化</h4><p>   对于频繁的在一段代码内进行加锁，去锁的操作，会导致更多的cpu消耗，这时，使用锁粗化技术放大加锁的范围，减少加锁的次数可以明显提高性能。</p>
@@ -469,8 +469,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/02/Go基础实战/" rel="next" title="Go基础实战">
-                <i class="fa fa-chevron-left"></i> Go基础实战
+              <a href="/2018/05/02/SpringCloud微服务实战-1/" rel="next" title="SpringCloud微服务实战-1">
+                <i class="fa fa-chevron-left"></i> SpringCloud微服务实战-1
               </a>
             
           </div>
@@ -572,7 +572,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -586,7 +586,7 @@
 			<div class="widget-wrap"> 
 			<div id="myCanvasContainer" class="widget tagcloud">
 			<canvas width="250" height="250" id="resCanvas" style="width=100%">
-				<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Go/">Go</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang/">Golang</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JIT/">JIT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Web-面试/">Java Web - 面试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NIO/">NIO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Netty/">Netty</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/">SpringBoot</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringCloud/">SpringCloud</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ip/">ip</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tcp/">tcp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/work/">work</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/中间件/">中间件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">1</span></li></ul>
+				<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Go/">Go</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang/">Golang</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JIT/">JIT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Web-面试/">Java Web - 面试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/">Mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NIO/">NIO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Netty/">Netty</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/">Redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/">SpringBoot</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringCloud/">SpringCloud</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ip/">ip</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tcp/">tcp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/work/">work</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/中间件/">中间件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">2</span></li></ul>
 			</canvas>
 			</div>
 			</div>
